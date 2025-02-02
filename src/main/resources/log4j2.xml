@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <!-- Console -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %highlight{%-5p}{FATAL=red, ERROR=red, WARN=yellow, INFO=green, DEBUG=blue} %style{%c{1.}}{cyan} %msg%n%throwable{short}"/>
+        </Console>
+
+        <!-- File Appender -->
+        <File name="File" fileName="logs/app.log" append="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1.} %msg%n%throwable{short}"/>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <!-- Logger racine -->
+        <Root level="warn">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+</Configuration>
