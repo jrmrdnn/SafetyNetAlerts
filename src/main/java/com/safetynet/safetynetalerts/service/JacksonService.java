@@ -6,9 +6,12 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 @Service
 public class JacksonService {
+
+    private static final Logger logger = Logger.getLogger(JacksonService.class.getName());
 
     private final ObjectMapper objectMapper;
 
@@ -42,6 +45,7 @@ public class JacksonService {
             return objectMapper.readValue(new File(filePath), valueType);
         } catch (IOException e) {
             e.printStackTrace();
+            logger.warning("Failed to load data from file");
             throw new RuntimeException("Failed to load data from file", e);
         }
     }
