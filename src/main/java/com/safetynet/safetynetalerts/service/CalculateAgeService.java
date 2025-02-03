@@ -33,4 +33,15 @@ public class CalculateAgeService implements CalculateAgeServiceInterface {
     public boolean isAdult(int age) {
         return age > 18;
     }
+
+    /**
+     * Checks if a person is a child based on their age.
+     *
+     * @param age the age of the person
+     * @return true if the person is a child, false otherwise
+     */
+    @Override
+    public boolean isChild(int age) {
+        return age <= 18;
+    }
 }

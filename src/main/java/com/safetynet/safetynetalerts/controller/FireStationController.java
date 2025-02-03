@@ -21,8 +21,8 @@ public class FireStationController {
     @GetMapping("/firestation")
     public FireStationDTO getFireStation(@RequestParam String stationNumber) {
         logger.info("GET /firestation?stationNumber=" + stationNumber);
-        FireStationDTO getPersonsCoveredByStation = firestationService.getPersonsCoveredByStation(stationNumber);
-        logger.info("Response: " + getPersonsCoveredByStation.toString());
-        return getPersonsCoveredByStation;
+        FireStationDTO personsCoveredByStation = firestationService.getPersonsCoveredByStation(stationNumber);
+        logger.info("Response: " + personsCoveredByStation.toString());
+        return personsCoveredByStation;
     }
 }
