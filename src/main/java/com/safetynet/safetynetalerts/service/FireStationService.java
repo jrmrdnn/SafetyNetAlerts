@@ -58,7 +58,8 @@ public class FireStationService implements FireStationServiceInterface {
      * @param stationNumber number of the fire station
      * @return list of addresses covered by the fire station
      */
-    private List<String> getAddresses(String stationNumber) {
+    @Override
+    public List<String> getAddresses(String stationNumber) {
         return jsonWrapper.getFireStations().stream()
                 .filter(firestation -> firestation.getStation().equals(stationNumber)).map(FireStation::getAddress)
                 .collect(Collectors.toList());

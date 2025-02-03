@@ -10,15 +10,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Arrays;
+import java.util.List;
 
 @SpringBootTest
 public class FirestationServiceTest {
 
     @Autowired
-    private FireStationService fireStationService;
+    private FireStationServiceInterface fireStationService;
 
     @Test
     public void testGetPersonsCoveredByStation() {
@@ -58,5 +59,29 @@ public class FirestationServiceTest {
         assertEquals(6, ireStation.getPersons().size());
         assertEquals(1, ireStation.getAdultCount());
         assertEquals(5, ireStation.getChildCount());
+    }
+
+    @Test
+    public void testGetAddresses() {
+        FireStation firestation1 = new FireStation();
+        firestation1.setAddress("1509 Culver St");
+        firestation1.setStation("1");
+
+        FireStation firestation2 = new FireStation();
+        firestation2.setAddress("29 15th St");
+        firestation2.setStation("2");
+
+        FireStation firestation3 = new FireStation();
+        firestation3.setAddress("834 Binoc Ave");
+        firestation3.setStation("1");
+
+        JsonWrapper jsonWrapper = new JsonWrapper();
+        jsonWrapper.setFireStations(Arrays.asList(firestation1, firestation2, firestation3));
+
+        List<String> addresses = fireStationService.getAddresses("1");
+
+        assertEquals(3, addresses.size());
+        assertEquals("644 Gershwin Cir", addresses.get(0));
+        assertEquals("908 73rd St", addresses.get(1));
     }
 }

@@ -1,12 +1,10 @@
-2025-02-03 10:38:39 INFO  c.s.s.SafetynetAlertsApplication:53 - Starting SafetynetAlertsApplication using Java 21.0.5 with PID 37973 (/Users/jeremy/Desktop/java/P5/safetynetalerts/target/classes started by jeremy in /Users/jeremy/Desktop/java/P5/safetynetalerts)
-2025-02-03 10:38:39 DEBUG c.s.s.SafetynetAlertsApplication:54 - Running with Spring Boot v3.4.2, Spring v6.2.2
-2025-02-03 10:38:39 INFO  c.s.s.SafetynetAlertsApplication:652 - No active profile set, falling back to 1 default profile: "default"
-2025-02-03 10:38:40 INFO  c.s.s.SafetynetAlertsApplication:59 - Started SafetynetAlertsApplication in 0.944 seconds (process running for 1.177)
-2025-02-03 10:38:52 INFO  c.s.s.SafetynetAlertsApplication:53 - Starting SafetynetAlertsApplication using Java 21.0.5 with PID 38067 (/Users/jeremy/Desktop/java/P5/safetynetalerts/target/classes started by jeremy in /Users/jeremy/Desktop/java/P5/safetynetalerts)
-2025-02-03 10:38:52 DEBUG c.s.s.SafetynetAlertsApplication:54 - Running with Spring Boot v3.4.2, Spring v6.2.2
-2025-02-03 10:38:52 INFO  c.s.s.SafetynetAlertsApplication:652 - No active profile set, falling back to 1 default profile: "default"
-2025-02-03 10:38:52 INFO  c.s.s.SafetynetAlertsApplication:59 - Started SafetynetAlertsApplication in 1.025 seconds (process running for 1.253)
-2025-02-03 10:39:09 INFO  c.s.s.c.ChildAlertController:23 - GET /firestation?stationNumber=1
-2025-02-03 10:39:09 INFO  c.s.s.c.ChildAlertController:25 - Response: FireStationDTO(persons=[PersonInfoDTO(firstName=Peter, lastName=Duncan, address=644 Gershwin Cir, phone=841-874-6512), PersonInfoDTO(firstName=Reginold, lastName=Walker, address=908 73rd St, phone=841-874-8547), PersonInfoDTO(firstName=Jamie, lastName=Peters, address=908 73rd St, phone=841-874-7462), PersonInfoDTO(firstName=Brian, lastName=Stelzer, address=947 E. Rose Dr, phone=841-874-7784), PersonInfoDTO(firstName=Shawna, lastName=Stelzer, address=947 E. Rose Dr, phone=841-874-7784), PersonInfoDTO(firstName=Kendrik, lastName=Stelzer, address=947 E. Rose Dr, phone=841-874-7784)], adultCount=1, childCount=5)
-2025-02-03 10:39:12 INFO  c.s.s.c.ChildAlertController:25 - GET /childAlert?address=947 E. Rose Dr
-2025-02-03 10:39:12 INFO  c.s.s.c.ChildAlertController:27 - Response: [ChildAlertDTO(firstName=Kendrik, lastName=Stelzer, age=10, householdMembers=[ChildAlertDTO.HouseholdMember(firstName=Brian, lastName=Stelzer), ChildAlertDTO.HouseholdMember(firstName=Shawna, lastName=Stelzer)])]
+2025-02-03 11:53:41 INFO  c.s.s.SafetynetAlertsApplication:53 - Starting SafetynetAlertsApplication using Java 21.0.5 with PID 57011 (/Users/jeremy/Desktop/java/P5/safetynetalerts/target/classes started by jeremy in /Users/jeremy/Desktop/java/P5/safetynetalerts)
+2025-02-03 11:53:41 DEBUG c.s.s.SafetynetAlertsApplication:54 - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-02-03 11:53:41 INFO  c.s.s.SafetynetAlertsApplication:652 - No active profile set, falling back to 1 default profile: "default"
+2025-02-03 11:53:42 INFO  c.s.s.SafetynetAlertsApplication:59 - Started SafetynetAlertsApplication in 1.12 seconds (process running for 1.4)
+2025-02-03 11:53:46 INFO  c.s.s.c.ChildAlertController:23 - GET /firestation?stationNumber=1
+2025-02-03 11:53:46 INFO  c.s.s.c.ChildAlertController:25 - Response: FireStationDTO(persons=[PersonInfoDTO(firstName=Peter, lastName=Duncan, address=644 Gershwin Cir, phone=841-874-6512), PersonInfoDTO(firstName=Reginold, lastName=Walker, address=908 73rd St, phone=841-874-8547), PersonInfoDTO(firstName=Jamie, lastName=Peters, address=908 73rd St, phone=841-874-7462), PersonInfoDTO(firstName=Brian, lastName=Stelzer, address=947 E. Rose Dr, phone=841-874-7784), PersonInfoDTO(firstName=Shawna, lastName=Stelzer, address=947 E. Rose Dr, phone=841-874-7784), PersonInfoDTO(firstName=Kendrik, lastName=Stelzer, address=947 E. Rose Dr, phone=841-874-7784)], adultCount=1, childCount=5)
+2025-02-03 11:53:49 INFO  c.s.s.c.ChildAlertController:25 - GET /childAlert?address=947 E. Rose Dr
+2025-02-03 11:53:49 INFO  c.s.s.c.ChildAlertController:27 - Response: [ChildAlertDTO(firstName=Kendrik, lastName=Stelzer, age=10, householdMembers=[ChildAlertDTO.HouseholdMember(firstName=Brian, lastName=Stelzer), ChildAlertDTO.HouseholdMember(firstName=Shawna, lastName=Stelzer)])]
+2025-02-03 11:53:53 INFO  c.s.s.c.PhoneAlertController:24 - GET /phoneAlert?firestation=3
+2025-02-03 11:53:53 INFO  c.s.s.c.PhoneAlertController:26 - Response: [841-874-6741, 841-874-6544, 841-874-6874, 841-874-6512, 841-874-6513, 841-874-8888, 841-874-9888]
