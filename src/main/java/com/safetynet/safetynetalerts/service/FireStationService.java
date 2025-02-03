@@ -109,8 +109,14 @@ public class FireStationService implements FireStationServiceInterface {
      */
     private FireStationDTO getCoverage(List<Person> coveredPersons, int childCount, int adultCount) {
         FireStationDTO coverage = new FireStationDTO();
-        coverage.setPersons(coveredPersons.stream().map(person -> new PersonInfoDTO(person.getFirstName(),
-                person.getLastName(), person.getAddress(), person.getPhone())).collect(Collectors.toList()));
+        coverage.setPersons(coveredPersons.stream().map(person -> {
+            PersonInfoDTO personInfo = new PersonInfoDTO();
+            personInfo.setFirstName(person.getFirstName());
+            personInfo.setLastName(person.getLastName());
+            personInfo.setAddress(person.getAddress());
+            personInfo.setPhone(person.getPhone());
+            return personInfo;
+        }).collect(Collectors.toList()));
         coverage.setAdultCount(adultCount);
         coverage.setChildCount(childCount);
 
