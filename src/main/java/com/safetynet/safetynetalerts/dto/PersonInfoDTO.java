@@ -1,0 +1,18 @@
+package com.safetynet.safetynetalerts.dto;
+
+import lombok.Data;
+
+@Data
+public class PersonInfoDTO {
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String phone;
+
+    public PersonInfoDTO(String firstName, String lastName, String address, String phone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.phone = phone;
+    }
+}

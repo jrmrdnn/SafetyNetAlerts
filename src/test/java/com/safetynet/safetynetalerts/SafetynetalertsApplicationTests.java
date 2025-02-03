@@ -18,12 +18,11 @@ class SafetynetAlertsApplicationTests {
 	void contextLoads() {
 		assertNotNull(applicationContext);
 		// assertTrue(applicationContext.containsBean("SafetynetalertsApplication"));
-		assertTrue(applicationContext.getBeanDefinitionCount() > 0,
-				"Le contexte devrait contenir des beans");
+		assertTrue(applicationContext.getBeanDefinitionCount() > 0);
 	}
 
 	@Test
 	void applicationStartsSuccessfully() {
-		SafetynetalertsApplication.main(new String[] {});
+		SafetynetAlertsApplication.main(new String[] {});
 	}
 }

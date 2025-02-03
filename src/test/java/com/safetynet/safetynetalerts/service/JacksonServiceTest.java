@@ -21,7 +21,7 @@ import org.junit.jupiter.api.AfterEach;
 public class JacksonServiceTest {
 
     @Autowired
-    private JacksonService JacksonService;
+    private JacksonServiceInterface JacksonService;
 
     private static final String FILE_PATH = "src/test/resource/test.json";
 
