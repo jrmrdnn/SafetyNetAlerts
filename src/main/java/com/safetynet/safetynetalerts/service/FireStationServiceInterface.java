@@ -1,10 +1,18 @@
 package com.safetynet.safetynetalerts.service;
 
 import com.safetynet.safetynetalerts.dto.FireStationDTO;
+import com.safetynet.safetynetalerts.model.FireStation;
 
 import java.util.List;
 
 public interface FireStationServiceInterface {
+
+    /**
+     * Get the list of all fire stations
+     * 
+     * @return list of all fire stations
+     */
+    List<FireStation> getAllFireStations();
 
     /**
      * Get the list of persons covered by a fire station

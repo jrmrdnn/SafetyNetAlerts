@@ -84,4 +84,26 @@ public class FirestationServiceTest {
         assertEquals("644 Gershwin Cir", addresses.get(0));
         assertEquals("908 73rd St", addresses.get(1));
     }
+
+    @Test
+    public void testGetAllFireStations() {
+        FireStation firestation1 = new FireStation();
+        firestation1.setAddress("1509 Culver St");
+        firestation1.setStation("1");
+
+        FireStation firestation2 = new FireStation();
+        firestation2.setAddress("29 15th St");
+        firestation2.setStation("2");
+
+        JsonWrapper jsonWrapper = new JsonWrapper();
+        jsonWrapper.setFireStations(Arrays.asList(firestation1, firestation2));
+
+        List<FireStation> fireStations = fireStationService.getAllFireStations();
+
+        assertEquals(13, fireStations.size());
+        assertEquals("1509 Culver St", fireStations.get(0).getAddress());
+        assertEquals("3", fireStations.get(0).getStation());
+        assertEquals("29 15th St", fireStations.get(1).getAddress());
+        assertEquals("2", fireStations.get(1).getStation());
+    }
 }

@@ -23,6 +23,16 @@ public class FireStationService implements FireStationServiceInterface {
     private CalculateAgeServiceInterface calculateAgeService;
 
     /**
+     * Get the list of all fire stations
+     * 
+     * @return list of all fire stations
+     */
+    @Override
+    public List<FireStation> getAllFireStations() {
+        return jsonWrapper.getFireStations();
+    }
+
+    /**
      * Get the list of persons covered by a fire station
      * 
      * @param stationNumber number of the fire station
