@@ -1,7 +1,7 @@
 package com.safetynet.safetynetalerts.service;
 
 import com.safetynet.safetynetalerts.dto.FireStationDTO;
-import com.safetynet.safetynetalerts.dto.PersonInfoDTO;
+import com.safetynet.safetynetalerts.dto.PersonDTO;
 import com.safetynet.safetynetalerts.model.FireStation;
 import com.safetynet.safetynetalerts.model.MedicalRecord;
 import com.safetynet.safetynetalerts.model.Person;
@@ -110,7 +110,7 @@ public class FireStationService implements FireStationServiceInterface {
     private FireStationDTO getCoverage(List<Person> coveredPersons, int childCount, int adultCount) {
         FireStationDTO coverage = new FireStationDTO();
         coverage.setPersons(coveredPersons.stream().map(person -> {
-            PersonInfoDTO personInfo = new PersonInfoDTO();
+            PersonDTO personInfo = new PersonDTO();
             personInfo.setFirstName(person.getFirstName());
             personInfo.setLastName(person.getLastName());
             personInfo.setAddress(person.getAddress());
