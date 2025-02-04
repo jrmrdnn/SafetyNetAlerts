@@ -13,4 +13,27 @@ public interface PersonServiceInterface {
      */
     List<Person> getAllPersons();
 
+    /**
+     * Add a person to the JSON file
+     * 
+     * @param person
+     * @return the person added
+     */
+    Person addPerson(Person person);
+
+    /**
+     * Update a person in the JSON file
+     * 
+     * @param person
+     * @return the updated person
+     */
+    Person updatePerson(Person person);
+
+    /**
+     * Delete a person from the JSON file
+     * 
+     * @param person
+     */
+    void deletePerson(Person person);
+
 }

@@ -12,7 +12,7 @@ public interface JacksonServiceInterface {
      * @param data     data to save
      * @throws IOException if an I/O error occurs
      */
-    <T> void saveToFile(String filePath, T data) throws IOException;
+    <T> void saveToFile(String filePath, T data);
 
     /**
      * Load JSON data from a file
