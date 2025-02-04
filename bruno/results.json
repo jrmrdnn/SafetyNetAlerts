@@ -1,0 +1,349 @@
+[
+  {
+    "iterationIndex": 0,
+    "summary": {
+      "totalRequests": 5,
+      "passedRequests": 5,
+      "failedRequests": 0,
+      "skippedRequests": 0,
+      "totalAssertions": 0,
+      "passedAssertions": 0,
+      "failedAssertions": 0,
+      "totalTests": 0,
+      "passedTests": 0,
+      "failedTests": 0
+    },
+    "results": [
+      {
+        "test": {
+          "filename": "StationNumber/stationNumber_1.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/firestation?stationNumber=1",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "date": "",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": {
+            "persons": [
+              {
+                "firstName": "Peter",
+                "lastName": "Duncan",
+                "address": "644 Gershwin Cir",
+                "phone": "841-874-6512"
+              },
+              {
+                "firstName": "Reginold",
+                "lastName": "Walker",
+                "address": "908 73rd St",
+                "phone": "841-874-8547"
+              },
+              {
+                "firstName": "Jamie",
+                "lastName": "Peters",
+                "address": "908 73rd St",
+                "phone": "841-874-7462"
+              },
+              {
+                "firstName": "Brian",
+                "lastName": "Stelzer",
+                "address": "947 E. Rose Dr",
+                "phone": "841-874-7784"
+              },
+              {
+                "firstName": "Shawna",
+                "lastName": "Stelzer",
+                "address": "947 E. Rose Dr",
+                "phone": "841-874-7784"
+              },
+              {
+                "firstName": "Kendrik",
+                "lastName": "Stelzer",
+                "address": "947 E. Rose Dr",
+                "phone": "841-874-7784"
+              }
+            ],
+            "adultCount": 5,
+            "childCount": 1
+          },
+          "responseTime": 34
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.045039666,
+        "suitename": "StationNumber/stationNumber_1",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "StationNumber/stationNumber_2.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/firestation?stationNumber=2",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "date": "",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": {
+            "persons": [
+              {
+                "firstName": "Jonanathan",
+                "lastName": "Marrack",
+                "address": "29 15th St",
+                "phone": "841-874-6513"
+              },
+              {
+                "firstName": "Sophia",
+                "lastName": "Zemicks",
+                "address": "892 Downing Ct",
+                "phone": "841-874-7878"
+              },
+              {
+                "firstName": "Warren",
+                "lastName": "Zemicks",
+                "address": "892 Downing Ct",
+                "phone": "841-874-7512"
+              },
+              {
+                "firstName": "Zach",
+                "lastName": "Zemicks",
+                "address": "892 Downing Ct",
+                "phone": "841-874-7512"
+              },
+              {
+                "firstName": "Eric",
+                "lastName": "Cadigan",
+                "address": "951 LoneTree Rd",
+                "phone": "841-874-7458"
+              }
+            ],
+            "adultCount": 4,
+            "childCount": 1
+          },
+          "responseTime": 6
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.008076292,
+        "suitename": "StationNumber/stationNumber_2",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "StationNumber/stationNumber_3.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/firestation?stationNumber=3",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "date": "",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": {
+            "persons": [
+              {
+                "firstName": "John",
+                "lastName": "Boyd",
+                "address": "1509 Culver St",
+                "phone": "841-874-6512"
+              },
+              {
+                "firstName": "Jacob",
+                "lastName": "Boyd",
+                "address": "1509 Culver St",
+                "phone": "841-874-6513"
+              },
+              {
+                "firstName": "Tenley",
+                "lastName": "Boyd",
+                "address": "1509 Culver St",
+                "phone": "841-874-6512"
+              },
+              {
+                "firstName": "Roger",
+                "lastName": "Boyd",
+                "address": "1509 Culver St",
+                "phone": "841-874-6512"
+              },
+              {
+                "firstName": "Felicia",
+                "lastName": "Boyd",
+                "address": "1509 Culver St",
+                "phone": "841-874-6544"
+              },
+              {
+                "firstName": "Tessa",
+                "lastName": "Carman",
+                "address": "834 Binoc Ave",
+                "phone": "841-874-6512"
+              },
+              {
+                "firstName": "Foster",
+                "lastName": "Shepard",
+                "address": "748 Townings Dr",
+                "phone": "841-874-6544"
+              },
+              {
+                "firstName": "Tony",
+                "lastName": "Cooper",
+                "address": "112 Steppes Pl",
+                "phone": "841-874-6874"
+              },
+              {
+                "firstName": "Ron",
+                "lastName": "Peters",
+                "address": "112 Steppes Pl",
+                "phone": "841-874-8888"
+              },
+              {
+                "firstName": "Allison",
+                "lastName": "Boyd",
+                "address": "112 Steppes Pl",
+                "phone": "841-874-9888"
+              },
+              {
+                "firstName": "Clive",
+                "lastName": "Ferguson",
+                "address": "748 Townings Dr",
+                "phone": "841-874-6741"
+              }
+            ],
+            "adultCount": 8,
+            "childCount": 3
+          },
+          "responseTime": 9
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.009854542,
+        "suitename": "StationNumber/stationNumber_3",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "StationNumber/stationNumber_4.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/firestation?stationNumber=4",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "date": "",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": {
+            "persons": [
+              {
+                "firstName": "Tony",
+                "lastName": "Cooper",
+                "address": "112 Steppes Pl",
+                "phone": "841-874-6874"
+              },
+              {
+                "firstName": "Lily",
+                "lastName": "Cooper",
+                "address": "489 Manchester St",
+                "phone": "841-874-9845"
+              },
+              {
+                "firstName": "Ron",
+                "lastName": "Peters",
+                "address": "112 Steppes Pl",
+                "phone": "841-874-8888"
+              },
+              {
+                "firstName": "Allison",
+                "lastName": "Boyd",
+                "address": "112 Steppes Pl",
+                "phone": "841-874-9888"
+              }
+            ],
+            "adultCount": 4,
+            "childCount": 0
+          },
+          "responseTime": 6
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.007009125,
+        "suitename": "StationNumber/stationNumber_4",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "StationNumber/stationNumber_5.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/firestation?stationNumber=5",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "date": "",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": {
+            "persons": [],
+            "adultCount": 0,
+            "childCount": 0
+          },
+          "responseTime": 3
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.003539917,
+        "suitename": "StationNumber/stationNumber_5",
+        "iterationIndex": 0
+      }
+    ]
+  }
+]
