@@ -22,7 +22,7 @@ public class PersonInfoController {
 
     @GetMapping("/personInfo")
     public List<PersonInfoDTO> getPersonInfo(@RequestParam String lastName) {
-        logger.info("Request: GET http://localhost:8080/personInfo?lastName=" + lastName);
+        logger.info("Request: GET /personInfo?lastName=" + lastName);
         List<PersonInfoDTO> personInfoList = personInfoService.getPersonInfoByLastName(lastName);
         logger.info("Response: " + personInfoList);
         return personInfoList;
