@@ -1,0 +1,23 @@
+package com.safetynet.safetynetalerts.controller;
+
+import com.safetynet.safetynetalerts.dto.ChildAlertDTO;
+import com.safetynet.safetynetalerts.service.ReadPersonService;
+import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class PersonController {
+
+  private final ReadPersonService readPersonService;
+
+  PersonController(ReadPersonService readPersonService) {
+    this.readPersonService = readPersonService;
+  }
+
+  @GetMapping("/childAlert")
+  public List<ChildAlertDTO> getChildAlert(@RequestParam String address) {
+    return readPersonService.allChildrenAtAddress(address);
+  }
+}

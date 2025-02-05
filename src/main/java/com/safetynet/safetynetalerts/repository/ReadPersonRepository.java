@@ -11,4 +11,11 @@ public interface ReadPersonRepository {
    * @return the list
    */
   List<Person> findPersonsByAddresses(List<FireStation> addresses);
+
+  /**
+   * Find persons at address.
+   * @param address the address
+   * @return the list
+   */
+  public List<Person> findPersonsAtAddress(String address);
 }
