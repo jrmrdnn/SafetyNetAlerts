@@ -2,8 +2,8 @@
   {
     "iterationIndex": 0,
     "summary": {
-      "totalRequests": 10,
-      "passedRequests": 10,
+      "totalRequests": 15,
+      "passedRequests": 15,
       "failedRequests": 0,
       "skippedRequests": 0,
       "totalAssertions": 0,
@@ -29,7 +29,6 @@
           "headers": {
             "content-type": "application/json",
             "transfer-encoding": "chunked",
-            "date": "",
             "keep-alive": "timeout=60",
             "connection": "keep-alive"
           },
@@ -81,13 +80,13 @@
               ]
             }
           ],
-          "responseTime": 88
+          "responseTime": 103
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.099651459,
+        "runtime": 0.113606791,
         "suitename": "ChildAlert/childAlert_1509 Culver St",
         "iterationIndex": 0
       },
@@ -106,7 +105,6 @@
           "headers": {
             "content-type": "application/json",
             "transfer-encoding": "chunked",
-            "date": "",
             "keep-alive": "timeout=60",
             "connection": "keep-alive"
           },
@@ -124,7 +122,7 @@
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.007323291,
+        "runtime": 0.006776,
         "suitename": "ChildAlert/childAlert_834 Binoc Ave",
         "iterationIndex": 0
       },
@@ -143,7 +141,6 @@
           "headers": {
             "content-type": "application/json",
             "transfer-encoding": "chunked",
-            "date": "",
             "keep-alive": "timeout=60",
             "connection": "keep-alive"
           },
@@ -164,13 +161,13 @@
               ]
             }
           ],
-          "responseTime": 6
+          "responseTime": 5
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.00670175,
+        "runtime": 0.006243125,
         "suitename": "ChildAlert/childAlert_892 Downing Ct",
         "iterationIndex": 0
       },
@@ -189,7 +186,6 @@
           "headers": {
             "content-type": "application/json",
             "transfer-encoding": "chunked",
-            "date": "",
             "keep-alive": "timeout=60",
             "connection": "keep-alive"
           },
@@ -210,13 +206,13 @@
               ]
             }
           ],
-          "responseTime": 6
+          "responseTime": 5
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.007093708,
+        "runtime": 0.006181333,
         "suitename": "ChildAlert/childAlert_947 E Rose Dr",
         "iterationIndex": 0
       },
@@ -235,19 +231,186 @@
           "headers": {
             "content-type": "application/json",
             "transfer-encoding": "chunked",
-            "date": "",
             "keep-alive": "timeout=60",
             "connection": "keep-alive"
           },
           "data": [],
+          "responseTime": 5
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.005419833,
+        "suitename": "ChildAlert/childAlert_29 15th St",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "PhoneAlert/phoneAlert_1.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/phoneAlert?firestation=1",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": [
+            "841-874-7784",
+            "841-874-7462",
+            "841-874-6512",
+            "841-874-8547"
+          ],
+          "responseTime": 5
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.006219417,
+        "suitename": "PhoneAlert/phoneAlert_1",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "PhoneAlert/phoneAlert_2.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/phoneAlert?firestation=2",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": [
+            "841-874-7512",
+            "841-874-7878",
+            "841-874-6513",
+            "841-874-7458"
+          ],
+          "responseTime": 3
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.004072709,
+        "suitename": "PhoneAlert/phoneAlert_2",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "PhoneAlert/phoneAlert_3.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/phoneAlert?firestation=3",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": [
+            "841-874-6741",
+            "841-874-6544",
+            "841-874-6874",
+            "841-874-6512",
+            "841-874-6513",
+            "841-874-8888",
+            "841-874-9888"
+          ],
           "responseTime": 4
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.004651,
-        "suitename": "ChildAlert/childAlert_29 15th St",
+        "runtime": 0.004654291,
+        "suitename": "PhoneAlert/phoneAlert_3",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "PhoneAlert/phoneAlert_4.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/phoneAlert?firestation=4",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": [
+            "841-874-9845",
+            "841-874-6874",
+            "841-874-8888",
+            "841-874-9888"
+          ],
+          "responseTime": 5
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.0061825,
+        "suitename": "PhoneAlert/phoneAlert_4",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "PhoneAlert/phoneAlert_5.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/phoneAlert?firestation=5",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": [],
+          "responseTime": 3
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.003462083,
+        "suitename": "PhoneAlert/phoneAlert_5",
         "iterationIndex": 0
       },
       {
@@ -265,7 +428,6 @@
           "headers": {
             "content-type": "application/json",
             "transfer-encoding": "chunked",
-            "date": "",
             "keep-alive": "timeout=60",
             "connection": "keep-alive"
           },
@@ -311,13 +473,13 @@
             "adultCount": 5,
             "childCount": 1
           },
-          "responseTime": 12
+          "responseTime": 11
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.01265875,
+        "runtime": 0.0110125,
         "suitename": "StationNumber/stationNumber_1",
         "iterationIndex": 0
       },
@@ -336,7 +498,6 @@
           "headers": {
             "content-type": "application/json",
             "transfer-encoding": "chunked",
-            "date": "",
             "keep-alive": "timeout=60",
             "connection": "keep-alive"
           },
@@ -376,13 +537,13 @@
             "adultCount": 4,
             "childCount": 1
           },
-          "responseTime": 6
+          "responseTime": 5
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.0064405,
+        "runtime": 0.00552525,
         "suitename": "StationNumber/stationNumber_2",
         "iterationIndex": 0
       },
@@ -401,7 +562,6 @@
           "headers": {
             "content-type": "application/json",
             "transfer-encoding": "chunked",
-            "date": "",
             "keep-alive": "timeout=60",
             "connection": "keep-alive"
           },
@@ -483,7 +643,7 @@
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.01237525,
+        "runtime": 0.012775625,
         "suitename": "StationNumber/stationNumber_3",
         "iterationIndex": 0
       },
@@ -502,7 +662,6 @@
           "headers": {
             "content-type": "application/json",
             "transfer-encoding": "chunked",
-            "date": "",
             "keep-alive": "timeout=60",
             "connection": "keep-alive"
           },
@@ -536,13 +695,13 @@
             "adultCount": 4,
             "childCount": 0
           },
-          "responseTime": 20
+          "responseTime": 4
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.02641825,
+        "runtime": 0.004910458,
         "suitename": "StationNumber/stationNumber_4",
         "iterationIndex": 0
       },
@@ -561,7 +720,6 @@
           "headers": {
             "content-type": "application/json",
             "transfer-encoding": "chunked",
-            "date": "",
             "keep-alive": "timeout=60",
             "connection": "keep-alive"
           },
@@ -570,13 +728,13 @@
             "adultCount": 0,
             "childCount": 0
           },
-          "responseTime": 13
+          "responseTime": 3
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.01544525,
+        "runtime": 0.004265,
         "suitename": "StationNumber/stationNumber_5",
         "iterationIndex": 0
       }

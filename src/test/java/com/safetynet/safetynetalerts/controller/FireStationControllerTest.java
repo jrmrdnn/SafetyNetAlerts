@@ -7,6 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.safetynet.safetynetalerts.dto.FireStationDTO;
 import com.safetynet.safetynetalerts.service.ReadFireStationService;
+import java.util.HashSet;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -44,5 +46,22 @@ public class FireStationControllerTest {
       .perform(get("/firestation").param("stationNumber", stationNumber))
       .andExpect(status().isOk())
       .andExpect(content().json("{/* expected JSON response */}"));
+  }
+
+  @Test
+  public void testGetPhoneAlert() throws Exception {
+    String fireStation = "1";
+    Set<String> phoneNumbers = new HashSet<>();
+    phoneNumbers.add("123-456-7890");
+    phoneNumbers.add("098-765-4321");
+
+    when(
+      readFireStationService.getPhoneNumbersByFireStation(fireStation)
+    ).thenReturn(phoneNumbers);
+
+    mockMvc
+      .perform(get("/phoneAlert").param("firestation", fireStation))
+      .andExpect(status().isOk())
+      .andExpect(content().json("[\"123-456-7890\",\"098-765-4321\"]"));
   }
 }

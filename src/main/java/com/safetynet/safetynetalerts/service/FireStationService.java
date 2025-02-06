@@ -9,6 +9,7 @@ import com.safetynet.safetynetalerts.repository.ReadMedicalRecordRepository;
 import com.safetynet.safetynetalerts.repository.ReadPersonRepository;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -53,5 +54,12 @@ public class FireStationService implements ReadFireStationService {
       childCount,
       adultCount
     );
+  }
+
+  @Override
+  public Set<String> getPhoneNumbersByFireStation(String stationNumber) {
+    List<FireStation> findByAddress =
+      readFireStationRepository.findByStationNumberToList(stationNumber);
+    return readPersonRepository.findPhoneNumbersByAddress(findByAddress);
   }
 }
