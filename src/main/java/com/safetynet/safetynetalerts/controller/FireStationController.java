@@ -1,5 +1,6 @@
 package com.safetynet.safetynetalerts.controller;
 
+import com.safetynet.safetynetalerts.dto.FireDTO;
 import com.safetynet.safetynetalerts.dto.FireStationDTO;
 import com.safetynet.safetynetalerts.service.ReadFireStationService;
 import java.util.Set;
@@ -24,5 +25,10 @@ public class FireStationController {
   @GetMapping("/phoneAlert")
   public Set<String> getPhoneAlert(@RequestParam String firestation) {
     return readFireStationService.getPhoneNumbersByFireStation(firestation);
+  }
+
+  @GetMapping("/fire")
+  public FireDTO getFireInfo(@RequestParam String address) {
+    return readFireStationService.getFireInfoByAddress(address);
   }
 }
