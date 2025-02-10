@@ -2,7 +2,9 @@ package com.safetynet.safetynetalerts.controller;
 
 import com.safetynet.safetynetalerts.dto.FireDTO;
 import com.safetynet.safetynetalerts.dto.FireStationDTO;
+import com.safetynet.safetynetalerts.dto.HouseholdInfoDTO;
 import com.safetynet.safetynetalerts.service.ReadFireStationService;
+import java.util.List;
 import java.util.Set;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,5 +32,12 @@ public class FireStationController {
   @GetMapping("/fire")
   public FireDTO getFireInfo(@RequestParam String address) {
     return readFireStationService.getFireInfoByAddress(address);
+  }
+
+  @GetMapping("/flood/stations")
+  public List<HouseholdInfoDTO> getFloodStations(
+    @RequestParam List<String> stations
+  ) {
+    return readFireStationService.getHouseholdsByStations(stations);
   }
 }

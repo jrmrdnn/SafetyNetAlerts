@@ -4,6 +4,7 @@ import com.safetynet.safetynetalerts.model.FireStation;
 import com.safetynet.safetynetalerts.model.JsonWrapper;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
 
@@ -32,5 +33,15 @@ public class FireStationRepository implements ReadFireStationRepository {
       .stream()
       .filter(f -> f.getAddress().equalsIgnoreCase(address))
       .findFirst();
+  }
+
+  @Override
+  public Set<String> findAllStationsNumberToSet(List<String> stations) {
+    return jsonWrapper
+      .getFireStations()
+      .stream()
+      .filter(f -> stations.contains(f.getStation()))
+      .map(FireStation::getAddress)
+      .collect(Collectors.toSet());
   }
 }

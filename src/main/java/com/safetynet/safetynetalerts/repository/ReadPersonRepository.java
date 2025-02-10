@@ -3,6 +3,7 @@ package com.safetynet.safetynetalerts.repository;
 import com.safetynet.safetynetalerts.model.FireStation;
 import com.safetynet.safetynetalerts.model.Person;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public interface ReadPersonRepository {
@@ -26,4 +27,11 @@ public interface ReadPersonRepository {
    * @return the set
    */
   Set<String> findPhoneNumbersByAddress(List<FireStation> addresses);
+
+  /**
+   * Find and group persons by address.
+   * @param addresses the addresses
+   * @return the map
+   */
+  Map<String, List<Person>> findAndGroupPersonsByAddress(Set<String> addresses);
 }

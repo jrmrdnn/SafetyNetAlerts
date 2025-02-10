@@ -7,8 +7,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.safetynet.safetynetalerts.dto.FireDTO;
 import com.safetynet.safetynetalerts.dto.FireStationDTO;
+import com.safetynet.safetynetalerts.dto.HouseholdInfoDTO;
 import com.safetynet.safetynetalerts.service.ReadFireStationService;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -80,5 +83,23 @@ public class FireStationControllerTest {
       .perform(get("/fire").param("address", address))
       .andExpect(status().isOk())
       .andExpect(content().json("{/* expected JSON response */}"));
+  }
+
+  @Test
+  public void testGetFloodStations() throws Exception {
+    List<String> stations = Arrays.asList("1", "2");
+    List<HouseholdInfoDTO> households = Arrays.asList(
+      new HouseholdInfoDTO(),
+      new HouseholdInfoDTO()
+    );
+
+    when(readFireStationService.getHouseholdsByStations(stations)).thenReturn(
+      households
+    );
+
+    mockMvc
+      .perform(get("/flood/stations").param("stations", "1,2"))
+      .andExpect(status().isOk())
+      .andExpect(content().json("[{}, {}]"));
   }
 }
