@@ -126,4 +126,16 @@ class PersonRepositoryTest {
 
     assertTrue(result.isEmpty());
   }
+
+  @Test
+  void testFindPersonsWithLastName() {
+    when(jsonWrapper.getPersons()).thenReturn(
+      Collections.singletonList(person)
+    );
+
+    List<Person> result = personRepository.findPersonsWithLastName("Doe");
+
+    assertEquals(1, result.size());
+    assertEquals(person, result.get(0));
+  }
 }

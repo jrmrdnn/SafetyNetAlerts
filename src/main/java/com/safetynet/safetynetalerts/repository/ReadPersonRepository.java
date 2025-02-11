@@ -34,4 +34,11 @@ public interface ReadPersonRepository {
    * @return the map
    */
   Map<String, List<Person>> findAndGroupPersonsByAddress(Set<String> addresses);
+
+  /**
+   * Find persons with last name.
+   * @param lastName the last name
+   * @return the list
+   */
+  List<Person> findPersonsWithLastName(String lastName);
 }

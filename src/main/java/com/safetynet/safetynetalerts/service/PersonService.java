@@ -2,6 +2,8 @@ package com.safetynet.safetynetalerts.service;
 
 import com.safetynet.safetynetalerts.dto.ChildAlertDTO;
 import com.safetynet.safetynetalerts.dto.ChildAlertDTO.HouseholdMember;
+import com.safetynet.safetynetalerts.dto.HouseholdInfoDTO;
+import com.safetynet.safetynetalerts.dto.HouseholdInfoDTO.PersonInfoDTO;
 import com.safetynet.safetynetalerts.model.MedicalRecord;
 import com.safetynet.safetynetalerts.model.Person;
 import com.safetynet.safetynetalerts.repository.ReadMedicalRecordRepository;
@@ -47,6 +49,29 @@ public class PersonService implements ReadPersonService {
       }
     }
     return children;
+  }
+
+  @Override
+  public List<PersonInfoDTO> getPersonInfoByLastName(String lastName) {
+    List<PersonInfoDTO> personInfoList = new ArrayList<>();
+    List<Person> personsWithLastName =
+      readPersonRepository.findPersonsWithLastName(lastName);
+
+    for (Person person : personsWithLastName) {
+      Optional<MedicalRecord> medicalRecord =
+        readMedicalRecordRepository.findByFirstNameAndLastName(person);
+
+      if (medicalRecord.isPresent()) {
+        int age = calculateAgeService.calculate(
+          medicalRecord.get().getBirthdate()
+        );
+        personInfoList.add(
+          HouseholdInfoDTO.createPersonInfoDTO(person, age, medicalRecord.get())
+        );
+      }
+    }
+
+    return personInfoList;
   }
 
   /**

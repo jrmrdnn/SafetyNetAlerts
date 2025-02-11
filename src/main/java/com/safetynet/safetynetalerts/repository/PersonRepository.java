@@ -70,4 +70,13 @@ public class PersonRepository implements ReadPersonRepository {
       .filter(p -> addresses.contains(p.getAddress()))
       .collect(Collectors.groupingBy(Person::getAddress));
   }
+
+  @Override
+  public List<Person> findPersonsWithLastName(String lastName) {
+    return jsonWrapper
+      .getPersons()
+      .stream()
+      .filter(p -> p.getLastName().equalsIgnoreCase(lastName))
+      .collect(Collectors.toList());
+  }
 }
