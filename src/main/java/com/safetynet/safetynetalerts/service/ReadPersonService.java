@@ -3,6 +3,7 @@ package com.safetynet.safetynetalerts.service;
 import com.safetynet.safetynetalerts.dto.ChildAlertDTO;
 import com.safetynet.safetynetalerts.dto.HouseholdInfoDTO.PersonInfoDTO;
 import java.util.List;
+import java.util.Set;
 
 public interface ReadPersonService {
   /**
@@ -18,4 +19,11 @@ public interface ReadPersonService {
    * @return
    */
   List<PersonInfoDTO> getPersonInfoByLastName(String lastName);
+
+  /**
+   * Get emails by city.
+   * @param city
+   * @return
+   */
+  Set<String> getEmailsByCity(String city);
 }

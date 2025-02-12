@@ -41,4 +41,11 @@ public interface ReadPersonRepository {
    * @return the list
    */
   List<Person> findPersonsWithLastName(String lastName);
+
+  /**
+   * Find emails by city.
+   * @param city the city
+   * @return the set
+   */
+  Set<String> findEmailsByCity(String city);
 }

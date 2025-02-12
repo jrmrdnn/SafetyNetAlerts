@@ -4,6 +4,7 @@ import com.safetynet.safetynetalerts.dto.ChildAlertDTO;
 import com.safetynet.safetynetalerts.dto.HouseholdInfoDTO.PersonInfoDTO;
 import com.safetynet.safetynetalerts.service.ReadPersonService;
 import java.util.List;
+import java.util.Set;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,5 +26,10 @@ public class PersonController {
   @GetMapping("/personInfo")
   public List<PersonInfoDTO> getPersonInfo(@RequestParam String lastName) {
     return readPersonService.getPersonInfoByLastName(lastName);
+  }
+
+  @GetMapping("/communityEmail")
+  public Set<String> getCommunityEmails(@RequestParam String city) {
+    return readPersonService.getEmailsByCity(city);
   }
 }
