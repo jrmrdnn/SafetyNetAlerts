@@ -6,6 +6,8 @@ import static org.mockito.Mockito.*;
 import com.safetynet.safetynetalerts.model.FireStation;
 import com.safetynet.safetynetalerts.model.JsonWrapper;
 import com.safetynet.safetynetalerts.model.Person;
+import com.safetynet.safetynetalerts.service.DataPersistenceServiceInterface;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +24,9 @@ class PersonRepositoryTest {
 
   @Mock
   private JsonWrapper jsonWrapper;
+
+  @Mock
+  private DataPersistenceServiceInterface dataPersistenceService;
 
   @InjectMocks
   private PersonRepository personRepository;
@@ -149,5 +154,48 @@ class PersonRepositoryTest {
 
     assertEquals(1, result.size());
     assertTrue(result.contains("john@mail.com"));
+  }
+
+  @Test
+  void testSave() {
+    List<Person> persons = new ArrayList<>();
+    when(jsonWrapper.getPersons()).thenReturn(persons);
+
+    personRepository.save(person);
+
+    verify(jsonWrapper, times(2)).getPersons();
+    verify(dataPersistenceService).saveData();
+    assertTrue(persons.contains(person));
+  }
+
+  @Test
+  void testUpdate() {
+    Person updatedPerson = new Person();
+    updatedPerson.setFirstName("John");
+    updatedPerson.setLastName("Doe");
+    updatedPerson.setAddress("456 Elm St");
+
+    List<Person> persons = new ArrayList<>(Collections.singletonList(person));
+    when(jsonWrapper.getPersons()).thenReturn(persons);
+
+    personRepository.update(updatedPerson);
+
+    verify(jsonWrapper, times(2)).getPersons();
+    verify(dataPersistenceService).saveData();
+    assertFalse(persons.contains(person));
+  }
+
+  @Test
+  void testDelete() {
+    List<Person> persons = new ArrayList<>(Collections.singletonList(person));
+    when(jsonWrapper.getPersons()).thenReturn(persons);
+
+    assertTrue(persons.contains(person));
+
+    personRepository.delete(person);
+
+    verify(jsonWrapper, times(2)).getPersons();
+    verify(dataPersistenceService).saveData();
+    assertFalse(persons.contains(person));
   }
 }

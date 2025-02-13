@@ -4,6 +4,7 @@ import com.safetynet.safetynetalerts.model.FireStation;
 import com.safetynet.safetynetalerts.model.Person;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 public interface ReadPersonRepository {
@@ -48,4 +49,11 @@ public interface ReadPersonRepository {
    * @return the set
    */
   Set<String> findEmailsByCity(String city);
+
+  /**
+   * Find person by first name and last name.
+   * @param person the person
+   * @return the optional
+   */
+  Optional<Person> findPersonByFirstNameAndLastName(Person person);
 }
