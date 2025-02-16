@@ -14,6 +14,7 @@ import com.safetynet.safetynetalerts.model.Person;
 import com.safetynet.safetynetalerts.repository.ReadFireStationRepository;
 import com.safetynet.safetynetalerts.repository.ReadMedicalRecordRepository;
 import com.safetynet.safetynetalerts.repository.ReadPersonRepository;
+import com.safetynet.safetynetalerts.repository.WriteFireStationRepository;
 import java.util.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,9 @@ class FireStationServiceTest {
 
   @Mock
   private ReadMedicalRecordRepository readMedicalRecordRepository;
+
+  @Mock
+  private WriteFireStationRepository writeFireStationRepository;
 
   @Mock
   private CalculateAgeServiceInterface calculateAgeService;
@@ -158,5 +162,38 @@ class FireStationServiceTest {
     verify(readPersonRepository, times(1)).findAndGroupPersonsByAddress(
       addresses
     );
+  }
+
+  @Test
+  void testAddFireStation() {
+    FireStation fireStation = new FireStation();
+    fireStation.setStation("1");
+    fireStation.setAddress("address");
+
+    fireStationService.addFireStation(fireStation);
+
+    verify(writeFireStationRepository, times(1)).save(fireStation);
+  }
+
+  @Test
+  void testUpdateFireStation() {
+    FireStation fireStation = new FireStation();
+    fireStation.setStation("1");
+    fireStation.setAddress("address");
+
+    fireStationService.updateFireStation(fireStation);
+
+    verify(writeFireStationRepository, times(1)).update(fireStation);
+  }
+
+  @Test
+  void testDeleteFireStation() {
+    FireStation fireStation = new FireStation();
+    fireStation.setStation("1");
+    fireStation.setAddress("address");
+
+    fireStationService.deleteFireStation(fireStation);
+
+    verify(writeFireStationRepository, times(1)).delete(fireStation);
   }
 }

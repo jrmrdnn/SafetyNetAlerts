@@ -1,0 +1,18 @@
+meta {
+  name: fireStation_update
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{URL}}/firestation
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "address": "123 Main St",
+    "station": "2"
+  }
+}

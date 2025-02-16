@@ -11,6 +11,7 @@ import com.safetynet.safetynetalerts.model.Person;
 import com.safetynet.safetynetalerts.repository.ReadFireStationRepository;
 import com.safetynet.safetynetalerts.repository.ReadMedicalRecordRepository;
 import com.safetynet.safetynetalerts.repository.ReadPersonRepository;
+import com.safetynet.safetynetalerts.repository.WriteFireStationRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,10 +23,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class FireStationService implements ReadFireStationService {
+public class FireStationService
+  implements ReadFireStationService, WriteFireStationService {
 
-  private final ReadPersonRepository readPersonRepository;
   private final ReadFireStationRepository readFireStationRepository;
+  private final WriteFireStationRepository writeFireStationRepository;
+  private final ReadPersonRepository readPersonRepository;
   private final ReadMedicalRecordRepository readMedicalRecordRepository;
   private final CalculateAgeServiceInterface calculateAgeService;
 
@@ -113,6 +116,30 @@ public class FireStationService implements ReadFireStationService {
     Map<String, List<Person>> groupPersonsByAddress =
       readPersonRepository.findAndGroupPersonsByAddress(addresses);
     return createHouseholdInfoDTO(groupPersonsByAddress);
+  }
+
+  @Override
+  public void addFireStation(FireStation fireStation) {
+    if (fireStation.getAddress() == null || fireStation.getStation() == null) {
+      throw new IllegalArgumentException("Address and station are required");
+    }
+    writeFireStationRepository.save(fireStation);
+  }
+
+  @Override
+  public void updateFireStation(FireStation fireStation) {
+    if (fireStation.getAddress() == null || fireStation.getStation() == null) {
+      throw new IllegalArgumentException("Address and station are required");
+    }
+    writeFireStationRepository.update(fireStation);
+  }
+
+  @Override
+  public void deleteFireStation(FireStation fireStation) {
+    if (fireStation.getAddress() == null) {
+      throw new IllegalArgumentException("Address is required");
+    }
+    writeFireStationRepository.delete(fireStation);
   }
 
   /**
