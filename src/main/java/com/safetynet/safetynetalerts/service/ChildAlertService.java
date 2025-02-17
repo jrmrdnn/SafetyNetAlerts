@@ -24,12 +24,6 @@ public class ChildAlertService implements ChildAlertServiceInterface {
     @Autowired
     private CalculateAgeServiceInterface calculateAgeService;
 
-    /**
-     * Get children at address
-     * 
-     * @param address address
-     * @return list of children at address
-     */
     @Override
     public List<ChildAlertDTO> getChildrenAtAddress(String address) {
         List<Person> personsAtAddress = getPersonsAtAddress(address);

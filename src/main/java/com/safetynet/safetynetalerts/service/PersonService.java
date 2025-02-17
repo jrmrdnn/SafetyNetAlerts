@@ -19,22 +19,11 @@ public class PersonService implements PersonServiceInterface {
     @Autowired
     private JacksonServiceInterface jacksonService;
 
-    /**
-     * Get all persons from the JSON file
-     * 
-     * @return list of persons
-     */
     @Override
     public List<Person> getAllPersons() {
         return jsonWrapper.getPersons();
     }
 
-    /**
-     * Add a person to the JSON file
-     * 
-     * @param person
-     * @return the person added
-     */
     @Override
     public Person addPerson(Person person) {
         List<Person> persons = jsonWrapper.getPersons();
@@ -47,48 +36,37 @@ public class PersonService implements PersonServiceInterface {
         persons.add(person);
         jsonWrapper.setPersons(persons);
         jacksonService.saveToFile(JacksonConstants.FILE_PATH, jsonWrapper);
+
         return person;
     }
 
-    /**
-     * Update a person in the JSON file
-     * 
-     * @param updatedPerson
-     * @return the updated person
-     */
     @Override
     public Person updatePerson(Person person) {
-        List<Person> persons = jsonWrapper.getPersons();
-        Optional<Person> existingPerson = getExistingPerson(person.getFirstName(), person.getLastName(), persons);
+        List<Person> Allpersons = jsonWrapper.getPersons();
+        Optional<Person> updatePerson = getExistingPerson(person.getFirstName(), person.getLastName(), Allpersons);
 
-        if (existingPerson.isPresent()) {
-            updatePersonDetails(person, persons, existingPerson);
-            jsonWrapper.setPersons(persons);
-            jacksonService.saveToFile(JacksonConstants.FILE_PATH, jsonWrapper);
-            return person;
-        } else {
+        if (updatePerson.isEmpty()) {
             throw new IllegalArgumentException("Person not found");
         }
+
+        setUpdatePerson(person, Allpersons, updatePerson);
+        jsonWrapper.setPersons(Allpersons);
+        jacksonService.saveToFile(JacksonConstants.FILE_PATH, jsonWrapper);
+
+        return Allpersons.get(Allpersons.indexOf(updatePerson.get()));
     }
 
-    /**
-     * Delete a person from the JSON file
-     * 
-     * @param firstName
-     * @param lastName
-     */
     @Override
     public void deletePerson(Person person) {
         List<Person> persons = jsonWrapper.getPersons();
         Optional<Person> existingPerson = getExistingPerson(person.getFirstName(), person.getLastName(), persons);
 
-        if (existingPerson.isPresent()) {
-            persons.remove(existingPerson.get());
-            jsonWrapper.setPersons(persons);
-            jacksonService.saveToFile(JacksonConstants.FILE_PATH, jsonWrapper);
-        } else {
+        if (existingPerson.isEmpty()) {
             throw new IllegalArgumentException("Person not found");
         }
+
+        persons.remove(existingPerson.get());
+        jacksonService.saveToFile(JacksonConstants.FILE_PATH, jsonWrapper);
     }
 
     /**
@@ -108,31 +86,20 @@ public class PersonService implements PersonServiceInterface {
     }
 
     /**
-     * Update the details of a person
+     * Update a person in the list of persons
      * 
-     * @param person
-     * @param persons
-     * @param existingPerson
+     * @param person       The new person data
+     * @param persons      The list of persons
+     * @param personUpdate The person to be modified
      */
-    private void updatePersonDetails(Person person, List<Person> persons, Optional<Person> existingPerson) {
-        String firstName = existingPerson.get().getFirstName();
-        String lastName = existingPerson.get().getLastName();
-        String address = existingPerson.get().getAddress();
-        String city = existingPerson.get().getCity();
-        String zip = existingPerson.get().getZip();
-        String phone = existingPerson.get().getPhone();
-        String email = existingPerson.get().getEmail();
-
-        persons.remove(existingPerson.get());
-
-        person.setFirstName(firstName);
-        person.setLastName(lastName);
-        person.setAddress(person.getAddress() == null ? address : person.getAddress());
-        person.setCity(person.getCity() == null ? city : person.getCity());
-        person.setZip(person.getZip() == null ? zip : person.getZip());
-        person.setPhone(person.getPhone() == null ? phone : person.getPhone());
-        person.setEmail(person.getEmail() == null ? email : person.getEmail());
-
-        persons.add(person);
+    private void setUpdatePerson(Person person, List<Person> persons, Optional<Person> personUpdate) {
+        personUpdate.stream().forEach(p -> {
+            p.setAddress(person.getAddress() != null ? person.getAddress() : p.getAddress());
+            p.setCity(person.getCity() != null ? person.getCity() : p.getCity());
+            p.setZip(person.getZip() != null ? person.getZip() : p.getZip());
+            p.setPhone(person.getPhone() != null ? person.getPhone() : p.getPhone());
+            p.setEmail(person.getEmail() != null ? person.getEmail() : p.getEmail());
+        });
+        persons.set(persons.indexOf(personUpdate.get()), personUpdate.get());
     }
 }

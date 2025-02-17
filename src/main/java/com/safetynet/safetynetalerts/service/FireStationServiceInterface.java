@@ -30,4 +30,10 @@ public interface FireStationServiceInterface {
      */
     List<String> getAddresses(String stationNumber);
 
+    FireStation addFireStation(FireStation fireStation);
+
+    FireStation updateFireStation(FireStation fireStation);
+
+    void deleteFireStation(FireStation fireStation);
+
 }

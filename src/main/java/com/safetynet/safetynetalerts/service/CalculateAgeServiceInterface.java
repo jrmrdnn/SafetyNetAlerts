@@ -11,14 +11,6 @@ public interface CalculateAgeServiceInterface {
     int calculate(String birthdate);
 
     /**
-     * Checks if a person is an adult based on their age.
-     *
-     * @param age the age of the person
-     * @return true if the person is an adult, false otherwise
-     */
-    boolean isAdult(int age);
-
-    /**
      * Checks if a person is a child based on their age.
      *
      * @param age the age of the person

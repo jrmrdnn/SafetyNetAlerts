@@ -25,12 +25,6 @@ public class FloodService implements FloodServiceInterface {
     @Autowired
     private CalculateAgeServiceInterface calculateAgeService;
 
-    /**
-     * Get the list of households covered by a list of fire stations
-     * 
-     * @param stationNumbers list of fire station numbers
-     * @return list of households covered by the fire stations
-     */
     @Override
     public List<HouseholdInfoDTO> getHouseholdsByStations(List<String> stationNumbers) {
         Set<String> addresses = getAddresses(stationNumbers);

@@ -14,12 +14,6 @@ public class CommunityEmailService implements CommunityEmailServiceInterface {
     @Autowired
     private PersonServiceInterface personService;
 
-    /**
-     * Get a list of emails of persons living in the city
-     * 
-     * @param city the city
-     * @return a list of emails
-     */
     @Override
     public Set<String> getEmailsByCity(String city) {
         return personService.getAllPersons().stream().filter(p -> p.getCity().equalsIgnoreCase(city))

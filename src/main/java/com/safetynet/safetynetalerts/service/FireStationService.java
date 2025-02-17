@@ -1,5 +1,6 @@
 package com.safetynet.safetynetalerts.service;
 
+import com.safetynet.safetynetalerts.constants.JacksonConstants;
 import com.safetynet.safetynetalerts.dto.FireStationDTO;
 import com.safetynet.safetynetalerts.dto.PersonDTO;
 import com.safetynet.safetynetalerts.model.FireStation;
@@ -11,33 +12,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class FireStationService implements FireStationServiceInterface {
-
     @Autowired
     private JsonWrapper jsonWrapper;
 
     @Autowired
+    private JacksonServiceInterface jacksonService;
+
+    @Autowired
     private CalculateAgeServiceInterface calculateAgeService;
 
-    /**
-     * Get the list of all fire stations
-     * 
-     * @return list of all fire stations
-     */
     @Override
     public List<FireStation> getAllFireStations() {
         return jsonWrapper.getFireStations();
     }
 
-    /**
-     * Get the list of persons covered by a fire station
-     * 
-     * @param stationNumber number of the fire station
-     * @return list of persons covered by the fire station
-     */
     @Override
     public FireStationDTO getPersonsCoveredByStation(String stationNumber) {
         List<String> addresses = getAddresses(stationNumber);
@@ -51,7 +44,7 @@ public class FireStationService implements FireStationServiceInterface {
 
             if (medicalRecord != null) {
                 int age = calculateAgeService.calculate(medicalRecord.getBirthdate());
-                if (calculateAgeService.isAdult(age)) {
+                if (calculateAgeService.isChild(age)) {
                     childCount++;
                 } else {
                     adultCount++;
@@ -62,17 +55,55 @@ public class FireStationService implements FireStationServiceInterface {
         return getCoverage(coveredPersons, childCount, adultCount);
     }
 
-    /**
-     * Get the list of addresses covered by a fire station
-     * 
-     * @param stationNumber number of the fire station
-     * @return list of addresses covered by the fire station
-     */
     @Override
     public List<String> getAddresses(String stationNumber) {
         return jsonWrapper.getFireStations().stream()
                 .filter(firestation -> firestation.getStation().equals(stationNumber)).map(FireStation::getAddress)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public FireStation addFireStation(FireStation firestation) {
+        List<FireStation> allFireStations = jsonWrapper.getFireStations();
+        Optional<FireStation> getFireStation = getExistingFireStation(firestation.getAddress(), allFireStations);
+
+        if (getFireStation.isPresent()) {
+            throw new IllegalArgumentException("Firestation already exists");
+        } else {
+            allFireStations.add(firestation);
+            jsonWrapper.setFireStations(allFireStations);
+            jacksonService.saveToFile(JacksonConstants.FILE_PATH, jsonWrapper);
+            return firestation;
+        }
+    }
+
+    @Override
+    public FireStation updateFireStation(FireStation fireStation) {
+        List<FireStation> allFireStations = jsonWrapper.getFireStations();
+        Optional<FireStation> getFireStation = getExistingFireStation(fireStation.getAddress(), allFireStations);
+
+        if (getFireStation.isPresent()) {
+            setUpdateFirestation(fireStation, allFireStations, getFireStation);
+            jsonWrapper.setFireStations(allFireStations);
+            jacksonService.saveToFile(JacksonConstants.FILE_PATH, jsonWrapper);
+            return fireStation;
+        } else {
+            throw new IllegalArgumentException("Firestation not found");
+        }
+    }
+
+    @Override
+    public void deleteFireStation(FireStation fireStation) {
+        List<FireStation> allFireStations = jsonWrapper.getFireStations();
+        Optional<FireStation> getFireStation = getExistingFireStation(fireStation.getAddress(), allFireStations);
+
+        if (getFireStation.isPresent()) {
+            allFireStations.remove(getFireStation.get());
+            jsonWrapper.setFireStations(allFireStations);
+            jacksonService.saveToFile(JacksonConstants.FILE_PATH, jsonWrapper);
+        } else {
+            throw new IllegalArgumentException("Firestation not found");
+        }
     }
 
     /**
@@ -122,4 +153,33 @@ public class FireStationService implements FireStationServiceInterface {
 
         return coverage;
     }
+
+    /**
+     * Get the existing fire station
+     * 
+     * @param address
+     * @param firestations
+     * @return
+     */
+    private Optional<FireStation> getExistingFireStation(String address, List<FireStation> firestations) {
+        Optional<FireStation> existingFirestation = firestations.stream()
+                .filter(firestation -> firestation.getAddress().equalsIgnoreCase(address)).findFirst();
+        return existingFirestation;
+    }
+
+    /**
+     * Set the updated fire station
+     * 
+     * @param fireStation
+     * @param allFireStations
+     * @param fireStationUpdate
+     */
+    private void setUpdateFirestation(FireStation fireStation, List<FireStation> allFireStations,
+            Optional<FireStation> fireStationUpdate) {
+        fireStationUpdate.stream().forEach(f -> {
+            f.setStation(fireStation.getStation());
+        });
+        allFireStations.set(allFireStations.indexOf(fireStationUpdate.get()), fireStationUpdate.get());
+    }
+
 }

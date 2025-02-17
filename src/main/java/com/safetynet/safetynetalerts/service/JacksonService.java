@@ -20,14 +20,6 @@ public class JacksonService implements JacksonServiceInterface {
         this.objectMapper = objectMapper;
     }
 
-    /**
-     * Save JSON data to a file
-     * 
-     * @param <T>      type of data
-     * @param filePath path to the file
-     * @param data     data to save
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     public <T> void saveToFile(String filePath, T data) {
         try {
@@ -40,15 +32,6 @@ public class JacksonService implements JacksonServiceInterface {
         }
     }
 
-    /**
-     * Load JSON data from a file
-     * 
-     * @param <T>       type of data
-     * @param filePath  path to the file
-     * @param valueType class of the data
-     * @return data loaded from the file
-     * @throws RuntimeException if an I/O error occurs
-     */
     @Override
     public <T> T loadFromFile(String filePath, Class<T> valueType) {
         try {

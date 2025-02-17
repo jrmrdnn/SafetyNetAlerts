@@ -25,26 +25,28 @@ public class PersonController {
     @PostMapping
     public Person addPerson(@RequestBody Person person) {
         logger.info("Request: POST /person");
-        logger.info("Body: " + person);
+        logger.info("Body: " + person.toString());
         Person addedPerson = personService.addPerson(person);
-        logger.info("Response: " + addedPerson);
+        logger.info("Response: " + addedPerson.toString());
         return addedPerson;
     }
 
     @PutMapping
     public Person updatePerson(@RequestBody Person person) {
         logger.info("Request: PUT /person");
-        logger.info("Body: " + person);
+        logger.info("Body: " + person.toString());
         Person updatePerson = personService.updatePerson(person);
-        logger.info("Response: " + updatePerson);
+        logger.info("Response: " + updatePerson.toString());
         return updatePerson;
     }
 
     @DeleteMapping
     public String deletePerson(@RequestBody Person person) {
         logger.info("Request: DELETE /person");
-        logger.info("Body: " + person);
+        logger.info("Body: " + person.toString());
         personService.deletePerson(person);
-        return "Person deleted successfully: " + person.getFirstName() + " " + person.getLastName();
+        String response = "Person deleted successfully: " + person.getFirstName() + " " + person.getLastName();
+        logger.info(response);
+        return response;
     }
 }

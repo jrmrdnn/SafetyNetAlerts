@@ -29,12 +29,6 @@ public class FireService implements FireServiceInterface {
     @Autowired
     private CalculateAgeServiceInterface calculateAgeService;
 
-    /**
-     * Ge list of persons covered by a fire station
-     * 
-     * @param address the address
-     * @return a list of persons
-     */
     @Override
     public FireDTO getFireInfoByAddress(String address) {
         FireDTO fire = new FireDTO();

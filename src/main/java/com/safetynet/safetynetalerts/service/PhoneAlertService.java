@@ -20,12 +20,6 @@ public class PhoneAlertService implements PhoneAlertServiceInterface {
     @Autowired
     private FireStationServiceInterface fireStationService;
 
-    /**
-     * Get phone numbers of persons covered by a fire station
-     * 
-     * @param fireStationNumber the number of the fire station
-     * @return a list of phone numbers
-     */
     @Override
     public Set<String> getPhoneNumbersByFirestation(String fireStationNumber) {
         List<String> addresses = fireStationService.getAddresses(fireStationNumber);

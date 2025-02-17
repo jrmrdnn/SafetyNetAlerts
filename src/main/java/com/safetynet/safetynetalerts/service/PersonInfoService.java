@@ -23,12 +23,6 @@ public class PersonInfoService implements PersonInfoServiceInterface {
     @Autowired
     private CalculateAgeServiceInterface calculateAgeService;
 
-    /**
-     * Get a list of persons with the given last name and their information
-     * 
-     * @param lastName the last name of the persons
-     * @return a list of PersonInfoDTO
-     */
     @Override
     public List<PersonInfoDTO> getPersonInfoByLastName(String lastName) {
         List<PersonInfoDTO> personInfoList = new ArrayList<>();
