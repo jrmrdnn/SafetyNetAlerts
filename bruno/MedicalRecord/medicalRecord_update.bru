@@ -1,0 +1,21 @@
+meta {
+  name: medicalRecord_update
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{URL}}/medicalRecord
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "firstName": "漢字",
+    "lastName": "ẞupoñt",
+    "birthdate": "01/01/1960",
+    "medications": ["ibupurin:100mg", "hydrapermazol:200mg"],
+    "allergies": []
+  }
+}
