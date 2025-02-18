@@ -4,6 +4,7 @@ import com.safetynet.safetynetalerts.model.FireStation;
 import com.safetynet.safetynetalerts.model.JsonWrapper;
 import com.safetynet.safetynetalerts.model.Person;
 import com.safetynet.safetynetalerts.service.DataPersistenceServiceInterface;
+import com.safetynet.safetynetalerts.util.EntityUpdater;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -131,41 +132,7 @@ public class PersonRepository
       throw new IllegalArgumentException("Person not found");
     }
 
-    jsonWrapper
-      .getPersons()
-      .replaceAll(p -> {
-        if (p.equals(findPerson.get())) {
-          Person updatedPerson = new Person();
-          updatedPerson.setFirstName(
-            person.getFirstName() != null
-              ? person.getFirstName()
-              : p.getFirstName()
-          );
-          updatedPerson.setLastName(
-            person.getLastName() != null
-              ? person.getLastName()
-              : p.getLastName()
-          );
-          updatedPerson.setAddress(
-            person.getAddress() != null ? person.getAddress() : p.getAddress()
-          );
-          updatedPerson.setCity(
-            person.getCity() != null ? person.getCity() : p.getCity()
-          );
-          updatedPerson.setZip(
-            person.getZip() != null ? person.getZip() : p.getZip()
-          );
-          updatedPerson.setPhone(
-            person.getPhone() != null ? person.getPhone() : p.getPhone()
-          );
-          updatedPerson.setEmail(
-            person.getEmail() != null ? person.getEmail() : p.getEmail()
-          );
-          return updatedPerson;
-        }
-        return p;
-      });
-
+    EntityUpdater.updateFields(findPerson.get(), person);
     dataPersistenceService.saveData();
   }
 

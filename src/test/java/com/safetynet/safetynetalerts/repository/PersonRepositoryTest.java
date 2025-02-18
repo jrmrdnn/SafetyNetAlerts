@@ -180,9 +180,16 @@ class PersonRepositoryTest {
 
     personRepository.update(updatedPerson);
 
-    verify(jsonWrapper, times(2)).getPersons();
+    verify(jsonWrapper, times(1)).getPersons();
     verify(dataPersistenceService).saveData();
-    assertFalse(persons.contains(person));
+
+    assertTrue(persons.get(0).getFirstName().equals("John"));
+    assertTrue(persons.get(0).getLastName().equals("Doe"));
+    assertTrue(persons.get(0).getAddress().equals("456 Elm St"));
+    assertTrue(persons.get(0).getCity().equals("Springfield"));
+    assertTrue(persons.get(0).getZip().equals("12345"));
+    assertTrue(persons.get(0).getPhone().equals("123-456-7890"));
+    assertTrue(persons.get(0).getEmail().equals("john@mail.com"));
   }
 
   @Test
