@@ -1,6 +1,8 @@
 package com.safetynet.safetynetalerts.service;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 import com.safetynet.safetynetalerts.dto.FireStationDTO;
@@ -67,5 +69,34 @@ class FireStationServiceTest {
 
     verify(readFireStationRepository, times(1)).findByStationNumberToList("1");
     verify(readPersonRepository, times(1)).findPersonsByAddresses(fireStations);
+  }
+
+  @Test
+  void testGetPhoneNumbersByFirestation() {
+    String stationNumber = "1";
+    List<FireStation> fireStations = Arrays.asList(
+      new FireStation(),
+      new FireStation()
+    );
+    Set<String> phoneNumbers = new HashSet<>(Arrays.asList("123", "456"));
+
+    when(
+      readFireStationRepository.findByStationNumberToList(stationNumber)
+    ).thenReturn(fireStations);
+    when(
+      readPersonRepository.findPhoneNumbersByAddress(fireStations)
+    ).thenReturn(phoneNumbers);
+
+    Set<String> result = fireStationService.getPhoneNumbersByFireStation(
+      stationNumber
+    );
+
+    assertEquals(2, result.size());
+    verify(readFireStationRepository, times(1)).findByStationNumberToList(
+      stationNumber
+    );
+    verify(readPersonRepository, times(1)).findPhoneNumbersByAddress(
+      fireStations
+    );
   }
 }

@@ -3,7 +3,9 @@ package com.safetynet.safetynetalerts.repository;
 import com.safetynet.safetynetalerts.model.FireStation;
 import com.safetynet.safetynetalerts.model.JsonWrapper;
 import com.safetynet.safetynetalerts.model.Person;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
 
@@ -37,5 +39,23 @@ public class PersonRepository implements ReadPersonRepository {
       .stream()
       .filter(p -> p.getAddress().equalsIgnoreCase(address))
       .collect(Collectors.toList());
+  }
+
+  @Override
+  public Set<String> findPhoneNumbersByAddress(List<FireStation> addresses) {
+    Set<String> phoneNumbers = new HashSet<>();
+
+    for (FireStation fireStation : addresses) {
+      String address = fireStation.getAddress();
+      Set<String> phones = jsonWrapper
+        .getPersons()
+        .stream()
+        .filter(p -> p.getAddress().equals(address))
+        .map(Person::getPhone)
+        .collect(Collectors.toSet());
+      phoneNumbers.addAll(phones);
+    }
+
+    return phoneNumbers;
   }
 }
