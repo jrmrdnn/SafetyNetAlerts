@@ -7,6 +7,7 @@ import static org.mockito.Mockito.*;
 
 import com.safetynet.safetynetalerts.dto.FireDTO;
 import com.safetynet.safetynetalerts.dto.FireStationDTO;
+import com.safetynet.safetynetalerts.dto.HouseholdInfoDTO;
 import com.safetynet.safetynetalerts.model.FireStation;
 import com.safetynet.safetynetalerts.model.MedicalRecord;
 import com.safetynet.safetynetalerts.model.Person;
@@ -126,5 +127,36 @@ class FireStationServiceTest {
     assertEquals(2, result.getPersons().size());
     verify(readFireStationRepository, times(1)).findByStationAddress("address");
     verify(readPersonRepository, times(1)).findPersonsAtAddress("address");
+  }
+
+  @Test
+  void testGetHouseholdsByStations() {
+    Set<String> addresses = new HashSet<>(
+      Arrays.asList("address1", "address2")
+    );
+    Map<String, List<Person>> groupedPersons = new HashMap<>();
+    groupedPersons.put("address1", Arrays.asList(new Person(), new Person()));
+    groupedPersons.put("address2", Arrays.asList(new Person()));
+
+    when(
+      readFireStationRepository.findAllStationsNumberToSet(
+        Arrays.asList("1", "2")
+      )
+    ).thenReturn(addresses);
+    when(
+      readPersonRepository.findAndGroupPersonsByAddress(addresses)
+    ).thenReturn(groupedPersons);
+
+    List<HouseholdInfoDTO> result = fireStationService.getHouseholdsByStations(
+      Arrays.asList("1", "2")
+    );
+
+    assertEquals(2, result.size());
+    verify(readFireStationRepository, times(1)).findAllStationsNumberToSet(
+      Arrays.asList("1", "2")
+    );
+    verify(readPersonRepository, times(1)).findAndGroupPersonsByAddress(
+      addresses
+    );
   }
 }

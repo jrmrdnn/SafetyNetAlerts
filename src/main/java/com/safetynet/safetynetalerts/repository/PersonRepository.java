@@ -5,6 +5,7 @@ import com.safetynet.safetynetalerts.model.JsonWrapper;
 import com.safetynet.safetynetalerts.model.Person;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
@@ -57,5 +58,16 @@ public class PersonRepository implements ReadPersonRepository {
     }
 
     return phoneNumbers;
+  }
+
+  @Override
+  public Map<String, List<Person>> findAndGroupPersonsByAddress(
+    Set<String> addresses
+  ) {
+    return jsonWrapper
+      .getPersons()
+      .stream()
+      .filter(p -> addresses.contains(p.getAddress()))
+      .collect(Collectors.groupingBy(Person::getAddress));
   }
 }

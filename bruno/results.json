@@ -2,8 +2,8 @@
   {
     "iterationIndex": 0,
     "summary": {
-      "totalRequests": 22,
-      "passedRequests": 22,
+      "totalRequests": 30,
+      "passedRequests": 30,
       "failedRequests": 0,
       "skippedRequests": 0,
       "totalAssertions": 0,
@@ -80,13 +80,13 @@
               ]
             }
           ],
-          "responseTime": 29
+          "responseTime": 121
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.038864083,
+        "runtime": 0.131678209,
         "suitename": "ChildAlert/childAlert_1509 Culver St",
         "iterationIndex": 0
       },
@@ -116,13 +116,13 @@
               "householdMembers": []
             }
           ],
-          "responseTime": 4
+          "responseTime": 5
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.006268417,
+        "runtime": 0.006727125,
         "suitename": "ChildAlert/childAlert_834 Binoc Ave",
         "iterationIndex": 0
       },
@@ -161,13 +161,13 @@
               ]
             }
           ],
-          "responseTime": 5
+          "responseTime": 6
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.006406458,
+        "runtime": 0.006797834,
         "suitename": "ChildAlert/childAlert_892 Downing Ct",
         "iterationIndex": 0
       },
@@ -206,13 +206,13 @@
               ]
             }
           ],
-          "responseTime": 5
+          "responseTime": 6
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.006545791,
+        "runtime": 0.007087917,
         "suitename": "ChildAlert/childAlert_947 E Rose Dr",
         "iterationIndex": 0
       },
@@ -241,7 +241,7 @@
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.00434425,
+        "runtime": 0.004857458,
         "suitename": "ChildAlert/childAlert_29 15th St",
         "iterationIndex": 0
       },
@@ -292,13 +292,13 @@
               }
             ]
           },
-          "responseTime": 7
+          "responseTime": 9
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.008071875,
+        "runtime": 0.009773291,
         "suitename": "Fire/fire_947 E. Rose Dr",
         "iterationIndex": 0
       },
@@ -347,7 +347,7 @@
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.005301459,
+        "runtime": 0.003733667,
         "suitename": "Fire/fire_908 73rd St",
         "iterationIndex": 0
       },
@@ -409,7 +409,7 @@
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.004911708,
+        "runtime": 0.005024416,
         "suitename": "Fire/fire_892 Downing Ct",
         "iterationIndex": 0
       },
@@ -444,13 +444,13 @@
               }
             ]
           },
-          "responseTime": 5
+          "responseTime": 6
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.007244583,
+        "runtime": 0.008090542,
         "suitename": "Fire/fire_29 15th St",
         "iterationIndex": 0
       },
@@ -521,13 +521,13 @@
               }
             ]
           },
-          "responseTime": 5
+          "responseTime": 6
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.004998333,
+        "runtime": 0.005792292,
         "suitename": "Fire/fire_1509 Culver St",
         "iterationIndex": 0
       },
@@ -578,13 +578,13 @@
               }
             ]
           },
-          "responseTime": 3
+          "responseTime": 4
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.004414166,
+        "runtime": 0.004077792,
         "suitename": "Fire/fire_112 Steppes Pl",
         "iterationIndex": 0
       },
@@ -627,14 +627,1026 @@
               }
             ]
           },
-          "responseTime": 4
+          "responseTime": 5
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.004544834,
+        "runtime": 0.004861375,
         "suitename": "Fire/fire_748 Townings Dr",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "FloodStations/floodStations_1.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/flood/stations?stations=1",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": [
+            {
+              "address": "947 E. Rose Dr",
+              "persons": [
+                {
+                  "firstName": "Brian",
+                  "lastName": "Stelzer",
+                  "phone": "841-874-7784",
+                  "age": 49,
+                  "medications": ["ibupurin:200mg", "hydrapermazol:400mg"],
+                  "allergies": ["nillacilan"]
+                },
+                {
+                  "firstName": "Shawna",
+                  "lastName": "Stelzer",
+                  "phone": "841-874-7784",
+                  "age": 44,
+                  "medications": [],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Kendrik",
+                  "lastName": "Stelzer",
+                  "phone": "841-874-7784",
+                  "age": 10,
+                  "medications": ["noxidian:100mg", "pharmacol:2500mg"],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "908 73rd St",
+              "persons": [
+                {
+                  "firstName": "Reginold",
+                  "lastName": "Walker",
+                  "phone": "841-874-8547",
+                  "age": 45,
+                  "medications": ["thradox:700mg"],
+                  "allergies": ["illisoxian"]
+                },
+                {
+                  "firstName": "Jamie",
+                  "lastName": "Peters",
+                  "phone": "841-874-7462",
+                  "age": 42,
+                  "medications": [],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "644 Gershwin Cir",
+              "persons": [
+                {
+                  "firstName": "Peter",
+                  "lastName": "Duncan",
+                  "phone": "841-874-6512",
+                  "age": 24,
+                  "medications": [],
+                  "allergies": ["shellfish"]
+                }
+              ]
+            }
+          ],
+          "responseTime": 10
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.010292917,
+        "suitename": "FloodStations/floodStations_1",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "FloodStations/floodStations_2.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/flood/stations?stations=2",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": [
+            {
+              "address": "951 LoneTree Rd",
+              "persons": [
+                {
+                  "firstName": "Eric",
+                  "lastName": "Cadigan",
+                  "phone": "841-874-7458",
+                  "age": 79,
+                  "medications": ["tradoxidine:400mg"],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "892 Downing Ct",
+              "persons": [
+                {
+                  "firstName": "Sophia",
+                  "lastName": "Zemicks",
+                  "phone": "841-874-7878",
+                  "age": 36,
+                  "medications": [
+                    "aznol:60mg",
+                    "hydrapermazol:900mg",
+                    "pharmacol:5000mg",
+                    "terazine:500mg"
+                  ],
+                  "allergies": ["peanut", "shellfish", "aznol"]
+                },
+                {
+                  "firstName": "Warren",
+                  "lastName": "Zemicks",
+                  "phone": "841-874-7512",
+                  "age": 39,
+                  "medications": [],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Zach",
+                  "lastName": "Zemicks",
+                  "phone": "841-874-7512",
+                  "age": 7,
+                  "medications": [],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "29 15th St",
+              "persons": [
+                {
+                  "firstName": "Jonanathan",
+                  "lastName": "Marrack",
+                  "phone": "841-874-6513",
+                  "age": 36,
+                  "medications": [],
+                  "allergies": []
+                }
+              ]
+            }
+          ],
+          "responseTime": 41
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.041940333,
+        "suitename": "FloodStations/floodStations_2",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "FloodStations/floodStations_3.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/flood/stations?stations=3",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": [
+            {
+              "address": "748 Townings Dr",
+              "persons": [
+                {
+                  "firstName": "Foster",
+                  "lastName": "Shepard",
+                  "phone": "841-874-6544",
+                  "age": 45,
+                  "medications": [],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Clive",
+                  "lastName": "Ferguson",
+                  "phone": "841-874-6741",
+                  "age": 30,
+                  "medications": [],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "1509 Culver St",
+              "persons": [
+                {
+                  "firstName": "John",
+                  "lastName": "Boyd",
+                  "phone": "841-874-6512",
+                  "age": 40,
+                  "medications": ["aznol:350mg", "hydrapermazol:100mg"],
+                  "allergies": ["nillacilan"]
+                },
+                {
+                  "firstName": "Jacob",
+                  "lastName": "Boyd",
+                  "phone": "841-874-6513",
+                  "age": 35,
+                  "medications": [
+                    "pharmacol:5000mg",
+                    "terazine:10mg",
+                    "noznazol:250mg"
+                  ],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Tenley",
+                  "lastName": "Boyd",
+                  "phone": "841-874-6512",
+                  "age": 13,
+                  "medications": [],
+                  "allergies": ["peanut"]
+                },
+                {
+                  "firstName": "Roger",
+                  "lastName": "Boyd",
+                  "phone": "841-874-6512",
+                  "age": 7,
+                  "medications": [],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Felicia",
+                  "lastName": "Boyd",
+                  "phone": "841-874-6544",
+                  "age": 39,
+                  "medications": ["tetracyclaz:650mg"],
+                  "allergies": ["xilliathal"]
+                }
+              ]
+            },
+            {
+              "address": "112 Steppes Pl",
+              "persons": [
+                {
+                  "firstName": "Tony",
+                  "lastName": "Cooper",
+                  "phone": "841-874-6874",
+                  "age": 30,
+                  "medications": ["hydrapermazol:300mg", "dodoxadin:30mg"],
+                  "allergies": ["shellfish"]
+                },
+                {
+                  "firstName": "Ron",
+                  "lastName": "Peters",
+                  "phone": "841-874-8888",
+                  "age": 59,
+                  "medications": [],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Allison",
+                  "lastName": "Boyd",
+                  "phone": "841-874-9888",
+                  "age": 59,
+                  "medications": ["aznol:200mg"],
+                  "allergies": ["nillacilan"]
+                }
+              ]
+            },
+            {
+              "address": "834 Binoc Ave",
+              "persons": [
+                {
+                  "firstName": "Tessa",
+                  "lastName": "Carman",
+                  "phone": "841-874-6512",
+                  "age": 13,
+                  "medications": [],
+                  "allergies": []
+                }
+              ]
+            }
+          ],
+          "responseTime": 24
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.025317959,
+        "suitename": "FloodStations/floodStations_3",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "FloodStations/floodStations_4.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/flood/stations?stations=4",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": [
+            {
+              "address": "489 Manchester St",
+              "persons": [
+                {
+                  "firstName": "Lily",
+                  "lastName": "Cooper",
+                  "phone": "841-874-9845",
+                  "age": 30,
+                  "medications": [],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "112 Steppes Pl",
+              "persons": [
+                {
+                  "firstName": "Tony",
+                  "lastName": "Cooper",
+                  "phone": "841-874-6874",
+                  "age": 30,
+                  "medications": ["hydrapermazol:300mg", "dodoxadin:30mg"],
+                  "allergies": ["shellfish"]
+                },
+                {
+                  "firstName": "Ron",
+                  "lastName": "Peters",
+                  "phone": "841-874-8888",
+                  "age": 59,
+                  "medications": [],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Allison",
+                  "lastName": "Boyd",
+                  "phone": "841-874-9888",
+                  "age": 59,
+                  "medications": ["aznol:200mg"],
+                  "allergies": ["nillacilan"]
+                }
+              ]
+            }
+          ],
+          "responseTime": 6
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.006557709,
+        "suitename": "FloodStations/floodStations_4",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "FloodStations/floodStations_5.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/flood/stations?stations=5",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": [],
+          "responseTime": 2
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.002901291,
+        "suitename": "FloodStations/floodStations_5",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "FloodStations/floodStations_1,2.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/flood/stations?stations=1,2",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": [
+            {
+              "address": "951 LoneTree Rd",
+              "persons": [
+                {
+                  "firstName": "Eric",
+                  "lastName": "Cadigan",
+                  "phone": "841-874-7458",
+                  "age": 79,
+                  "medications": ["tradoxidine:400mg"],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "947 E. Rose Dr",
+              "persons": [
+                {
+                  "firstName": "Brian",
+                  "lastName": "Stelzer",
+                  "phone": "841-874-7784",
+                  "age": 49,
+                  "medications": ["ibupurin:200mg", "hydrapermazol:400mg"],
+                  "allergies": ["nillacilan"]
+                },
+                {
+                  "firstName": "Shawna",
+                  "lastName": "Stelzer",
+                  "phone": "841-874-7784",
+                  "age": 44,
+                  "medications": [],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Kendrik",
+                  "lastName": "Stelzer",
+                  "phone": "841-874-7784",
+                  "age": 10,
+                  "medications": ["noxidian:100mg", "pharmacol:2500mg"],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "908 73rd St",
+              "persons": [
+                {
+                  "firstName": "Reginold",
+                  "lastName": "Walker",
+                  "phone": "841-874-8547",
+                  "age": 45,
+                  "medications": ["thradox:700mg"],
+                  "allergies": ["illisoxian"]
+                },
+                {
+                  "firstName": "Jamie",
+                  "lastName": "Peters",
+                  "phone": "841-874-7462",
+                  "age": 42,
+                  "medications": [],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "644 Gershwin Cir",
+              "persons": [
+                {
+                  "firstName": "Peter",
+                  "lastName": "Duncan",
+                  "phone": "841-874-6512",
+                  "age": 24,
+                  "medications": [],
+                  "allergies": ["shellfish"]
+                }
+              ]
+            },
+            {
+              "address": "892 Downing Ct",
+              "persons": [
+                {
+                  "firstName": "Sophia",
+                  "lastName": "Zemicks",
+                  "phone": "841-874-7878",
+                  "age": 36,
+                  "medications": [
+                    "aznol:60mg",
+                    "hydrapermazol:900mg",
+                    "pharmacol:5000mg",
+                    "terazine:500mg"
+                  ],
+                  "allergies": ["peanut", "shellfish", "aznol"]
+                },
+                {
+                  "firstName": "Warren",
+                  "lastName": "Zemicks",
+                  "phone": "841-874-7512",
+                  "age": 39,
+                  "medications": [],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Zach",
+                  "lastName": "Zemicks",
+                  "phone": "841-874-7512",
+                  "age": 7,
+                  "medications": [],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "29 15th St",
+              "persons": [
+                {
+                  "firstName": "Jonanathan",
+                  "lastName": "Marrack",
+                  "phone": "841-874-6513",
+                  "age": 36,
+                  "medications": [],
+                  "allergies": []
+                }
+              ]
+            }
+          ],
+          "responseTime": 6
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.006195667,
+        "suitename": "FloodStations/floodStations_1,2",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "FloodStations/floodStations_3,4.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/flood/stations?stations=3,4",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": [
+            {
+              "address": "748 Townings Dr",
+              "persons": [
+                {
+                  "firstName": "Foster",
+                  "lastName": "Shepard",
+                  "phone": "841-874-6544",
+                  "age": 45,
+                  "medications": [],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Clive",
+                  "lastName": "Ferguson",
+                  "phone": "841-874-6741",
+                  "age": 30,
+                  "medications": [],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "489 Manchester St",
+              "persons": [
+                {
+                  "firstName": "Lily",
+                  "lastName": "Cooper",
+                  "phone": "841-874-9845",
+                  "age": 30,
+                  "medications": [],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "1509 Culver St",
+              "persons": [
+                {
+                  "firstName": "John",
+                  "lastName": "Boyd",
+                  "phone": "841-874-6512",
+                  "age": 40,
+                  "medications": ["aznol:350mg", "hydrapermazol:100mg"],
+                  "allergies": ["nillacilan"]
+                },
+                {
+                  "firstName": "Jacob",
+                  "lastName": "Boyd",
+                  "phone": "841-874-6513",
+                  "age": 35,
+                  "medications": [
+                    "pharmacol:5000mg",
+                    "terazine:10mg",
+                    "noznazol:250mg"
+                  ],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Tenley",
+                  "lastName": "Boyd",
+                  "phone": "841-874-6512",
+                  "age": 13,
+                  "medications": [],
+                  "allergies": ["peanut"]
+                },
+                {
+                  "firstName": "Roger",
+                  "lastName": "Boyd",
+                  "phone": "841-874-6512",
+                  "age": 7,
+                  "medications": [],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Felicia",
+                  "lastName": "Boyd",
+                  "phone": "841-874-6544",
+                  "age": 39,
+                  "medications": ["tetracyclaz:650mg"],
+                  "allergies": ["xilliathal"]
+                }
+              ]
+            },
+            {
+              "address": "112 Steppes Pl",
+              "persons": [
+                {
+                  "firstName": "Tony",
+                  "lastName": "Cooper",
+                  "phone": "841-874-6874",
+                  "age": 30,
+                  "medications": ["hydrapermazol:300mg", "dodoxadin:30mg"],
+                  "allergies": ["shellfish"]
+                },
+                {
+                  "firstName": "Ron",
+                  "lastName": "Peters",
+                  "phone": "841-874-8888",
+                  "age": 59,
+                  "medications": [],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Allison",
+                  "lastName": "Boyd",
+                  "phone": "841-874-9888",
+                  "age": 59,
+                  "medications": ["aznol:200mg"],
+                  "allergies": ["nillacilan"]
+                }
+              ]
+            },
+            {
+              "address": "834 Binoc Ave",
+              "persons": [
+                {
+                  "firstName": "Tessa",
+                  "lastName": "Carman",
+                  "phone": "841-874-6512",
+                  "age": 13,
+                  "medications": [],
+                  "allergies": []
+                }
+              ]
+            }
+          ],
+          "responseTime": 9
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.009773542,
+        "suitename": "FloodStations/floodStations_3,4",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "FloodStations/floodStations_1,2,3,4.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/flood/stations?stations=1,2,3,4",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": [
+            {
+              "address": "748 Townings Dr",
+              "persons": [
+                {
+                  "firstName": "Foster",
+                  "lastName": "Shepard",
+                  "phone": "841-874-6544",
+                  "age": 45,
+                  "medications": [],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Clive",
+                  "lastName": "Ferguson",
+                  "phone": "841-874-6741",
+                  "age": 30,
+                  "medications": [],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "951 LoneTree Rd",
+              "persons": [
+                {
+                  "firstName": "Eric",
+                  "lastName": "Cadigan",
+                  "phone": "841-874-7458",
+                  "age": 79,
+                  "medications": ["tradoxidine:400mg"],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "947 E. Rose Dr",
+              "persons": [
+                {
+                  "firstName": "Brian",
+                  "lastName": "Stelzer",
+                  "phone": "841-874-7784",
+                  "age": 49,
+                  "medications": ["ibupurin:200mg", "hydrapermazol:400mg"],
+                  "allergies": ["nillacilan"]
+                },
+                {
+                  "firstName": "Shawna",
+                  "lastName": "Stelzer",
+                  "phone": "841-874-7784",
+                  "age": 44,
+                  "medications": [],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Kendrik",
+                  "lastName": "Stelzer",
+                  "phone": "841-874-7784",
+                  "age": 10,
+                  "medications": ["noxidian:100mg", "pharmacol:2500mg"],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "908 73rd St",
+              "persons": [
+                {
+                  "firstName": "Reginold",
+                  "lastName": "Walker",
+                  "phone": "841-874-8547",
+                  "age": 45,
+                  "medications": ["thradox:700mg"],
+                  "allergies": ["illisoxian"]
+                },
+                {
+                  "firstName": "Jamie",
+                  "lastName": "Peters",
+                  "phone": "841-874-7462",
+                  "age": 42,
+                  "medications": [],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "489 Manchester St",
+              "persons": [
+                {
+                  "firstName": "Lily",
+                  "lastName": "Cooper",
+                  "phone": "841-874-9845",
+                  "age": 30,
+                  "medications": [],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "644 Gershwin Cir",
+              "persons": [
+                {
+                  "firstName": "Peter",
+                  "lastName": "Duncan",
+                  "phone": "841-874-6512",
+                  "age": 24,
+                  "medications": [],
+                  "allergies": ["shellfish"]
+                }
+              ]
+            },
+            {
+              "address": "892 Downing Ct",
+              "persons": [
+                {
+                  "firstName": "Sophia",
+                  "lastName": "Zemicks",
+                  "phone": "841-874-7878",
+                  "age": 36,
+                  "medications": [
+                    "aznol:60mg",
+                    "hydrapermazol:900mg",
+                    "pharmacol:5000mg",
+                    "terazine:500mg"
+                  ],
+                  "allergies": ["peanut", "shellfish", "aznol"]
+                },
+                {
+                  "firstName": "Warren",
+                  "lastName": "Zemicks",
+                  "phone": "841-874-7512",
+                  "age": 39,
+                  "medications": [],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Zach",
+                  "lastName": "Zemicks",
+                  "phone": "841-874-7512",
+                  "age": 7,
+                  "medications": [],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "1509 Culver St",
+              "persons": [
+                {
+                  "firstName": "John",
+                  "lastName": "Boyd",
+                  "phone": "841-874-6512",
+                  "age": 40,
+                  "medications": ["aznol:350mg", "hydrapermazol:100mg"],
+                  "allergies": ["nillacilan"]
+                },
+                {
+                  "firstName": "Jacob",
+                  "lastName": "Boyd",
+                  "phone": "841-874-6513",
+                  "age": 35,
+                  "medications": [
+                    "pharmacol:5000mg",
+                    "terazine:10mg",
+                    "noznazol:250mg"
+                  ],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Tenley",
+                  "lastName": "Boyd",
+                  "phone": "841-874-6512",
+                  "age": 13,
+                  "medications": [],
+                  "allergies": ["peanut"]
+                },
+                {
+                  "firstName": "Roger",
+                  "lastName": "Boyd",
+                  "phone": "841-874-6512",
+                  "age": 7,
+                  "medications": [],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Felicia",
+                  "lastName": "Boyd",
+                  "phone": "841-874-6544",
+                  "age": 39,
+                  "medications": ["tetracyclaz:650mg"],
+                  "allergies": ["xilliathal"]
+                }
+              ]
+            },
+            {
+              "address": "112 Steppes Pl",
+              "persons": [
+                {
+                  "firstName": "Tony",
+                  "lastName": "Cooper",
+                  "phone": "841-874-6874",
+                  "age": 30,
+                  "medications": ["hydrapermazol:300mg", "dodoxadin:30mg"],
+                  "allergies": ["shellfish"]
+                },
+                {
+                  "firstName": "Ron",
+                  "lastName": "Peters",
+                  "phone": "841-874-8888",
+                  "age": 59,
+                  "medications": [],
+                  "allergies": []
+                },
+                {
+                  "firstName": "Allison",
+                  "lastName": "Boyd",
+                  "phone": "841-874-9888",
+                  "age": 59,
+                  "medications": ["aznol:200mg"],
+                  "allergies": ["nillacilan"]
+                }
+              ]
+            },
+            {
+              "address": "834 Binoc Ave",
+              "persons": [
+                {
+                  "firstName": "Tessa",
+                  "lastName": "Carman",
+                  "phone": "841-874-6512",
+                  "age": 13,
+                  "medications": [],
+                  "allergies": []
+                }
+              ]
+            },
+            {
+              "address": "29 15th St",
+              "persons": [
+                {
+                  "firstName": "Jonanathan",
+                  "lastName": "Marrack",
+                  "phone": "841-874-6513",
+                  "age": 36,
+                  "medications": [],
+                  "allergies": []
+                }
+              ]
+            }
+          ],
+          "responseTime": 11
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.011706333,
+        "suitename": "FloodStations/floodStations_1,2,3,4",
         "iterationIndex": 0
       },
       {
@@ -661,13 +1673,13 @@
             "841-874-6512",
             "841-874-8547"
           ],
-          "responseTime": 7
+          "responseTime": 5
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.007781291,
+        "runtime": 0.004684125,
         "suitename": "PhoneAlert/phoneAlert_1",
         "iterationIndex": 0
       },
@@ -701,7 +1713,7 @@
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.003189042,
+        "runtime": 0.00317225,
         "suitename": "PhoneAlert/phoneAlert_2",
         "iterationIndex": 0
       },
@@ -732,13 +1744,13 @@
             "841-874-8888",
             "841-874-9888"
           ],
-          "responseTime": 3
+          "responseTime": 4
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.003517292,
+        "runtime": 0.004476875,
         "suitename": "PhoneAlert/phoneAlert_3",
         "iterationIndex": 0
       },
@@ -766,13 +1778,13 @@
             "841-874-8888",
             "841-874-9888"
           ],
-          "responseTime": 3
+          "responseTime": 5
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.004361375,
+        "runtime": 0.005462666,
         "suitename": "PhoneAlert/phoneAlert_4",
         "iterationIndex": 0
       },
@@ -801,7 +1813,7 @@
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.003980166,
+        "runtime": 0.003871709,
         "suitename": "PhoneAlert/phoneAlert_5",
         "iterationIndex": 0
       },
@@ -865,13 +1877,13 @@
             "adultCount": 5,
             "childCount": 1
           },
-          "responseTime": 10
+          "responseTime": 11
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.010974,
+        "runtime": 0.011185292,
         "suitename": "StationNumber/stationNumber_1",
         "iterationIndex": 0
       },
@@ -935,7 +1947,7 @@
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.009917709,
+        "runtime": 0.008988209,
         "suitename": "StationNumber/stationNumber_2",
         "iterationIndex": 0
       },
@@ -1029,13 +2041,13 @@
             "adultCount": 8,
             "childCount": 3
           },
-          "responseTime": 10
+          "responseTime": 133
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.0113255,
+        "runtime": 0.13377875,
         "suitename": "StationNumber/stationNumber_3",
         "iterationIndex": 0
       },
@@ -1087,13 +2099,13 @@
             "adultCount": 4,
             "childCount": 0
           },
-          "responseTime": 4
+          "responseTime": 12
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.004616792,
+        "runtime": 0.012719833,
         "suitename": "StationNumber/stationNumber_4",
         "iterationIndex": 0
       },
@@ -1120,13 +2132,13 @@
             "adultCount": 0,
             "childCount": 0
           },
-          "responseTime": 2
+          "responseTime": 3
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.003128042,
+        "runtime": 0.002804166,
         "suitename": "StationNumber/stationNumber_5",
         "iterationIndex": 0
       }
