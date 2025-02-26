@@ -20,7 +20,7 @@ public class EntityUpdater {
           field.set(existing, newValue);
         }
       }
-    } catch (IllegalAccessException e) {
+    } catch (Exception e) {
       throw new RuntimeException(
         "Error while updating fields of entities: " + e.getMessage(),
         e

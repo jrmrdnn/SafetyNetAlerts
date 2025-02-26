@@ -5,20 +5,29 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import com.safetynet.safetynetalerts.dto.ChildAlertDTO;
+import com.safetynet.safetynetalerts.dto.ChildAlertDTO.HouseholdMember;
 import com.safetynet.safetynetalerts.dto.HouseholdInfoDTO.PersonInfoDTO;
 import com.safetynet.safetynetalerts.model.MedicalRecord;
 import com.safetynet.safetynetalerts.model.Person;
 import com.safetynet.safetynetalerts.repository.ReadMedicalRecordRepository;
 import com.safetynet.safetynetalerts.repository.ReadPersonRepository;
 import com.safetynet.safetynetalerts.repository.WritePersonRepository;
+import java.lang.reflect.Method;
 import java.util.*;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 class PersonServiceTest {
+
+  private Person child;
+  private Person adult;
+  private Person person1;
+  private Person person2;
 
   @Mock
   private ReadPersonRepository readPersonRepository;
@@ -38,213 +47,432 @@ class PersonServiceTest {
   @BeforeEach
   void setUp() {
     MockitoAnnotations.openMocks(this);
-  }
 
-  @Test
-  void allChildrenAtAddress_ShouldReturnChildrenWithHouseholdMembers() {
-    final String address = "123 Street";
-
-    Person child = new Person();
+    child = new Person();
     child.setFirstName("Child");
-    child.setLastName("Test");
-    child.setAddress(address);
+    child.setLastName("LastName");
+    child.setAddress("123 Street");
     child.setCity("City");
     child.setZip("12345");
     child.setPhone("123-456-7890");
     child.setEmail("child@email.com");
 
-    Person adult = new Person();
+    adult = new Person();
     adult.setFirstName("Adult");
-    adult.setLastName("Test");
-    adult.setAddress(address);
+    adult.setLastName("LastName");
+    adult.setAddress("123 Street");
     adult.setCity("City");
     adult.setZip("12345");
     adult.setPhone("123-456-7891");
     adult.setEmail("adult@email.com");
 
-    List<Person> personsAtAddress = Arrays.asList(child, adult);
-
-    MedicalRecord childRecord = new MedicalRecord();
-    when(readPersonRepository.findPersonsAtAddress(address)).thenReturn(
-      personsAtAddress
-    );
-    when(
-      readMedicalRecordRepository.findByFirstNameAndLastName(child)
-    ).thenReturn(Optional.of(childRecord));
-    when(calculateAgeService.calculate(any())).thenReturn(10);
-    when(calculateAgeService.isChild(10)).thenReturn(true);
-
-    List<ChildAlertDTO> result = personService.allChildrenAtAddress(address);
-
-    assertFalse(result.isEmpty());
-    assertEquals(1, result.size());
-    assertEquals("Child", result.get(0).getFirstName());
-    assertEquals(1, result.get(0).getHouseholdMembers().size());
-  }
-
-  @Test
-  void getPersonInfoByLastName_ShouldReturnPersonInfoList() {
-    final String lastName = "Test";
-
-    Person person1 = new Person();
+    person1 = new Person();
     person1.setFirstName("FirstName1");
-    person1.setLastName(lastName);
+    person1.setLastName("Test");
     person1.setAddress("123 Street");
     person1.setCity("City");
     person1.setZip("12345");
     person1.setPhone("123-456-7890");
     person1.setEmail("person1@email.com");
 
-    Person person2 = new Person();
+    person2 = new Person();
     person2.setFirstName("FirstName2");
-    person2.setLastName(lastName);
+    person2.setLastName("Test");
     person2.setAddress("456 Street");
     person2.setCity("City");
     person2.setZip("12345");
     person2.setPhone("123-456-7891");
     person2.setEmail("person2@email.com");
-
-    List<Person> personsWithLastName = Arrays.asList(person1, person2);
-
-    MedicalRecord medicalRecord1 = new MedicalRecord();
-    MedicalRecord medicalRecord2 = new MedicalRecord();
-
-    when(readPersonRepository.findPersonsWithLastName(lastName)).thenReturn(
-      personsWithLastName
-    );
-    when(
-      readMedicalRecordRepository.findByFirstNameAndLastName(person1)
-    ).thenReturn(Optional.of(medicalRecord1));
-    when(
-      readMedicalRecordRepository.findByFirstNameAndLastName(person2)
-    ).thenReturn(Optional.of(medicalRecord2));
-    when(calculateAgeService.calculate(any())).thenReturn(30);
-
-    List<PersonInfoDTO> result = personService.getPersonInfoByLastName(
-      lastName
-    );
-
-    assertFalse(result.isEmpty());
-    assertEquals(2, result.size());
-    assertEquals("FirstName1", result.get(0).getFirstName());
-    assertEquals("FirstName2", result.get(1).getFirstName());
   }
 
-  @Test
-  void getPersonInfoByLastName_ShouldReturnEmptyList_WhenNoPersonsFound() {
-    final String lastName = "NonExistent";
+  @Nested
+  class AllChildrenAtAddress {
 
-    when(readPersonRepository.findPersonsWithLastName(lastName)).thenReturn(
-      Collections.emptyList()
-    );
+    @Test
+    void testAllChildrenAtAddress() {
+      List<Person> personsAtAddress = Arrays.asList(child, adult);
 
-    List<PersonInfoDTO> result = personService.getPersonInfoByLastName(
-      lastName
-    );
+      MedicalRecord childRecord = new MedicalRecord();
+      when(readPersonRepository.findPersonsAtAddress("123 Street")).thenReturn(
+        personsAtAddress
+      );
+      when(
+        readMedicalRecordRepository.findByFirstNameAndLastName(child)
+      ).thenReturn(Optional.of(childRecord));
+      when(calculateAgeService.calculate(any())).thenReturn(10);
+      when(calculateAgeService.isChild(10)).thenReturn(true);
 
-    assertTrue(result.isEmpty());
+      List<ChildAlertDTO> result = personService.allChildrenAtAddress(
+        "123 Street"
+      );
+
+      assertFalse(result.isEmpty());
+      assertEquals(1, result.size());
+      assertEquals("Child", result.get(0).getFirstName());
+      assertEquals("LastName", result.get(0).getLastName());
+      assertEquals(1, result.get(0).getHouseholdMembers().size());
+    }
+
+    @Test
+    void testAllChildrenAtAddress_ChildrenNoFound() {
+      List<Person> personsAtAddress = Arrays.asList(person1, person2);
+      MedicalRecord adultRecord = new MedicalRecord();
+
+      when(readPersonRepository.findPersonsAtAddress("123 Street")).thenReturn(
+        personsAtAddress
+      );
+      when(
+        readMedicalRecordRepository.findByFirstNameAndLastName(person1)
+      ).thenReturn(Optional.of(adultRecord));
+      when(
+        readMedicalRecordRepository.findByFirstNameAndLastName(person2)
+      ).thenReturn(Optional.of(adultRecord));
+      when(calculateAgeService.calculate(any())).thenReturn(30);
+      when(calculateAgeService.isChild(30)).thenReturn(false);
+
+      List<ChildAlertDTO> result = personService.allChildrenAtAddress(
+        "123 Street"
+      );
+
+      assertTrue(result.isEmpty());
+    }
   }
 
-  @Test
-  void getPersonInfoByLastName_ShouldReturnEmptyList_WhenNoMedicalRecordsFound() {
-    final String lastName = "Test";
+  @Nested
+  class GetPersonInfoByLastName {
 
-    Person person = new Person();
-    person.setFirstName("FirstName");
-    person.setLastName(lastName);
-    person.setAddress("123 Street");
-    person.setCity("City");
-    person.setZip("12345");
-    person.setPhone("123-456-7890");
-    person.setEmail("person@email.com");
+    @Test
+    void shouldReturnPersonInfoList() {
+      List<Person> personsWithLastName = Arrays.asList(person1, person2);
 
-    List<Person> personsWithLastName = Collections.singletonList(person);
+      MedicalRecord medicalRecord1 = new MedicalRecord();
+      MedicalRecord medicalRecord2 = new MedicalRecord();
 
-    when(readPersonRepository.findPersonsWithLastName(lastName)).thenReturn(
-      personsWithLastName
-    );
-    when(
-      readMedicalRecordRepository.findByFirstNameAndLastName(person)
-    ).thenReturn(Optional.empty());
+      when(readPersonRepository.findPersonsWithLastName("Test")).thenReturn(
+        personsWithLastName
+      );
+      when(
+        readMedicalRecordRepository.findByFirstNameAndLastName(person1)
+      ).thenReturn(Optional.of(medicalRecord1));
+      when(
+        readMedicalRecordRepository.findByFirstNameAndLastName(person2)
+      ).thenReturn(Optional.of(medicalRecord2));
+      when(calculateAgeService.calculate(any())).thenReturn(30);
 
-    List<PersonInfoDTO> result = personService.getPersonInfoByLastName(
-      lastName
-    );
+      List<PersonInfoDTO> result = personService.getPersonInfoByLastName(
+        "Test"
+      );
 
-    assertTrue(result.isEmpty());
+      assertFalse(result.isEmpty());
+      assertEquals(2, result.size());
+      assertEquals("FirstName1", result.get(0).getFirstName());
+      assertEquals("FirstName2", result.get(1).getFirstName());
+    }
+
+    @Test
+    void whenNoPersonsFound() {
+      when(
+        readPersonRepository.findPersonsWithLastName("NoExisting")
+      ).thenReturn(Collections.emptyList());
+
+      List<PersonInfoDTO> result = personService.getPersonInfoByLastName(
+        "NoExisting"
+      );
+
+      assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void whenNoMedicalRecordsFound() {
+      final String lastName = "Test";
+
+      Person person = new Person();
+      person.setFirstName("FirstName");
+      person.setLastName(lastName);
+      person.setAddress("123 Street");
+      person.setCity("City");
+      person.setZip("12345");
+      person.setPhone("123-456-7890");
+      person.setEmail("person@email.com");
+
+      List<Person> personsWithLastName = Collections.singletonList(person);
+
+      when(readPersonRepository.findPersonsWithLastName(lastName)).thenReturn(
+        personsWithLastName
+      );
+      when(
+        readMedicalRecordRepository.findByFirstNameAndLastName(person)
+      ).thenReturn(Optional.empty());
+
+      List<PersonInfoDTO> result = personService.getPersonInfoByLastName(
+        lastName
+      );
+
+      assertTrue(result.isEmpty());
+    }
   }
 
-  @Test
-  void getEmailsByCity_ShouldReturnEmails() {
-    final String city = "City";
+  @Nested
+  class GetEmailsByCity {
 
-    Set<String> emails = new HashSet<>(
-      Arrays.asList("email1@example.com", "email2@example.com")
-    );
+    @Test
+    void shouldReturnEmails() {
+      final String city = "City";
 
-    when(readPersonRepository.findEmailsByCity(city)).thenReturn(emails);
+      Set<String> emails = new HashSet<>(
+        Arrays.asList("email1@example.com", "email2@example.com")
+      );
 
-    Set<String> result = personService.getEmailsByCity(city);
+      when(readPersonRepository.findEmailsByCity(city)).thenReturn(emails);
 
-    assertFalse(result.isEmpty());
-    assertEquals(2, result.size());
-    assertTrue(result.contains("email1@example.com"));
-    assertTrue(result.contains("email2@example.com"));
+      Set<String> result = personService.getEmailsByCity(city);
+
+      assertFalse(result.isEmpty());
+      assertEquals(2, result.size());
+      assertTrue(result.contains("email1@example.com"));
+      assertTrue(result.contains("email2@example.com"));
+    }
+
+    @Test
+    void whenNoEmailsFound() {
+      final String city = "NonExistentCity";
+
+      when(readPersonRepository.findEmailsByCity(city)).thenReturn(
+        Collections.emptySet()
+      );
+
+      Set<String> result = personService.getEmailsByCity(city);
+
+      assertTrue(result.isEmpty());
+    }
   }
 
-  @Test
-  void getEmailsByCity_ShouldReturnEmptySet_WhenNoEmailsFound() {
-    final String city = "NonExistentCity";
+  @Nested
+  class AddPerson {
 
-    when(readPersonRepository.findEmailsByCity(city)).thenReturn(
-      Collections.emptySet()
-    );
+    @Test
+    void shouldCallRepositorySave() {
+      Person person = new Person();
+      person.setFirstName("John");
+      person.setLastName("Doe");
+      person.setAddress("123 Street");
+      person.setCity("City");
+      person.setZip("12345");
+      person.setPhone("123-456-7890");
+      person.setEmail("john@email.com");
 
-    Set<String> result = personService.getEmailsByCity(city);
+      personService.addPerson(person);
 
-    assertTrue(result.isEmpty());
+      verify(writePersonRepository).save(person);
+    }
+
+    @Test
+    void whenFirstNameIsNull() {
+      Person person = new Person();
+      person.setLastName("Doe");
+
+      IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> personService.addPerson(person)
+      );
+
+      assertEquals(
+        "First name and last name are required",
+        exception.getMessage()
+      );
+    }
+
+    @Test
+    void whenLastNameIsNull() {
+      Person person = new Person();
+      person.setFirstName("John");
+
+      IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> personService.addPerson(person)
+      );
+
+      assertEquals(
+        "First name and last name are required",
+        exception.getMessage()
+      );
+    }
   }
 
-  @Test
-  void addPerson_ShouldCallRepositorySave() {
-    Person person = new Person();
-    person.setFirstName("John");
-    person.setLastName("Doe");
-    person.setAddress("123 Street");
-    person.setCity("City");
-    person.setZip("12345");
-    person.setPhone("123-456-7890");
-    person.setEmail("john@email.com");
+  @Nested
+  class UpdatePerson {
 
-    personService.addPerson(person);
+    @Test
+    void shouldCallRepositoryUpdate() {
+      Person person = new Person();
+      person.setFirstName("John");
+      person.setLastName("Doe");
+      person.setAddress("123 Street");
+      person.setCity("City");
+      person.setZip("12345");
+      person.setPhone("123-456-7890");
+      person.setEmail("john@email.com");
 
-    verify(writePersonRepository).save(person);
+      personService.updatePerson(person);
+
+      verify(writePersonRepository).update(person);
+    }
+
+    @Test
+    void whenFirstNameIsNull() {
+      Person person = new Person();
+      person.setLastName("Doe");
+
+      IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> personService.updatePerson(person)
+      );
+
+      assertEquals(
+        "First name and last name are required",
+        exception.getMessage()
+      );
+    }
+
+    @Test
+    void whenLastNameIsNull() {
+      Person person = new Person();
+      person.setFirstName("John");
+
+      IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> personService.updatePerson(person)
+      );
+
+      assertEquals(
+        "First name and last name are required",
+        exception.getMessage()
+      );
+    }
   }
 
-  @Test
-  void updatePerson_ShouldCallRepositoryUpdate() {
-    Person person = new Person();
-    person.setFirstName("John");
-    person.setLastName("Doe");
-    person.setAddress("123 Street");
-    person.setCity("City");
-    person.setZip("12345");
-    person.setPhone("123-456-7890");
-    person.setEmail("john@email.com");
+  @Nested
+  class DeletePerson {
 
-    personService.updatePerson(person);
+    @Test
+    void shouldCallRepositoryDelete() {
+      Person person = new Person();
+      person.setFirstName("John");
+      person.setLastName("Doe");
 
-    verify(writePersonRepository).update(person);
+      personService.deletePerson(person);
+
+      verify(writePersonRepository).delete(person);
+    }
+
+    @Test
+    void whenFirstNameIsNull() {
+      Person person = new Person();
+      person.setLastName("Doe");
+
+      IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> personService.deletePerson(person)
+      );
+
+      assertEquals(
+        "First name and last name are required",
+        exception.getMessage()
+      );
+    }
+
+    @Test
+    void whenLastNameIsNull() {
+      Person person = new Person();
+      person.setFirstName("John");
+
+      IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> personService.deletePerson(person)
+      );
+
+      assertEquals(
+        "First name and last name are required",
+        exception.getMessage()
+      );
+    }
   }
 
-  @Test
-  void deletePerson_ShouldCallRepositoryDelete() {
-    Person person = new Person();
-    person.setFirstName("John");
-    person.setLastName("Doe");
+  @Nested
+  public class AllHouseholdMembers_PrivateMethod {
 
-    personService.deletePerson(person);
+    @Test
+    void allHouseholdMembers() throws Exception {
+      Person targetChild = new Person();
+      targetChild.setFirstName("TargetChild");
+      targetChild.setLastName("Family");
 
-    verify(writePersonRepository).delete(person);
+      Person sameNamePerson = new Person();
+      sameNamePerson.setFirstName("TargetChild");
+      sameNamePerson.setLastName("Family");
+
+      Person differentFirstName = new Person();
+      differentFirstName.setFirstName("OtherChild");
+      differentFirstName.setLastName("Family");
+
+      Person differentLastName = new Person();
+      differentLastName.setFirstName("TargetChild");
+      differentLastName.setLastName("OtherFamily");
+
+      Person completelyDifferent = new Person();
+      completelyDifferent.setFirstName("Adult");
+      completelyDifferent.setLastName("OtherFamily");
+
+      List<Person> personsAtAddress = Arrays.asList(
+        targetChild,
+        sameNamePerson,
+        differentFirstName,
+        differentLastName,
+        completelyDifferent
+      );
+
+      ChildAlertDTO childAlertDTO = new ChildAlertDTO();
+      childAlertDTO.setFirstName("TargetChild");
+      childAlertDTO.setLastName("Family");
+
+      Method method =
+        PersonService.class.getDeclaredMethod(
+            "allHouseholdMembers",
+            List.class,
+            Person.class,
+            ChildAlertDTO.class
+          );
+      method.setAccessible(true);
+
+      ChildAlertDTO result = (ChildAlertDTO) method.invoke(
+        personService,
+        personsAtAddress,
+        targetChild,
+        childAlertDTO
+      );
+
+      assertEquals(3, result.getHouseholdMembers().size());
+
+      List<String> householdFirstNames = result
+        .getHouseholdMembers()
+        .stream()
+        .map(HouseholdMember::getFirstName)
+        .collect(Collectors.toList());
+
+      assertTrue(householdFirstNames.contains("OtherChild"));
+      assertTrue(householdFirstNames.contains("TargetChild"));
+      assertTrue(householdFirstNames.contains("Adult"));
+
+      boolean hasExactDuplicate = result
+        .getHouseholdMembers()
+        .stream()
+        .anyMatch(
+          m ->
+            "TargetChild".equals(m.getFirstName()) &&
+            "Family".equals(m.getLastName())
+        );
+
+      assertFalse(hasExactDuplicate);
+    }
   }
 }

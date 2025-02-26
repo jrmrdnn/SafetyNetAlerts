@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -45,129 +46,190 @@ public class FireStationRepositoryTest {
     fireStation2.setAddress("456 Elm St");
   }
 
-  @Test
-  public void testFindByStationNumberToList() {
-    when(jsonWrapper.getFireStations()).thenReturn(
-      Arrays.asList(fireStation1, fireStation2)
-    );
+  @Nested
+  class FindByStationNumberToList {
 
-    List<FireStation> result = fireStationRepository.findByStationNumberToList(
-      "1"
-    );
+    @Test
+    public void testFindByStationNumberToList() {
+      when(jsonWrapper.getFireStations()).thenReturn(
+        Arrays.asList(fireStation1, fireStation2)
+      );
 
-    assertEquals(1, result.size());
-    assertTrue(result.contains(fireStation1));
+      List<FireStation> result =
+        fireStationRepository.findByStationNumberToList("1");
+
+      assertEquals(1, result.size());
+      assertTrue(result.contains(fireStation1));
+    }
+
+    @Test
+    public void testFindByStationNumberToList_NoFireStation() {
+      when(jsonWrapper.getFireStations()).thenReturn(
+        Arrays.asList(fireStation1, fireStation2)
+      );
+
+      List<FireStation> result =
+        fireStationRepository.findByStationNumberToList("3");
+
+      assertEquals(0, result.size());
+    }
   }
 
-  @Test
-  public void testFindByStationAddress() {
-    when(jsonWrapper.getFireStations()).thenReturn(
-      Arrays.asList(fireStation1, fireStation2)
-    );
+  @Nested
+  class FindByStationAddress {
 
-    Optional<FireStation> result = fireStationRepository.findByStationAddress(
-      "123 Main St"
-    );
+    @Test
+    public void testFindByStationAddress() {
+      when(jsonWrapper.getFireStations()).thenReturn(
+        Arrays.asList(fireStation1, fireStation2)
+      );
 
-    assertTrue(result.isPresent());
-    assertEquals(fireStation1, result.get());
+      Optional<FireStation> result = fireStationRepository.findByStationAddress(
+        "123 Main St"
+      );
+
+      assertTrue(result.isPresent());
+      assertEquals(fireStation1, result.get());
+    }
+
+    @Test
+    public void testFindByStationAddress_NoFireStation() {
+      when(jsonWrapper.getFireStations()).thenReturn(
+        Arrays.asList(fireStation1, fireStation2)
+      );
+
+      Optional<FireStation> result = fireStationRepository.findByStationAddress(
+        "789 Test St"
+      );
+
+      assertTrue(result.isEmpty());
+    }
   }
 
-  @Test
-  public void testFindAllStationsNumberToSet() {
-    when(jsonWrapper.getFireStations()).thenReturn(
-      Arrays.asList(fireStation1, fireStation2)
-    );
+  @Nested
+  class FindAllStationsNumberToSet {
 
-    Set<String> result = fireStationRepository.findAllStationsNumberToSet(
-      Arrays.asList("1", "2")
-    );
+    @Test
+    public void testFindAllStationsNumberToSet() {
+      when(jsonWrapper.getFireStations()).thenReturn(
+        Arrays.asList(fireStation1, fireStation2)
+      );
 
-    assertEquals(2, result.size());
-    assertTrue(result.contains("123 Main St"));
-    assertTrue(result.contains("456 Elm St"));
+      Set<String> result = fireStationRepository.findAllStationsNumberToSet(
+        Arrays.asList("1", "2")
+      );
+
+      assertEquals(2, result.size());
+      assertTrue(result.contains("123 Main St"));
+      assertTrue(result.contains("456 Elm St"));
+    }
+
+    @Test
+    public void testFindAllStationsNumberToSet_NoFireStation() {
+      when(jsonWrapper.getFireStations()).thenReturn(
+        Arrays.asList(fireStation1, fireStation2)
+      );
+
+      Set<String> result = fireStationRepository.findAllStationsNumberToSet(
+        Arrays.asList("3")
+      );
+
+      assertEquals(0, result.size());
+    }
   }
 
-  @Test
-  public void testSave() {
-    List<FireStation> fireStations = new ArrayList<>();
-    when(jsonWrapper.getFireStations()).thenReturn(fireStations);
+  @Nested
+  class SaveFireStation {
 
-    fireStationRepository.save(fireStation1);
+    @Test
+    public void testSave() {
+      List<FireStation> fireStations = new ArrayList<>();
+      when(jsonWrapper.getFireStations()).thenReturn(fireStations);
 
-    verify(jsonWrapper, times(2)).getFireStations();
-    verify(dataPersistenceService).saveData();
-    assertTrue(fireStations.contains(fireStation1));
+      fireStationRepository.save(fireStation1);
+
+      verify(jsonWrapper, times(2)).getFireStations();
+      verify(dataPersistenceService).saveData();
+      assertTrue(fireStations.contains(fireStation1));
+    }
+
+    @Test
+    public void testSave_ExistingFireStation() {
+      List<FireStation> fireStations = new ArrayList<>(
+        Collections.singletonList(fireStation1)
+      );
+      when(jsonWrapper.getFireStations()).thenReturn(fireStations);
+
+      assertThrows(IllegalArgumentException.class, () ->
+        fireStationRepository.save(fireStation1)
+      );
+    }
   }
 
-  @Test
-  public void testSaveExistingFireStation() {
-    List<FireStation> fireStations = new ArrayList<>(
-      Collections.singletonList(fireStation1)
-    );
-    when(jsonWrapper.getFireStations()).thenReturn(fireStations);
+  @Nested
+  class UpdateFireStation {
 
-    assertThrows(IllegalArgumentException.class, () ->
-      fireStationRepository.save(fireStation1)
-    );
+    @Test
+    public void testUpdate() {
+      FireStation updatedFireStation = new FireStation();
+      updatedFireStation.setStation("2");
+      updatedFireStation.setAddress("123 Main St");
+
+      List<FireStation> fireStations = new ArrayList<>(
+        Collections.singletonList(fireStation1)
+      );
+
+      when(jsonWrapper.getFireStations()).thenReturn(fireStations);
+
+      fireStationRepository.update(updatedFireStation);
+
+      verify(jsonWrapper, times(1)).getFireStations();
+      verify(dataPersistenceService).saveData();
+
+      assertTrue(fireStations.get(0).getStation().equals("2"));
+      assertTrue(fireStations.get(0).getAddress().equals("123 Main St"));
+    }
+
+    @Test
+    public void testUpdate_NoExistingFireStation() {
+      List<FireStation> fireStations = new ArrayList<>(
+        Collections.singletonList(fireStation1)
+      );
+      when(jsonWrapper.getFireStations()).thenReturn(fireStations);
+
+      assertThrows(IllegalArgumentException.class, () ->
+        fireStationRepository.update(fireStation2)
+      );
+    }
   }
 
-  @Test
-  public void testUpdate() {
-    FireStation updatedFireStation = new FireStation();
-    updatedFireStation.setStation("2");
-    updatedFireStation.setAddress("123 Main St");
+  @Nested
+  class DeleteFireStation {
 
-    List<FireStation> fireStations = new ArrayList<>(
-      Collections.singletonList(fireStation1)
-    );
+    @Test
+    public void testDelete() {
+      List<FireStation> fireStations = new ArrayList<>(
+        Collections.singletonList(fireStation1)
+      );
+      when(jsonWrapper.getFireStations()).thenReturn(fireStations);
 
-    when(jsonWrapper.getFireStations()).thenReturn(fireStations);
+      fireStationRepository.delete(fireStation1);
 
-    fireStationRepository.update(updatedFireStation);
+      verify(jsonWrapper, times(2)).getFireStations();
+      verify(dataPersistenceService).saveData();
+      assertFalse(fireStations.contains(fireStation1));
+    }
 
-    verify(jsonWrapper, times(1)).getFireStations();
-    verify(dataPersistenceService).saveData();
+    @Test
+    public void testDelete_NoExistingFireStation() {
+      List<FireStation> fireStations = new ArrayList<>(
+        Collections.singletonList(fireStation1)
+      );
+      when(jsonWrapper.getFireStations()).thenReturn(fireStations);
 
-    assertTrue(fireStations.get(0).getStation().equals("2"));
-    assertTrue(fireStations.get(0).getAddress().equals("123 Main St"));
-  }
-
-  @Test
-  public void testUpdateNonExistingFireStation() {
-    List<FireStation> fireStations = new ArrayList<>(
-      Collections.singletonList(fireStation1)
-    );
-    when(jsonWrapper.getFireStations()).thenReturn(fireStations);
-
-    assertThrows(IllegalArgumentException.class, () ->
-      fireStationRepository.update(fireStation2)
-    );
-  }
-
-  @Test
-  public void testDelete() {
-    List<FireStation> fireStations = new ArrayList<>(
-      Collections.singletonList(fireStation1)
-    );
-    when(jsonWrapper.getFireStations()).thenReturn(fireStations);
-
-    fireStationRepository.delete(fireStation1);
-
-    verify(jsonWrapper, times(2)).getFireStations();
-    verify(dataPersistenceService).saveData();
-    assertFalse(fireStations.contains(fireStation1));
-  }
-
-  @Test
-  public void testDeleteNonExistingFireStation() {
-    List<FireStation> fireStations = new ArrayList<>(
-      Collections.singletonList(fireStation1)
-    );
-    when(jsonWrapper.getFireStations()).thenReturn(fireStations);
-
-    assertThrows(IllegalArgumentException.class, () ->
-      fireStationRepository.delete(fireStation2)
-    );
+      assertThrows(IllegalArgumentException.class, () ->
+        fireStationRepository.delete(fireStation2)
+      );
+    }
   }
 }
