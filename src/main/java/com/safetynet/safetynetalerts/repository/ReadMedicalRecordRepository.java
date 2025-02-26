@@ -11,4 +11,13 @@ public interface ReadMedicalRecordRepository {
    * @return
    */
   Optional<MedicalRecord> findByFirstNameAndLastName(Person person);
+
+  /**
+   * Find a medical record by first name and last name.
+   * @param medicalRecord
+   * @return
+   */
+  Optional<MedicalRecord> findByFirstNameAndLastName(
+    MedicalRecord medicalRecord
+  );
 }

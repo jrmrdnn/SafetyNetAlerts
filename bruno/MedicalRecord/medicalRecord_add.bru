@@ -1,0 +1,21 @@
+meta {
+  name: medicalRecord_add
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{URL}}/medicalRecord
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "firstName": "漢字",
+    "lastName": "ẞupoñt",
+    "birthdate": "01/01/1950",
+    "medications": ["ibupurin:200mg", "hydrapermazol:400mg"],
+    "allergies": ["nillacilan"]
+  }
+}
