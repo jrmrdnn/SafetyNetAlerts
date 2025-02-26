@@ -5,7 +5,10 @@ import static org.mockito.Mockito.*;
 
 import com.safetynet.safetynetalerts.model.FireStation;
 import com.safetynet.safetynetalerts.model.JsonWrapper;
+import com.safetynet.safetynetalerts.service.DataPersistenceServiceInterface;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -22,6 +25,9 @@ public class FireStationRepositoryTest {
 
   @Mock
   private JsonWrapper jsonWrapper;
+
+  @Mock
+  private DataPersistenceServiceInterface dataPersistenceService;
 
   @InjectMocks
   private FireStationRepository fireStationRepository;
@@ -80,5 +86,86 @@ public class FireStationRepositoryTest {
     assertEquals(2, result.size());
     assertTrue(result.contains("123 Main St"));
     assertTrue(result.contains("456 Elm St"));
+  }
+
+  @Test
+  public void testSave() {
+    List<FireStation> fireStations = new ArrayList<>();
+    when(jsonWrapper.getFireStations()).thenReturn(fireStations);
+
+    fireStationRepository.save(fireStation1);
+
+    verify(jsonWrapper, times(2)).getFireStations();
+    verify(dataPersistenceService).saveData();
+    assertTrue(fireStations.contains(fireStation1));
+  }
+
+  @Test
+  public void testSaveExistingFireStation() {
+    List<FireStation> fireStations = new ArrayList<>(
+      Collections.singletonList(fireStation1)
+    );
+    when(jsonWrapper.getFireStations()).thenReturn(fireStations);
+
+    assertThrows(IllegalArgumentException.class, () ->
+      fireStationRepository.save(fireStation1)
+    );
+  }
+
+  @Test
+  public void testUpdate() {
+    FireStation updatedFireStation = new FireStation();
+    updatedFireStation.setStation("2");
+    updatedFireStation.setAddress("123 Main St");
+
+    List<FireStation> fireStations = new ArrayList<>(
+      Collections.singletonList(fireStation1)
+    );
+    when(jsonWrapper.getFireStations()).thenReturn(fireStations);
+
+    fireStationRepository.update(updatedFireStation);
+
+    verify(jsonWrapper, times(2)).getFireStations();
+    verify(dataPersistenceService).saveData();
+
+    assertFalse(fireStations.contains(fireStation1));
+  }
+
+  @Test
+  public void testUpdateNonExistingFireStation() {
+    List<FireStation> fireStations = new ArrayList<>(
+      Collections.singletonList(fireStation1)
+    );
+    when(jsonWrapper.getFireStations()).thenReturn(fireStations);
+
+    assertThrows(IllegalArgumentException.class, () ->
+      fireStationRepository.update(fireStation2)
+    );
+  }
+
+  @Test
+  public void testDelete() {
+    List<FireStation> fireStations = new ArrayList<>(
+      Collections.singletonList(fireStation1)
+    );
+    when(jsonWrapper.getFireStations()).thenReturn(fireStations);
+
+    fireStationRepository.delete(fireStation1);
+
+    verify(jsonWrapper, times(2)).getFireStations();
+    verify(dataPersistenceService).saveData();
+    assertFalse(fireStations.contains(fireStation1));
+  }
+
+  @Test
+  public void testDeleteNonExistingFireStation() {
+    List<FireStation> fireStations = new ArrayList<>(
+      Collections.singletonList(fireStation1)
+    );
+    when(jsonWrapper.getFireStations()).thenReturn(fireStations);
+
+    assertThrows(IllegalArgumentException.class, () ->
+      fireStationRepository.delete(fireStation2)
+    );
   }
 }

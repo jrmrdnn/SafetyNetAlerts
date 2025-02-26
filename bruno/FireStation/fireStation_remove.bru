@@ -1,0 +1,17 @@
+meta {
+  name: fireStation_remove
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{URL}}/firestation
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "address": "123 Main St"
+  }
+}
