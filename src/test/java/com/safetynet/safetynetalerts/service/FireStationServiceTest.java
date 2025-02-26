@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
+import com.safetynet.safetynetalerts.dto.FireDTO;
 import com.safetynet.safetynetalerts.dto.FireStationDTO;
 import com.safetynet.safetynetalerts.model.FireStation;
 import com.safetynet.safetynetalerts.model.MedicalRecord;
@@ -98,5 +99,32 @@ class FireStationServiceTest {
     verify(readPersonRepository, times(1)).findPhoneNumbersByAddress(
       fireStations
     );
+  }
+
+  @Test
+  void testGetFireInfoByAddress() {
+    FireStation fireStation = new FireStation();
+    fireStation.setStation("1");
+    List<Person> persons = Arrays.asList(new Person(), new Person());
+    MedicalRecord medicalRecord = new MedicalRecord();
+    medicalRecord.setBirthdate("01/01/2000");
+
+    when(readFireStationRepository.findByStationAddress("address")).thenReturn(
+      Optional.of(fireStation)
+    );
+    when(readPersonRepository.findPersonsAtAddress("address")).thenReturn(
+      persons
+    );
+    when(
+      readMedicalRecordRepository.findByFirstNameAndLastName(any(Person.class))
+    ).thenReturn(Optional.of(medicalRecord));
+    when(calculateAgeService.calculate(anyString())).thenReturn(21);
+
+    FireDTO result = fireStationService.getFireInfoByAddress("address");
+
+    assertEquals("1", result.getStationNumber());
+    assertEquals(2, result.getPersons().size());
+    verify(readFireStationRepository, times(1)).findByStationAddress("address");
+    verify(readPersonRepository, times(1)).findPersonsAtAddress("address");
   }
 }

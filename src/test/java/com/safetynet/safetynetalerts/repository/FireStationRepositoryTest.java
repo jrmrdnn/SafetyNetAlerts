@@ -7,6 +7,7 @@ import com.safetynet.safetynetalerts.model.FireStation;
 import com.safetynet.safetynetalerts.model.JsonWrapper;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -49,5 +50,19 @@ public class FireStationRepositoryTest {
 
     assertEquals(1, result.size());
     assertTrue(result.contains(fireStation1));
+  }
+
+  @Test
+  public void testFindByStationAddress() {
+    when(jsonWrapper.getFireStations()).thenReturn(
+      Arrays.asList(fireStation1, fireStation2)
+    );
+
+    Optional<FireStation> result = fireStationRepository.findByStationAddress(
+      "123 Main St"
+    );
+
+    assertTrue(result.isPresent());
+    assertEquals(fireStation1, result.get());
   }
 }

@@ -2,8 +2,8 @@
   {
     "iterationIndex": 0,
     "summary": {
-      "totalRequests": 15,
-      "passedRequests": 15,
+      "totalRequests": 22,
+      "passedRequests": 22,
       "failedRequests": 0,
       "skippedRequests": 0,
       "totalAssertions": 0,
@@ -80,13 +80,13 @@
               ]
             }
           ],
-          "responseTime": 103
+          "responseTime": 29
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.113606791,
+        "runtime": 0.038864083,
         "suitename": "ChildAlert/childAlert_1509 Culver St",
         "iterationIndex": 0
       },
@@ -116,13 +116,13 @@
               "householdMembers": []
             }
           ],
-          "responseTime": 5
+          "responseTime": 4
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.006776,
+        "runtime": 0.006268417,
         "suitename": "ChildAlert/childAlert_834 Binoc Ave",
         "iterationIndex": 0
       },
@@ -167,7 +167,7 @@
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.006243125,
+        "runtime": 0.006406458,
         "suitename": "ChildAlert/childAlert_892 Downing Ct",
         "iterationIndex": 0
       },
@@ -212,7 +212,7 @@
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.006181333,
+        "runtime": 0.006545791,
         "suitename": "ChildAlert/childAlert_947 E Rose Dr",
         "iterationIndex": 0
       },
@@ -235,14 +235,406 @@
             "connection": "keep-alive"
           },
           "data": [],
+          "responseTime": 4
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.00434425,
+        "suitename": "ChildAlert/childAlert_29 15th St",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "Fire/fire_947 E. Rose Dr.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/fire?address=947 E. Rose Dr",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": {
+            "stationNumber": "1",
+            "persons": [
+              {
+                "firstName": "Brian",
+                "lastName": "Stelzer",
+                "phone": "841-874-7784",
+                "age": 49,
+                "medications": ["ibupurin:200mg", "hydrapermazol:400mg"],
+                "allergies": ["nillacilan"]
+              },
+              {
+                "firstName": "Shawna",
+                "lastName": "Stelzer",
+                "phone": "841-874-7784",
+                "age": 44,
+                "medications": [],
+                "allergies": []
+              },
+              {
+                "firstName": "Kendrik",
+                "lastName": "Stelzer",
+                "phone": "841-874-7784",
+                "age": 10,
+                "medications": ["noxidian:100mg", "pharmacol:2500mg"],
+                "allergies": []
+              }
+            ]
+          },
+          "responseTime": 7
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.008071875,
+        "suitename": "Fire/fire_947 E. Rose Dr",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "Fire/fire_908 73rd St.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/fire?address=908 73rd St",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": {
+            "stationNumber": "1",
+            "persons": [
+              {
+                "firstName": "Reginold",
+                "lastName": "Walker",
+                "phone": "841-874-8547",
+                "age": 45,
+                "medications": ["thradox:700mg"],
+                "allergies": ["illisoxian"]
+              },
+              {
+                "firstName": "Jamie",
+                "lastName": "Peters",
+                "phone": "841-874-7462",
+                "age": 42,
+                "medications": [],
+                "allergies": []
+              }
+            ]
+          },
+          "responseTime": 4
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.005301459,
+        "suitename": "Fire/fire_908 73rd St",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "Fire/fire_892 Downing Ct.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/fire?address=892 Downing Ct",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": {
+            "stationNumber": "2",
+            "persons": [
+              {
+                "firstName": "Sophia",
+                "lastName": "Zemicks",
+                "phone": "841-874-7878",
+                "age": 36,
+                "medications": [
+                  "aznol:60mg",
+                  "hydrapermazol:900mg",
+                  "pharmacol:5000mg",
+                  "terazine:500mg"
+                ],
+                "allergies": ["peanut", "shellfish", "aznol"]
+              },
+              {
+                "firstName": "Warren",
+                "lastName": "Zemicks",
+                "phone": "841-874-7512",
+                "age": 39,
+                "medications": [],
+                "allergies": []
+              },
+              {
+                "firstName": "Zach",
+                "lastName": "Zemicks",
+                "phone": "841-874-7512",
+                "age": 7,
+                "medications": [],
+                "allergies": []
+              }
+            ]
+          },
           "responseTime": 5
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.005419833,
-        "suitename": "ChildAlert/childAlert_29 15th St",
+        "runtime": 0.004911708,
+        "suitename": "Fire/fire_892 Downing Ct",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "Fire/fire_29 15th St.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/fire?address=29 15th St",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": {
+            "stationNumber": "2",
+            "persons": [
+              {
+                "firstName": "Jonanathan",
+                "lastName": "Marrack",
+                "phone": "841-874-6513",
+                "age": 36,
+                "medications": [],
+                "allergies": []
+              }
+            ]
+          },
+          "responseTime": 5
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.007244583,
+        "suitename": "Fire/fire_29 15th St",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "Fire/fire_1509 Culver St.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/fire?address=1509 Culver St",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": {
+            "stationNumber": "3",
+            "persons": [
+              {
+                "firstName": "John",
+                "lastName": "Boyd",
+                "phone": "841-874-6512",
+                "age": 40,
+                "medications": ["aznol:350mg", "hydrapermazol:100mg"],
+                "allergies": ["nillacilan"]
+              },
+              {
+                "firstName": "Jacob",
+                "lastName": "Boyd",
+                "phone": "841-874-6513",
+                "age": 35,
+                "medications": [
+                  "pharmacol:5000mg",
+                  "terazine:10mg",
+                  "noznazol:250mg"
+                ],
+                "allergies": []
+              },
+              {
+                "firstName": "Tenley",
+                "lastName": "Boyd",
+                "phone": "841-874-6512",
+                "age": 13,
+                "medications": [],
+                "allergies": ["peanut"]
+              },
+              {
+                "firstName": "Roger",
+                "lastName": "Boyd",
+                "phone": "841-874-6512",
+                "age": 7,
+                "medications": [],
+                "allergies": []
+              },
+              {
+                "firstName": "Felicia",
+                "lastName": "Boyd",
+                "phone": "841-874-6544",
+                "age": 39,
+                "medications": ["tetracyclaz:650mg"],
+                "allergies": ["xilliathal"]
+              }
+            ]
+          },
+          "responseTime": 5
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.004998333,
+        "suitename": "Fire/fire_1509 Culver St",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "Fire/fire_112 Steppes Pl.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/fire?address=112 Steppes Pl",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": {
+            "stationNumber": "3",
+            "persons": [
+              {
+                "firstName": "Tony",
+                "lastName": "Cooper",
+                "phone": "841-874-6874",
+                "age": 30,
+                "medications": ["hydrapermazol:300mg", "dodoxadin:30mg"],
+                "allergies": ["shellfish"]
+              },
+              {
+                "firstName": "Ron",
+                "lastName": "Peters",
+                "phone": "841-874-8888",
+                "age": 59,
+                "medications": [],
+                "allergies": []
+              },
+              {
+                "firstName": "Allison",
+                "lastName": "Boyd",
+                "phone": "841-874-9888",
+                "age": 59,
+                "medications": ["aznol:200mg"],
+                "allergies": ["nillacilan"]
+              }
+            ]
+          },
+          "responseTime": 3
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.004414166,
+        "suitename": "Fire/fire_112 Steppes Pl",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "Fire/fire_748 Townings Dr.bru"
+        },
+        "request": {
+          "method": "GET",
+          "url": "http://localhost:8080/fire?address=748 Townings Dr",
+          "headers": {}
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": {
+            "stationNumber": "3",
+            "persons": [
+              {
+                "firstName": "Foster",
+                "lastName": "Shepard",
+                "phone": "841-874-6544",
+                "age": 45,
+                "medications": [],
+                "allergies": []
+              },
+              {
+                "firstName": "Clive",
+                "lastName": "Ferguson",
+                "phone": "841-874-6741",
+                "age": 30,
+                "medications": [],
+                "allergies": []
+              }
+            ]
+          },
+          "responseTime": 4
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.004544834,
+        "suitename": "Fire/fire_748 Townings Dr",
         "iterationIndex": 0
       },
       {
@@ -269,13 +661,13 @@
             "841-874-6512",
             "841-874-8547"
           ],
-          "responseTime": 5
+          "responseTime": 7
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.006219417,
+        "runtime": 0.007781291,
         "suitename": "PhoneAlert/phoneAlert_1",
         "iterationIndex": 0
       },
@@ -309,7 +701,7 @@
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.004072709,
+        "runtime": 0.003189042,
         "suitename": "PhoneAlert/phoneAlert_2",
         "iterationIndex": 0
       },
@@ -340,13 +732,13 @@
             "841-874-8888",
             "841-874-9888"
           ],
-          "responseTime": 4
+          "responseTime": 3
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.004654291,
+        "runtime": 0.003517292,
         "suitename": "PhoneAlert/phoneAlert_3",
         "iterationIndex": 0
       },
@@ -374,13 +766,13 @@
             "841-874-8888",
             "841-874-9888"
           ],
-          "responseTime": 5
+          "responseTime": 3
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.0061825,
+        "runtime": 0.004361375,
         "suitename": "PhoneAlert/phoneAlert_4",
         "iterationIndex": 0
       },
@@ -409,7 +801,7 @@
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.003462083,
+        "runtime": 0.003980166,
         "suitename": "PhoneAlert/phoneAlert_5",
         "iterationIndex": 0
       },
@@ -473,13 +865,13 @@
             "adultCount": 5,
             "childCount": 1
           },
-          "responseTime": 11
+          "responseTime": 10
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.0110125,
+        "runtime": 0.010974,
         "suitename": "StationNumber/stationNumber_1",
         "iterationIndex": 0
       },
@@ -537,13 +929,13 @@
             "adultCount": 4,
             "childCount": 1
           },
-          "responseTime": 5
+          "responseTime": 8
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.00552525,
+        "runtime": 0.009917709,
         "suitename": "StationNumber/stationNumber_2",
         "iterationIndex": 0
       },
@@ -637,13 +1029,13 @@
             "adultCount": 8,
             "childCount": 3
           },
-          "responseTime": 12
+          "responseTime": 10
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.012775625,
+        "runtime": 0.0113255,
         "suitename": "StationNumber/stationNumber_3",
         "iterationIndex": 0
       },
@@ -701,7 +1093,7 @@
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.004910458,
+        "runtime": 0.004616792,
         "suitename": "StationNumber/stationNumber_4",
         "iterationIndex": 0
       },
@@ -728,13 +1120,13 @@
             "adultCount": 0,
             "childCount": 0
           },
-          "responseTime": 3
+          "responseTime": 2
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.004265,
+        "runtime": 0.003128042,
         "suitename": "StationNumber/stationNumber_5",
         "iterationIndex": 0
       }

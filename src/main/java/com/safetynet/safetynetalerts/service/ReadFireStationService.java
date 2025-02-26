@@ -1,5 +1,6 @@
 package com.safetynet.safetynetalerts.service;
 
+import com.safetynet.safetynetalerts.dto.FireDTO;
 import com.safetynet.safetynetalerts.dto.FireStationDTO;
 import java.util.Set;
 
@@ -17,4 +18,11 @@ public interface ReadFireStationService {
    * @return
    */
   Set<String> getPhoneNumbersByFireStation(String stationNumber);
+
+  /**
+   * Get fire information by address.
+   * @param address
+   * @return
+   */
+  public FireDTO getFireInfoByAddress(String address);
 }

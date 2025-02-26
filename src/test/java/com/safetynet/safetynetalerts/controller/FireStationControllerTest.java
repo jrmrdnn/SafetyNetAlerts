@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.safetynet.safetynetalerts.dto.FireDTO;
 import com.safetynet.safetynetalerts.dto.FireStationDTO;
 import com.safetynet.safetynetalerts.service.ReadFireStationService;
 import java.util.HashSet;
@@ -63,5 +64,21 @@ public class FireStationControllerTest {
       .perform(get("/phoneAlert").param("firestation", fireStation))
       .andExpect(status().isOk())
       .andExpect(content().json("[\"123-456-7890\",\"098-765-4321\"]"));
+  }
+
+  @Test
+  public void testGetFireInfo() throws Exception {
+    String address = "123 Test St";
+
+    FireDTO fireDTO = new FireDTO();
+
+    when(readFireStationService.getFireInfoByAddress(address)).thenReturn(
+      fireDTO
+    );
+
+    mockMvc
+      .perform(get("/fire").param("address", address))
+      .andExpect(status().isOk())
+      .andExpect(content().json("{/* expected JSON response */}"));
   }
 }
