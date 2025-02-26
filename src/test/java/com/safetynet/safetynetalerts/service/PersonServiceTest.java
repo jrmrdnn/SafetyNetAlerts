@@ -10,6 +10,7 @@ import com.safetynet.safetynetalerts.model.MedicalRecord;
 import com.safetynet.safetynetalerts.model.Person;
 import com.safetynet.safetynetalerts.repository.ReadMedicalRecordRepository;
 import com.safetynet.safetynetalerts.repository.ReadPersonRepository;
+import com.safetynet.safetynetalerts.repository.WritePersonRepository;
 import java.util.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,9 @@ class PersonServiceTest {
 
   @Mock
   private ReadPersonRepository readPersonRepository;
+
+  @Mock
+  private WritePersonRepository writePersonRepository;
 
   @Mock
   private ReadMedicalRecordRepository readMedicalRecordRepository;
@@ -199,5 +203,48 @@ class PersonServiceTest {
     Set<String> result = personService.getEmailsByCity(city);
 
     assertTrue(result.isEmpty());
+  }
+
+  @Test
+  void addPerson_ShouldCallRepositorySave() {
+    Person person = new Person();
+    person.setFirstName("John");
+    person.setLastName("Doe");
+    person.setAddress("123 Street");
+    person.setCity("City");
+    person.setZip("12345");
+    person.setPhone("123-456-7890");
+    person.setEmail("john@email.com");
+
+    personService.addPerson(person);
+
+    verify(writePersonRepository).save(person);
+  }
+
+  @Test
+  void updatePerson_ShouldCallRepositoryUpdate() {
+    Person person = new Person();
+    person.setFirstName("John");
+    person.setLastName("Doe");
+    person.setAddress("123 Street");
+    person.setCity("City");
+    person.setZip("12345");
+    person.setPhone("123-456-7890");
+    person.setEmail("john@email.com");
+
+    personService.updatePerson(person);
+
+    verify(writePersonRepository).update(person);
+  }
+
+  @Test
+  void deletePerson_ShouldCallRepositoryDelete() {
+    Person person = new Person();
+    person.setFirstName("John");
+    person.setLastName("Doe");
+
+    personService.deletePerson(person);
+
+    verify(writePersonRepository).delete(person);
   }
 }

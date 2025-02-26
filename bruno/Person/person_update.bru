@@ -1,0 +1,22 @@
+meta {
+  name: person_update
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{URL}}/person
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "firstName": "漢字",
+    "lastName": "ẞupoñt",
+    "address": "Avenue des Champs-Élysées",
+    "city": "Paris",
+    "zip": "75008",
+    "phone": "841-841-4480"
+  }
+}

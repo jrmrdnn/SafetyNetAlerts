@@ -2,8 +2,8 @@
   {
     "iterationIndex": 0,
     "summary": {
-      "totalRequests": 37,
-      "passedRequests": 37,
+      "totalRequests": 40,
+      "passedRequests": 40,
       "failedRequests": 0,
       "skippedRequests": 0,
       "totalAssertions": 0,
@@ -80,13 +80,13 @@
               ]
             }
           ],
-          "responseTime": 112
+          "responseTime": 30
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.121764209,
+        "runtime": 0.040289,
         "suitename": "ChildAlert/childAlert_1509 Culver St",
         "iterationIndex": 0
       },
@@ -116,13 +116,13 @@
               "householdMembers": []
             }
           ],
-          "responseTime": 6
+          "responseTime": 4
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.008636042,
+        "runtime": 0.00660375,
         "suitename": "ChildAlert/childAlert_834 Binoc Ave",
         "iterationIndex": 0
       },
@@ -161,13 +161,13 @@
               ]
             }
           ],
-          "responseTime": 6
+          "responseTime": 37
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.006432708,
+        "runtime": 0.037116125,
         "suitename": "ChildAlert/childAlert_892 Downing Ct",
         "iterationIndex": 0
       },
@@ -206,13 +206,13 @@
               ]
             }
           ],
-          "responseTime": 6
+          "responseTime": 4
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.007418083,
+        "runtime": 0.004355333,
         "suitename": "ChildAlert/childAlert_947 E Rose Dr",
         "iterationIndex": 0
       },
@@ -235,13 +235,13 @@
             "connection": "keep-alive"
           },
           "data": [],
-          "responseTime": 5
+          "responseTime": 3
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.006298583,
+        "runtime": 0.003286167,
         "suitename": "ChildAlert/childAlert_29 15th St",
         "iterationIndex": 0
       },
@@ -280,13 +280,13 @@
             "tenz@email.com",
             "lily@email.com"
           ],
-          "responseTime": 4
+          "responseTime": 2
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.00537025,
+        "runtime": 0.002553041,
         "suitename": "CommunityEmail/communityEmail_culver",
         "iterationIndex": 0
       },
@@ -309,13 +309,13 @@
             "connection": "keep-alive"
           },
           "data": [],
-          "responseTime": 3
+          "responseTime": 1
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.003926208,
+        "runtime": 0.002235458,
         "suitename": "CommunityEmail/communityEmail_paris",
         "iterationIndex": 0
       },
@@ -366,13 +366,13 @@
               }
             ]
           },
-          "responseTime": 8
+          "responseTime": 3
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.008830916,
+        "runtime": 0.003355,
         "suitename": "Fire/fire_947 E. Rose Dr",
         "iterationIndex": 0
       },
@@ -421,7 +421,7 @@
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.007664583,
+        "runtime": 0.006867375,
         "suitename": "Fire/fire_908 73rd St",
         "iterationIndex": 0
       },
@@ -483,7 +483,7 @@
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.005371625,
+        "runtime": 0.004545166,
         "suitename": "Fire/fire_892 Downing Ct",
         "iterationIndex": 0
       },
@@ -518,13 +518,13 @@
               }
             ]
           },
-          "responseTime": 4
+          "responseTime": 2
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.009704167,
+        "runtime": 0.002538334,
         "suitename": "Fire/fire_29 15th St",
         "iterationIndex": 0
       },
@@ -595,13 +595,13 @@
               }
             ]
           },
-          "responseTime": 76
+          "responseTime": 3
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.078149166,
+        "runtime": 0.00324825,
         "suitename": "Fire/fire_1509 Culver St",
         "iterationIndex": 0
       },
@@ -652,13 +652,13 @@
               }
             ]
           },
-          "responseTime": 61
+          "responseTime": 2
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.061889959,
+        "runtime": 0.002729,
         "suitename": "Fire/fire_112 Steppes Pl",
         "iterationIndex": 0
       },
@@ -701,13 +701,13 @@
               }
             ]
           },
-          "responseTime": 13
+          "responseTime": 3
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.013585041,
+        "runtime": 0.003496875,
         "suitename": "Fire/fire_748 Townings Dr",
         "iterationIndex": 0
       },
@@ -794,13 +794,13 @@
               ]
             }
           ],
-          "responseTime": 24
+          "responseTime": 7
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.024922,
+        "runtime": 0.0075765,
         "suitename": "FloodStations/floodStations_1",
         "iterationIndex": 0
       },
@@ -884,13 +884,13 @@
               ]
             }
           ],
-          "responseTime": 7
+          "responseTime": 3
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.007910083,
+        "runtime": 0.003060125,
         "suitename": "FloodStations/floodStations_2",
         "iterationIndex": 0
       },
@@ -1026,13 +1026,13 @@
               ]
             }
           ],
-          "responseTime": 8
+          "responseTime": 5
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.008937916,
+        "runtime": 0.0055695,
         "suitename": "FloodStations/floodStations_3",
         "iterationIndex": 0
       },
@@ -1098,13 +1098,13 @@
               ]
             }
           ],
-          "responseTime": 6
+          "responseTime": 3
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.006025583,
+        "runtime": 0.002690166,
         "suitename": "FloodStations/floodStations_4",
         "iterationIndex": 0
       },
@@ -1127,13 +1127,13 @@
             "connection": "keep-alive"
           },
           "data": [],
-          "responseTime": 3
+          "responseTime": 2
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.004151,
+        "runtime": 0.001979958,
         "suitename": "FloodStations/floodStations_5",
         "iterationIndex": 0
       },
@@ -1280,13 +1280,13 @@
               ]
             }
           ],
-          "responseTime": 6
+          "responseTime": 4
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.006915292,
+        "runtime": 0.00416475,
         "suitename": "FloodStations/floodStations_1,2",
         "iterationIndex": 0
       },
@@ -1435,13 +1435,13 @@
               ]
             }
           ],
-          "responseTime": 10
+          "responseTime": 6
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.010395167,
+        "runtime": 0.0058455,
         "suitename": "FloodStations/floodStations_3,4",
         "iterationIndex": 0
       },
@@ -1713,14 +1713,126 @@
               ]
             }
           ],
-          "responseTime": 17
+          "responseTime": 7
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.0179915,
+        "runtime": 0.0075495,
         "suitename": "FloodStations/floodStations_1,2,3,4",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "Person/person_add.bru"
+        },
+        "request": {
+          "method": "POST",
+          "url": "http://localhost:8080/person",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "data": "{\n  \"firstName\": \"漢字\",\n  \"lastName\": \"ẞupoñt\",\n  \"address\": \"Rue Sainte-Catherine\",\n  \"city\": \"Bordeaux\",\n  \"zip\": \"33000\",\n  \"phone\": \"841-841-4580\",\n  \"email\": \"dupont@email.com\"\n}"
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": {
+            "firstName": "漢字",
+            "lastName": "ẞupoñt",
+            "address": "Rue Sainte-Catherine",
+            "city": "Bordeaux",
+            "zip": "33000",
+            "phone": "841-841-4580",
+            "email": "dupont@email.com"
+          },
+          "responseTime": 4
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.006179,
+        "suitename": "Person/person_add",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "Person/person_update.bru"
+        },
+        "request": {
+          "method": "PUT",
+          "url": "http://localhost:8080/person",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "data": "{\n  \"firstName\": \"漢字\",\n  \"lastName\": \"ẞupoñt\",\n  \"address\": \"Avenue des Champs-Élysées\",\n  \"city\": \"Paris\",\n  \"zip\": \"75008\",\n  \"phone\": \"841-841-4480\"\n}"
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "transfer-encoding": "chunked",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": {
+            "firstName": "漢字",
+            "lastName": "ẞupoñt",
+            "address": "Avenue des Champs-Élysées",
+            "city": "Paris",
+            "zip": "75008",
+            "phone": "841-841-4480",
+            "email": null
+          },
+          "responseTime": 4
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.004674875,
+        "suitename": "Person/person_update",
+        "iterationIndex": 0
+      },
+      {
+        "test": {
+          "filename": "Person/person_remove.bru"
+        },
+        "request": {
+          "method": "DELETE",
+          "url": "http://localhost:8080/person",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "data": "{\n  \"firstName\": \"漢字\",\n  \"lastName\": \"ẞupoñt\"\n}"
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "content-type": "application/json",
+            "content-length": "32",
+            "keep-alive": "timeout=60",
+            "connection": "keep-alive"
+          },
+          "data": "Person deleted: 漢字 ẞupoñt",
+          "responseTime": 4
+        },
+        "error": null,
+        "assertionResults": [],
+        "testResults": [],
+        "shouldStopRunnerExecution": false,
+        "runtime": 0.005063959,
+        "suitename": "Person/person_remove",
         "iterationIndex": 0
       },
       {
@@ -1795,13 +1907,13 @@
               "allergies": ["nillacilan"]
             }
           ],
-          "responseTime": 6
+          "responseTime": 3
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.005887792,
+        "runtime": 0.004189959,
         "suitename": "PersonInfo/personInfo_boyd",
         "iterationIndex": 0
       },
@@ -1854,13 +1966,13 @@
               "allergies": []
             }
           ],
-          "responseTime": 6
+          "responseTime": 2
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.006886333,
+        "runtime": 0.002754042,
         "suitename": "PersonInfo/personInfo_zemicks",
         "iterationIndex": 0
       },
@@ -1908,13 +2020,13 @@
               "allergies": []
             }
           ],
-          "responseTime": 4
+          "responseTime": 2
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.004265625,
+        "runtime": 0.00293075,
         "suitename": "PersonInfo/personInfo_stelzer",
         "iterationIndex": 0
       },
@@ -1954,13 +2066,13 @@
               "allergies": []
             }
           ],
-          "responseTime": 4
+          "responseTime": 2
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.004108667,
+        "runtime": 0.0029145,
         "suitename": "PersonInfo/personInfo_peters",
         "iterationIndex": 0
       },
@@ -1992,13 +2104,13 @@
               "allergies": ["illisoxian"]
             }
           ],
-          "responseTime": 10
+          "responseTime": 1
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.010662834,
+        "runtime": 0.002228958,
         "suitename": "PersonInfo/personInfo_walker",
         "iterationIndex": 0
       },
@@ -2026,13 +2138,13 @@
             "841-874-6512",
             "841-874-8547"
           ],
-          "responseTime": 11
+          "responseTime": 2
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.01246375,
+        "runtime": 0.002305958,
         "suitename": "PhoneAlert/phoneAlert_1",
         "iterationIndex": 0
       },
@@ -2060,13 +2172,13 @@
             "841-874-6513",
             "841-874-7458"
           ],
-          "responseTime": 12
+          "responseTime": 2
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.012901417,
+        "runtime": 0.00216075,
         "suitename": "PhoneAlert/phoneAlert_2",
         "iterationIndex": 0
       },
@@ -2097,13 +2209,13 @@
             "841-874-8888",
             "841-874-9888"
           ],
-          "responseTime": 7
+          "responseTime": 3
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.007603792,
+        "runtime": 0.003368375,
         "suitename": "PhoneAlert/phoneAlert_3",
         "iterationIndex": 0
       },
@@ -2131,13 +2243,13 @@
             "841-874-8888",
             "841-874-9888"
           ],
-          "responseTime": 8
+          "responseTime": 5
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.008660375,
+        "runtime": 0.005247292,
         "suitename": "PhoneAlert/phoneAlert_4",
         "iterationIndex": 0
       },
@@ -2160,13 +2272,13 @@
             "connection": "keep-alive"
           },
           "data": [],
-          "responseTime": 5
+          "responseTime": 16
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.00733875,
+        "runtime": 0.017018667,
         "suitename": "PhoneAlert/phoneAlert_5",
         "iterationIndex": 0
       },
@@ -2230,13 +2342,13 @@
             "adultCount": 5,
             "childCount": 1
           },
-          "responseTime": 10
+          "responseTime": 24
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.010279334,
+        "runtime": 0.024214959,
         "suitename": "StationNumber/stationNumber_1",
         "iterationIndex": 0
       },
@@ -2294,13 +2406,13 @@
             "adultCount": 4,
             "childCount": 1
           },
-          "responseTime": 5
+          "responseTime": 11
         },
         "error": null,
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.005426958,
+        "runtime": 0.011872458,
         "suitename": "StationNumber/stationNumber_2",
         "iterationIndex": 0
       },
@@ -2400,7 +2512,7 @@
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.00849825,
+        "runtime": 0.009460792,
         "suitename": "StationNumber/stationNumber_3",
         "iterationIndex": 0
       },
@@ -2458,7 +2570,7 @@
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.005730375,
+        "runtime": 0.005551417,
         "suitename": "StationNumber/stationNumber_4",
         "iterationIndex": 0
       },
@@ -2491,7 +2603,7 @@
         "assertionResults": [],
         "testResults": [],
         "shouldStopRunnerExecution": false,
-        "runtime": 0.002417375,
+        "runtime": 0.002665209,
         "suitename": "StationNumber/stationNumber_5",
         "iterationIndex": 0
       }

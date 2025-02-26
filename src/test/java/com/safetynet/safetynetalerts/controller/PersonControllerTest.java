@@ -1,13 +1,17 @@
 package com.safetynet.safetynetalerts.controller;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.safetynet.safetynetalerts.dto.ChildAlertDTO;
 import com.safetynet.safetynetalerts.dto.HouseholdInfoDTO.PersonInfoDTO;
 import com.safetynet.safetynetalerts.service.ReadPersonService;
+import com.safetynet.safetynetalerts.service.WritePersonService;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -17,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -26,6 +31,9 @@ public class PersonControllerTest {
 
   @Mock
   private ReadPersonService readPersonService;
+
+  @Mock
+  private WritePersonService writePersonService;
 
   @InjectMocks
   private PersonController personController;
@@ -117,5 +125,45 @@ public class PersonControllerTest {
       .andExpect(
         content().json("[\"test1@example.com\",\"test2@example.com\"]")
       );
+  }
+
+  @Test
+  public void testAddPerson() throws Exception {
+    mockMvc
+      .perform(
+        post("/person")
+          .contentType(MediaType.APPLICATION_JSON)
+          .content("{\"firstName\":\"John\",\"lastName\":\"Doe\"}")
+      )
+      .andExpect(status().isOk())
+      .andExpect(
+        content().json("{\"firstName\":\"John\",\"lastName\":\"Doe\"}")
+      );
+  }
+
+  @Test
+  public void testUpdatePerson() throws Exception {
+    mockMvc
+      .perform(
+        put("/person")
+          .contentType(MediaType.APPLICATION_JSON)
+          .content("{\"firstName\":\"John\",\"lastName\":\"Doe\"}")
+      )
+      .andExpect(status().isOk())
+      .andExpect(
+        content().json("{\"firstName\":\"John\",\"lastName\":\"Doe\"}")
+      );
+  }
+
+  @Test
+  public void testDeletePerson() throws Exception {
+    mockMvc
+      .perform(
+        delete("/person")
+          .contentType(MediaType.APPLICATION_JSON)
+          .content("{\"firstName\":\"John\",\"lastName\":\"Doe\"}")
+      )
+      .andExpect(status().isOk())
+      .andExpect(content().string("Person deleted: John Doe"));
   }
 }

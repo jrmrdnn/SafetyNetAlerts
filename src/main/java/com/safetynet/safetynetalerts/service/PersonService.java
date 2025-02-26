@@ -8,6 +8,7 @@ import com.safetynet.safetynetalerts.model.MedicalRecord;
 import com.safetynet.safetynetalerts.model.Person;
 import com.safetynet.safetynetalerts.repository.ReadMedicalRecordRepository;
 import com.safetynet.safetynetalerts.repository.ReadPersonRepository;
+import com.safetynet.safetynetalerts.repository.WritePersonRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,9 +19,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class PersonService implements ReadPersonService {
+public class PersonService implements ReadPersonService, WritePersonService {
 
   private final ReadPersonRepository readPersonRepository;
+  private final WritePersonRepository writePersonRepository;
   private final ReadMedicalRecordRepository readMedicalRecordRepository;
   private final CalculateAgeServiceInterface calculateAgeService;
 
@@ -78,6 +80,36 @@ public class PersonService implements ReadPersonService {
   @Override
   public Set<String> getEmailsByCity(String city) {
     return readPersonRepository.findEmailsByCity(city);
+  }
+
+  @Override
+  public void addPerson(Person person) {
+    if (person.getFirstName() == null || person.getLastName() == null) {
+      throw new IllegalArgumentException(
+        "First name and last name are required"
+      );
+    }
+    writePersonRepository.save(person);
+  }
+
+  @Override
+  public void updatePerson(Person person) {
+    if (person.getFirstName() == null || person.getLastName() == null) {
+      throw new IllegalArgumentException(
+        "First name and last name are required"
+      );
+    }
+    writePersonRepository.update(person);
+  }
+
+  @Override
+  public void deletePerson(Person person) {
+    if (person.getFirstName() == null || person.getLastName() == null) {
+      throw new IllegalArgumentException(
+        "First name and last name are required"
+      );
+    }
+    writePersonRepository.delete(person);
   }
 
   /**

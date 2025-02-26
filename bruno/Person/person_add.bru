@@ -1,0 +1,23 @@
+meta {
+  name: person_add
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{URL}}/person
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "firstName": "漢字",
+    "lastName": "ẞupoñt",
+    "address": "Rue Sainte-Catherine",
+    "city": "Bordeaux",
+    "zip": "33000",
+    "phone": "841-841-4580",
+    "email": "dupont@email.com"
+  }
+}
