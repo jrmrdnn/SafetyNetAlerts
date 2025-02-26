@@ -54,4 +54,16 @@ class PersonRepositoryTest {
     assertEquals(1, result.size());
     assertEquals(person, result.get(0));
   }
+
+  @Test
+  void testFindPersonsAtAddress() {
+    when(jsonWrapper.getPersons()).thenReturn(
+      Collections.singletonList(person)
+    );
+
+    List<Person> result = personRepository.findPersonsAtAddress("123 Main St");
+
+    assertEquals(1, result.size());
+    assertEquals(person, result.get(0));
+  }
 }

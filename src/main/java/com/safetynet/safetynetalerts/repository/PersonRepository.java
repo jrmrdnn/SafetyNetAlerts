@@ -29,4 +29,13 @@ public class PersonRepository implements ReadPersonRepository {
       .filter(person -> addressList.contains(person.getAddress()))
       .collect(Collectors.toList());
   }
+
+  @Override
+  public List<Person> findPersonsAtAddress(String address) {
+    return jsonWrapper
+      .getPersons()
+      .stream()
+      .filter(p -> p.getAddress().equalsIgnoreCase(address))
+      .collect(Collectors.toList());
+  }
 }
