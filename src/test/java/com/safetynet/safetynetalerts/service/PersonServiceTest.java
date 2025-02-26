@@ -169,4 +169,35 @@ class PersonServiceTest {
 
     assertTrue(result.isEmpty());
   }
+
+  @Test
+  void getEmailsByCity_ShouldReturnEmails() {
+    final String city = "City";
+
+    Set<String> emails = new HashSet<>(
+      Arrays.asList("email1@example.com", "email2@example.com")
+    );
+
+    when(readPersonRepository.findEmailsByCity(city)).thenReturn(emails);
+
+    Set<String> result = personService.getEmailsByCity(city);
+
+    assertFalse(result.isEmpty());
+    assertEquals(2, result.size());
+    assertTrue(result.contains("email1@example.com"));
+    assertTrue(result.contains("email2@example.com"));
+  }
+
+  @Test
+  void getEmailsByCity_ShouldReturnEmptySet_WhenNoEmailsFound() {
+    final String city = "NonExistentCity";
+
+    when(readPersonRepository.findEmailsByCity(city)).thenReturn(
+      Collections.emptySet()
+    );
+
+    Set<String> result = personService.getEmailsByCity(city);
+
+    assertTrue(result.isEmpty());
+  }
 }

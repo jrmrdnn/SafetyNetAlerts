@@ -138,4 +138,16 @@ class PersonRepositoryTest {
     assertEquals(1, result.size());
     assertEquals(person, result.get(0));
   }
+
+  @Test
+  void testFindEmailsByCity() {
+    when(jsonWrapper.getPersons()).thenReturn(
+      Collections.singletonList(person)
+    );
+
+    Set<String> result = personRepository.findEmailsByCity("Springfield");
+
+    assertEquals(1, result.size());
+    assertTrue(result.contains("john@mail.com"));
+  }
 }

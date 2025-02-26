@@ -79,4 +79,14 @@ public class PersonRepository implements ReadPersonRepository {
       .filter(p -> p.getLastName().equalsIgnoreCase(lastName))
       .collect(Collectors.toList());
   }
+
+  @Override
+  public Set<String> findEmailsByCity(String city) {
+    return jsonWrapper
+      .getPersons()
+      .stream()
+      .filter(p -> p.getCity().equalsIgnoreCase(city))
+      .map(Person::getEmail)
+      .collect(Collectors.toSet());
+  }
 }

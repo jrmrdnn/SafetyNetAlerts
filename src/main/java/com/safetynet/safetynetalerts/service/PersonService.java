@@ -11,6 +11,7 @@ import com.safetynet.safetynetalerts.repository.ReadPersonRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -72,6 +73,11 @@ public class PersonService implements ReadPersonService {
     }
 
     return personInfoList;
+  }
+
+  @Override
+  public Set<String> getEmailsByCity(String city) {
+    return readPersonRepository.findEmailsByCity(city);
   }
 
   /**

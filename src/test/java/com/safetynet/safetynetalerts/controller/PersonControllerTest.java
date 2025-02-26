@@ -9,7 +9,9 @@ import com.safetynet.safetynetalerts.dto.ChildAlertDTO;
 import com.safetynet.safetynetalerts.dto.HouseholdInfoDTO.PersonInfoDTO;
 import com.safetynet.safetynetalerts.service.ReadPersonService;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -97,6 +99,23 @@ public class PersonControllerTest {
           .json(
             "[{'firstName':'John','lastName':'Doe','age':30,'medications':['med1'],'allergies':['allergy1']},{'firstName':'Jane','lastName':'Doe','age':28,'medications':['med2'],'allergies':['allergy2']}]"
           )
+      );
+  }
+
+  @Test
+  public void testGetCommunityEmails() throws Exception {
+    String city = "TestCity";
+    Set<String> emails = new HashSet<>();
+    emails.add("test1@example.com");
+    emails.add("test2@example.com");
+
+    when(readPersonService.getEmailsByCity(city)).thenReturn(emails);
+
+    mockMvc
+      .perform(get("/communityEmail").param("city", city))
+      .andExpect(status().isOk())
+      .andExpect(
+        content().json("[\"test1@example.com\",\"test2@example.com\"]")
       );
   }
 }
