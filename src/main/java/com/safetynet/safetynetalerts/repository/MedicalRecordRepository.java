@@ -4,6 +4,7 @@ import com.safetynet.safetynetalerts.model.JsonWrapper;
 import com.safetynet.safetynetalerts.model.MedicalRecord;
 import com.safetynet.safetynetalerts.model.Person;
 import com.safetynet.safetynetalerts.service.DataPersistenceServiceInterface;
+import com.safetynet.safetynetalerts.util.EntityUpdater;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Repository;
@@ -92,40 +93,7 @@ public class MedicalRecordRepository
       throw new IllegalArgumentException("Medical record not found");
     }
 
-    jsonWrapper
-      .getMedicalRecords()
-      .replaceAll(m -> {
-        if (m.equals(findMedicalRecord.get())) {
-          MedicalRecord updatedMedicalRecord = new MedicalRecord();
-          updatedMedicalRecord.setFirstName(
-            medicalRecord.getFirstName() != null
-              ? medicalRecord.getFirstName()
-              : m.getFirstName()
-          );
-          updatedMedicalRecord.setLastName(
-            medicalRecord.getLastName() != null
-              ? medicalRecord.getLastName()
-              : m.getLastName()
-          );
-          updatedMedicalRecord.setBirthdate(
-            medicalRecord.getBirthdate() != null
-              ? medicalRecord.getBirthdate()
-              : m.getBirthdate()
-          );
-          updatedMedicalRecord.setMedications(
-            medicalRecord.getMedications() != null
-              ? medicalRecord.getMedications()
-              : m.getMedications()
-          );
-          updatedMedicalRecord.setAllergies(
-            medicalRecord.getAllergies() != null
-              ? medicalRecord.getAllergies()
-              : m.getAllergies()
-          );
-          return updatedMedicalRecord;
-        }
-        return m;
-      });
+    EntityUpdater.updateFields(findMedicalRecord.get(), medicalRecord);
     dataPersistenceService.saveData();
   }
 

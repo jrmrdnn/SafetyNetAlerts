@@ -3,6 +3,7 @@ package com.safetynet.safetynetalerts.repository;
 import com.safetynet.safetynetalerts.model.FireStation;
 import com.safetynet.safetynetalerts.model.JsonWrapper;
 import com.safetynet.safetynetalerts.service.DataPersistenceServiceInterface;
+import com.safetynet.safetynetalerts.util.EntityUpdater;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -76,26 +77,7 @@ public class FireStationRepository
       throw new IllegalArgumentException("FireStation not found");
     }
 
-    jsonWrapper
-      .getFireStations()
-      .replaceAll(f -> {
-        if (f.equals(findStation.get())) {
-          FireStation updatedFireStation = new FireStation();
-          updatedFireStation.setStation(
-            fireStation.getStation() != null
-              ? fireStation.getStation()
-              : f.getStation()
-          );
-          updatedFireStation.setAddress(
-            fireStation.getAddress() != null
-              ? fireStation.getAddress()
-              : f.getAddress()
-          );
-          return updatedFireStation;
-        } else {
-          return f;
-        }
-      });
+    EntityUpdater.updateFields(findStation.get(), fireStation);
     dataPersistenceService.saveData();
   }
 

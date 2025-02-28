@@ -121,14 +121,16 @@ public class FireStationRepositoryTest {
     List<FireStation> fireStations = new ArrayList<>(
       Collections.singletonList(fireStation1)
     );
+
     when(jsonWrapper.getFireStations()).thenReturn(fireStations);
 
     fireStationRepository.update(updatedFireStation);
 
-    verify(jsonWrapper, times(2)).getFireStations();
+    verify(jsonWrapper, times(1)).getFireStations();
     verify(dataPersistenceService).saveData();
 
-    assertFalse(fireStations.contains(fireStation1));
+    assertTrue(fireStations.get(0).getStation().equals("2"));
+    assertTrue(fireStations.get(0).getAddress().equals("123 Main St"));
   }
 
   @Test

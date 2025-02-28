@@ -106,14 +106,21 @@ class MedicalRecordRepositoryTest {
     List<MedicalRecord> medicalRecords = new ArrayList<>(
       Collections.singletonList(medicalRecord)
     );
+
     when(jsonWrapper.getMedicalRecords()).thenReturn(medicalRecords);
 
     medicalRecordRepository.update(updatedMedicalRecord);
 
-    verify(jsonWrapper, times(2)).getMedicalRecords();
+    verify(jsonWrapper, times(1)).getMedicalRecords();
     verify(dataPersistenceService).saveData();
 
-    assertFalse(medicalRecords.contains(medicalRecord));
+    System.out.println(medicalRecords);
+
+    assertTrue(medicalRecords.get(0).getFirstName().equals("John"));
+    assertTrue(medicalRecords.get(0).getLastName().equals("Doe"));
+    assertTrue(medicalRecords.get(0).getBirthdate().equals("10-01-2000"));
+    assertTrue(medicalRecords.get(0).getMedications().contains("medication1"));
+    assertTrue(medicalRecords.get(0).getAllergies().contains("allergy1"));
   }
 
   @Test
