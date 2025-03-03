@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FireStationDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">safetynetalerts</a> &gt; <a href="index.source.html" class="el_package">com.safetynet.safetynetalerts.dto</a> &gt; <span class="el_source">FireStationDTO.java</span></div><h1>FireStationDTO.java</h1><pre class="source lang-java linenums">package com.safetynet.safetynetalerts.dto;
+
+import com.safetynet.safetynetalerts.model.Person;
+import java.util.List;
+import java.util.stream.Collectors;
+import lombok.Data;
+
+@Data
+public class FireStationDTO {
+
+  private List&lt;PersonDTO&gt; persons;
+  private int adultCount;
+  private int childCount;
+
+  public static FireStationDTO createFireStationDTO(
+    List&lt;Person&gt; persons,
+    int childCount,
+    int adultCount
+  ) {
+<span class="fc" id="L20">    FireStationDTO fireStationDTO = new FireStationDTO();</span>
+
+<span class="fc" id="L22">    fireStationDTO.setPersons(</span>
+      persons
+<span class="fc" id="L24">        .stream()</span>
+<span class="fc" id="L25">        .map(p -&gt; {</span>
+<span class="fc" id="L26">          PersonDTO personDTO = new PersonDTO();</span>
+<span class="fc" id="L27">          personDTO.setFirstName(p.getFirstName());</span>
+<span class="fc" id="L28">          personDTO.setLastName(p.getLastName());</span>
+<span class="fc" id="L29">          personDTO.setAddress(p.getAddress());</span>
+<span class="fc" id="L30">          personDTO.setPhone(p.getPhone());</span>
+<span class="fc" id="L31">          return personDTO;</span>
+        })
+<span class="fc" id="L33">        .collect(Collectors.toList())</span>
+    );
+
+<span class="fc" id="L36">    fireStationDTO.setAdultCount(adultCount);</span>
+<span class="fc" id="L37">    fireStationDTO.setChildCount(childCount);</span>
+
+<span class="fc" id="L39">    return fireStationDTO;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

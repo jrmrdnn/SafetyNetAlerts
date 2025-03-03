@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MedicalRecordRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">safetynetalerts</a> &gt; <a href="index.source.html" class="el_package">com.safetynet.safetynetalerts.repository</a> &gt; <span class="el_source">MedicalRecordRepository.java</span></div><h1>MedicalRecordRepository.java</h1><pre class="source lang-java linenums">package com.safetynet.safetynetalerts.repository;
+
+import com.safetynet.safetynetalerts.model.JsonWrapper;
+import com.safetynet.safetynetalerts.model.MedicalRecord;
+import com.safetynet.safetynetalerts.model.Person;
+import com.safetynet.safetynetalerts.service.DataPersistenceServiceInterface;
+import com.safetynet.safetynetalerts.util.EntityUpdater;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class MedicalRecordRepository
+  implements ReadMedicalRecordRepository, WriteMedicalRecordRepository {
+
+  private final JsonWrapper jsonWrapper;
+  private final DataPersistenceServiceInterface dataPersistenceService;
+
+  public MedicalRecordRepository(
+    JsonWrapper jsonWrapper,
+    DataPersistenceServiceInterface dataPersistenceService
+<span class="fc" id="L22">  ) {</span>
+<span class="fc" id="L23">    this.jsonWrapper = jsonWrapper;</span>
+<span class="fc" id="L24">    this.dataPersistenceService = dataPersistenceService;</span>
+<span class="fc" id="L25">  }</span>
+
+  @Override
+  public Optional&lt;MedicalRecord&gt; findByFirstNameAndLastName(Person person) {
+<span class="fc" id="L29">    return jsonWrapper</span>
+<span class="fc" id="L30">      .getMedicalRecords()</span>
+<span class="fc" id="L31">      .stream()</span>
+<span class="fc" id="L32">      .filter(</span>
+        m -&gt;
+<span class="fc bfc" id="L34" title="All 2 branches covered.">          m.getFirstName().equalsIgnoreCase(person.getFirstName()) &amp;&amp;</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">          m.getLastName().equalsIgnoreCase(person.getLastName())</span>
+      )
+<span class="fc" id="L37">      .findFirst();</span>
+  }
+
+  @Override
+  public Optional&lt;MedicalRecord&gt; findByFirstNameAndLastName(
+    MedicalRecord medicalRecord
+  ) {
+<span class="fc" id="L44">    return jsonWrapper</span>
+<span class="fc" id="L45">      .getMedicalRecords()</span>
+<span class="fc" id="L46">      .stream()</span>
+<span class="fc" id="L47">      .filter(</span>
+        m -&gt;
+<span class="fc bfc" id="L49" title="All 2 branches covered.">          m.getFirstName().equalsIgnoreCase(medicalRecord.getFirstName()) &amp;&amp;</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">          m.getLastName().equalsIgnoreCase(medicalRecord.getLastName())</span>
+      )
+<span class="fc" id="L52">      .findFirst();</span>
+  }
+
+  @Override
+  public void save(MedicalRecord medicalRecord) {
+<span class="fc" id="L57">    if (</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">      medicalRecord.getFirstName() == null ||</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">      medicalRecord.getLastName() == null</span>
+    ) {
+<span class="fc" id="L61">      throw new IllegalArgumentException(</span>
+        &quot;First name and last name are required&quot;
+      );
+    }
+
+<span class="fc" id="L66">    Optional&lt;MedicalRecord&gt; findMedicalRecord = findByFirstNameAndLastName(</span>
+      medicalRecord
+    );
+
+<span class="fc bfc" id="L70" title="All 2 branches covered.">    if (findMedicalRecord.isPresent()) {</span>
+<span class="fc" id="L71">      throw new IllegalArgumentException(&quot;Medical record already exists&quot;);</span>
+    }
+
+<span class="fc bfc" id="L74" title="All 2 branches covered.">    if (medicalRecord.getMedications() == null) {</span>
+<span class="fc" id="L75">      medicalRecord.setMedications(List.of());</span>
+    }
+
+<span class="fc bfc" id="L78" title="All 2 branches covered.">    if (medicalRecord.getAllergies() == null) {</span>
+<span class="fc" id="L79">      medicalRecord.setAllergies(List.of());</span>
+    }
+
+<span class="fc" id="L82">    jsonWrapper.getMedicalRecords().add(medicalRecord);</span>
+<span class="fc" id="L83">    dataPersistenceService.saveData();</span>
+<span class="fc" id="L84">  }</span>
+
+  @Override
+  public void update(MedicalRecord medicalRecord) {
+<span class="fc" id="L88">    Optional&lt;MedicalRecord&gt; findMedicalRecord = findByFirstNameAndLastName(</span>
+      medicalRecord
+    );
+
+<span class="fc bfc" id="L92" title="All 2 branches covered.">    if (findMedicalRecord.isEmpty()) {</span>
+<span class="fc" id="L93">      throw new IllegalArgumentException(&quot;Medical record not found&quot;);</span>
+    }
+
+<span class="fc" id="L96">    EntityUpdater.updateFields(findMedicalRecord.get(), medicalRecord);</span>
+<span class="fc" id="L97">    dataPersistenceService.saveData();</span>
+<span class="fc" id="L98">  }</span>
+
+  @Override
+  public void delete(MedicalRecord medicalRecord) {
+<span class="fc" id="L102">    Optional&lt;MedicalRecord&gt; findMedicalRecord = findByFirstNameAndLastName(</span>
+      medicalRecord
+    );
+
+<span class="fc bfc" id="L106" title="All 2 branches covered.">    if (findMedicalRecord.isEmpty()) {</span>
+<span class="fc" id="L107">      throw new IllegalArgumentException(&quot;Medical record not found&quot;);</span>
+    }
+
+<span class="fc" id="L110">    jsonWrapper.getMedicalRecords().remove(findMedicalRecord.get());</span>
+<span class="fc" id="L111">    dataPersistenceService.saveData();</span>
+<span class="fc" id="L112">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

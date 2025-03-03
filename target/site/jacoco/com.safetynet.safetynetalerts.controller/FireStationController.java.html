@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FireStationController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">safetynetalerts</a> &gt; <a href="index.source.html" class="el_package">com.safetynet.safetynetalerts.controller</a> &gt; <span class="el_source">FireStationController.java</span></div><h1>FireStationController.java</h1><pre class="source lang-java linenums">package com.safetynet.safetynetalerts.controller;
+
+import com.safetynet.safetynetalerts.dto.FireDTO;
+import com.safetynet.safetynetalerts.dto.FireStationDTO;
+import com.safetynet.safetynetalerts.dto.HouseholdInfoDTO;
+import com.safetynet.safetynetalerts.model.FireStation;
+import com.safetynet.safetynetalerts.service.ReadFireStationService;
+import com.safetynet.safetynetalerts.service.WriteFireStationService;
+import jakarta.validation.Valid;
+import java.util.List;
+import java.util.Set;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class FireStationController {
+
+  private final ReadFireStationService readFireStationService;
+  private final WriteFireStationService writeFireStationService;
+
+  FireStationController(
+    ReadFireStationService readFireStationService,
+    WriteFireStationService writeFireStationService
+<span class="fc" id="L29">  ) {</span>
+<span class="fc" id="L30">    this.readFireStationService = readFireStationService;</span>
+<span class="fc" id="L31">    this.writeFireStationService = writeFireStationService;</span>
+<span class="fc" id="L32">  }</span>
+
+  @GetMapping(&quot;/firestation&quot;)
+  public FireStationDTO getFireStation(@RequestParam String stationNumber) {
+<span class="fc" id="L36">    return readFireStationService.getPersonsCoveredByStation(stationNumber);</span>
+  }
+
+  @GetMapping(&quot;/phoneAlert&quot;)
+  public Set&lt;String&gt; getPhoneAlert(@RequestParam String firestation) {
+<span class="fc" id="L41">    return readFireStationService.getPhoneNumbersByFireStation(firestation);</span>
+  }
+
+  @GetMapping(&quot;/fire&quot;)
+  public FireDTO getFireInfo(@RequestParam String address) {
+<span class="fc" id="L46">    return readFireStationService.getFireInfoByAddress(address);</span>
+  }
+
+  @GetMapping(&quot;/flood/stations&quot;)
+  public List&lt;HouseholdInfoDTO&gt; getFloodStations(
+    @RequestParam List&lt;String&gt; stations
+  ) {
+<span class="fc" id="L53">    return readFireStationService.getHouseholdsByStations(stations);</span>
+  }
+
+  @PostMapping(&quot;/firestation&quot;)
+  public FireStation addFireStation(
+    @Valid @RequestBody FireStation fireStation
+  ) {
+<span class="fc" id="L60">    writeFireStationService.addFireStation(fireStation);</span>
+<span class="fc" id="L61">    return fireStation;</span>
+  }
+
+  @PutMapping(&quot;/firestation&quot;)
+  public FireStation updateFireStation(
+    @Valid @RequestBody FireStation fireStation
+  ) {
+<span class="fc" id="L68">    writeFireStationService.updateFireStation(fireStation);</span>
+<span class="fc" id="L69">    return fireStation;</span>
+  }
+
+  @DeleteMapping(&quot;/firestation&quot;)
+  public String deleteFireStation(@Valid @RequestBody FireStation fireStation) {
+<span class="fc" id="L74">    writeFireStationService.deleteFireStation(fireStation);</span>
+<span class="fc" id="L75">    return &quot;FireStation deleted: &quot; + fireStation.getAddress();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

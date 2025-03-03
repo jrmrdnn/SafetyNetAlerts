@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PersonService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">safetynetalerts</a> &gt; <a href="index.source.html" class="el_package">com.safetynet.safetynetalerts.service</a> &gt; <span class="el_source">PersonService.java</span></div><h1>PersonService.java</h1><pre class="source lang-java linenums">package com.safetynet.safetynetalerts.service;
+
+import com.safetynet.safetynetalerts.dto.ChildAlertDTO;
+import com.safetynet.safetynetalerts.dto.ChildAlertDTO.HouseholdMember;
+import com.safetynet.safetynetalerts.dto.HouseholdInfoDTO;
+import com.safetynet.safetynetalerts.dto.HouseholdInfoDTO.PersonInfoDTO;
+import com.safetynet.safetynetalerts.model.MedicalRecord;
+import com.safetynet.safetynetalerts.model.Person;
+import com.safetynet.safetynetalerts.repository.ReadMedicalRecordRepository;
+import com.safetynet.safetynetalerts.repository.ReadPersonRepository;
+import com.safetynet.safetynetalerts.repository.WritePersonRepository;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@AllArgsConstructor
+public class PersonService implements ReadPersonService, WritePersonService {
+
+  private final ReadPersonRepository readPersonRepository;
+  private final WritePersonRepository writePersonRepository;
+  private final ReadMedicalRecordRepository readMedicalRecordRepository;
+  private final CalculateAgeServiceInterface calculateAgeService;
+
+  @Override
+  public List&lt;ChildAlertDTO&gt; allChildrenAtAddress(String address) {
+<span class="fc" id="L31">    List&lt;ChildAlertDTO&gt; children = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L33">    List&lt;Person&gt; personsAtAddress = readPersonRepository.findPersonsAtAddress(</span>
+      address
+    );
+
+<span class="fc bfc" id="L37" title="All 2 branches covered.">    for (Person person : personsAtAddress) {</span>
+<span class="fc" id="L38">      Optional&lt;MedicalRecord&gt; medicalRecord =</span>
+<span class="fc" id="L39">        readMedicalRecordRepository.findByFirstNameAndLastName(person);</span>
+
+<span class="fc bfc" id="L41" title="All 2 branches covered.">      if (medicalRecord.isPresent()) {</span>
+<span class="fc" id="L42">        int age = calculateAgeService.calculate(</span>
+<span class="fc" id="L43">          medicalRecord.get().getBirthdate()</span>
+        );
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (calculateAgeService.isChild(age)) {</span>
+<span class="fc" id="L46">          ChildAlertDTO childDTO = ChildAlertDTO.createChildAlertDTO(</span>
+            person,
+            age
+          );
+<span class="fc" id="L50">          children.add(allHouseholdMembers(personsAtAddress, person, childDTO));</span>
+        }
+      }
+<span class="fc" id="L53">    }</span>
+<span class="fc" id="L54">    return children;</span>
+  }
+
+  @Override
+  public List&lt;PersonInfoDTO&gt; getPersonInfoByLastName(String lastName) {
+<span class="fc" id="L59">    List&lt;PersonInfoDTO&gt; personInfoList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L60">    List&lt;Person&gt; personsWithLastName =</span>
+<span class="fc" id="L61">      readPersonRepository.findPersonsWithLastName(lastName);</span>
+
+<span class="fc bfc" id="L63" title="All 2 branches covered.">    for (Person person : personsWithLastName) {</span>
+<span class="fc" id="L64">      Optional&lt;MedicalRecord&gt; medicalRecord =</span>
+<span class="fc" id="L65">        readMedicalRecordRepository.findByFirstNameAndLastName(person);</span>
+
+<span class="fc bfc" id="L67" title="All 2 branches covered.">      if (medicalRecord.isPresent()) {</span>
+<span class="fc" id="L68">        int age = calculateAgeService.calculate(</span>
+<span class="fc" id="L69">          medicalRecord.get().getBirthdate()</span>
+        );
+<span class="fc" id="L71">        personInfoList.add(</span>
+<span class="fc" id="L72">          HouseholdInfoDTO.createPersonInfoDTO(person, age, medicalRecord.get())</span>
+        );
+      }
+<span class="fc" id="L75">    }</span>
+
+<span class="fc" id="L77">    return personInfoList;</span>
+  }
+
+  @Override
+  public Set&lt;String&gt; getEmailsByCity(String city) {
+<span class="fc" id="L82">    return readPersonRepository.findEmailsByCity(city);</span>
+  }
+
+  @Override
+  public void addPerson(Person person) {
+<span class="fc bfc" id="L87" title="All 4 branches covered.">    if (person.getFirstName() == null || person.getLastName() == null) {</span>
+<span class="fc" id="L88">      throw new IllegalArgumentException(</span>
+        &quot;First name and last name are required&quot;
+      );
+    }
+<span class="fc" id="L92">    writePersonRepository.save(person);</span>
+<span class="fc" id="L93">  }</span>
+
+  @Override
+  public void updatePerson(Person person) {
+<span class="fc bfc" id="L97" title="All 4 branches covered.">    if (person.getFirstName() == null || person.getLastName() == null) {</span>
+<span class="fc" id="L98">      throw new IllegalArgumentException(</span>
+        &quot;First name and last name are required&quot;
+      );
+    }
+<span class="fc" id="L102">    writePersonRepository.update(person);</span>
+<span class="fc" id="L103">  }</span>
+
+  @Override
+  public void deletePerson(Person person) {
+<span class="fc bfc" id="L107" title="All 4 branches covered.">    if (person.getFirstName() == null || person.getLastName() == null) {</span>
+<span class="fc" id="L108">      throw new IllegalArgumentException(</span>
+        &quot;First name and last name are required&quot;
+      );
+    }
+<span class="fc" id="L112">    writePersonRepository.delete(person);</span>
+<span class="fc" id="L113">  }</span>
+
+  /**
+   * Create a ChildAlertDTO with all household members.
+   * @param personsAtAddress
+   * @param person
+   * @param child
+   * @return ChildAlertDTO
+   */
+  private ChildAlertDTO allHouseholdMembers(
+    List&lt;Person&gt; personsAtAddress,
+    Person person,
+    ChildAlertDTO child
+  ) {
+<span class="fc" id="L127">    List&lt;HouseholdMember&gt; householdMembers = personsAtAddress</span>
+<span class="fc" id="L128">      .stream()</span>
+<span class="fc" id="L129">      .filter(p -&gt;</span>
+<span class="fc bfc" id="L130" title="All 2 branches covered.">        !(p.getFirstName().equals(person.getFirstName()) &amp;&amp;</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">          p.getLastName().equals(person.getLastName()))</span>
+      )
+<span class="fc" id="L133">      .map(p -&gt; {</span>
+<span class="fc" id="L134">        HouseholdMember member = new ChildAlertDTO.HouseholdMember();</span>
+<span class="fc" id="L135">        member.setFirstName(p.getFirstName());</span>
+<span class="fc" id="L136">        member.setLastName(p.getLastName());</span>
+<span class="fc" id="L137">        return member;</span>
+      })
+<span class="fc" id="L139">      .collect(Collectors.toList());</span>
+
+<span class="fc" id="L141">    child.setHouseholdMembers(householdMembers);</span>
+
+<span class="fc" id="L143">    return child;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
