@@ -1,6 +1,6 @@
 package com.safetynet.safetynetalerts.controller;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.safetynet.safetynetalerts.dto.ChildAlertDTO;
 import com.safetynet.safetynetalerts.dto.HouseholdInfoDTO.PersonInfoDTO;
+import com.safetynet.safetynetalerts.model.Person;
 import com.safetynet.safetynetalerts.service.ReadPersonService;
 import com.safetynet.safetynetalerts.service.WritePersonService;
 import java.util.Arrays;
@@ -125,6 +126,8 @@ public class PersonControllerTest {
       .andExpect(
         content().json("[\"test1@example.com\",\"test2@example.com\"]")
       );
+
+    verify(readPersonService, times(1)).getEmailsByCity(city);
   }
 
   @Test
@@ -139,6 +142,8 @@ public class PersonControllerTest {
       .andExpect(
         content().json("{\"firstName\":\"John\",\"lastName\":\"Doe\"}")
       );
+
+    verify(writePersonService, times(1)).addPerson(any(Person.class));
   }
 
   @Test
@@ -153,6 +158,8 @@ public class PersonControllerTest {
       .andExpect(
         content().json("{\"firstName\":\"John\",\"lastName\":\"Doe\"}")
       );
+
+    verify(writePersonService, times(1)).updatePerson(any(Person.class));
   }
 
   @Test
@@ -165,5 +172,7 @@ public class PersonControllerTest {
       )
       .andExpect(status().isOk())
       .andExpect(content().string("Person deleted: John Doe"));
+
+    verify(writePersonService, times(1)).deletePerson(any(Person.class));
   }
 }

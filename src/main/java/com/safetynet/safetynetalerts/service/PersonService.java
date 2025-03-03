@@ -112,14 +112,8 @@ public class PersonService implements ReadPersonService, WritePersonService {
     writePersonRepository.delete(person);
   }
 
-  /**
-   * Create a ChildAlertDTO with all household members.
-   * @param personsAtAddress
-   * @param person
-   * @param child
-   * @return ChildAlertDTO
-   */
-  private ChildAlertDTO allHouseholdMembers(
+  @Override
+  public ChildAlertDTO allHouseholdMembers(
     List<Person> personsAtAddress,
     Person person,
     ChildAlertDTO child

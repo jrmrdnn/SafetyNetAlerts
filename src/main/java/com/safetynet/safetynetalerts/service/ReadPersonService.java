@@ -2,6 +2,7 @@ package com.safetynet.safetynetalerts.service;
 
 import com.safetynet.safetynetalerts.dto.ChildAlertDTO;
 import com.safetynet.safetynetalerts.dto.HouseholdInfoDTO.PersonInfoDTO;
+import com.safetynet.safetynetalerts.model.Person;
 import java.util.List;
 import java.util.Set;
 
@@ -26,4 +27,17 @@ public interface ReadPersonService {
    * @return
    */
   Set<String> getEmailsByCity(String city);
+
+  /**
+   * Create a ChildAlertDTO with all household members.
+   * @param personsAtAddress
+   * @param person
+   * @param child
+   * @return ChildAlertDTO
+   */
+  ChildAlertDTO allHouseholdMembers(
+    List<Person> personsAtAddress,
+    Person person,
+    ChildAlertDTO child
+  );
 }

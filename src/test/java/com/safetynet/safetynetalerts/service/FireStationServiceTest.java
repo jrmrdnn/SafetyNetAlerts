@@ -48,7 +48,7 @@ class FireStationServiceTest {
   }
 
   @Test
-  void testGetPersonsCoveredByStation() {
+  void testGetPersonsCoveredByStation_getAdultCount() {
     List<FireStation> fireStations = Arrays.asList(new FireStation());
 
     List<Person> persons = Arrays.asList(new Person(), new Person());
@@ -71,6 +71,59 @@ class FireStationServiceTest {
     FireStationDTO result = fireStationService.getPersonsCoveredByStation("1");
 
     assertEquals(2, result.getAdultCount());
+
+    verify(readFireStationRepository, times(1)).findByStationNumberToList("1");
+    verify(readPersonRepository, times(1)).findPersonsByAddresses(fireStations);
+  }
+
+  @Test
+  void testGetPersonsCoveredByStation_getChildCount() {
+    List<FireStation> fireStations = Arrays.asList(new FireStation());
+
+    List<Person> persons = Arrays.asList(new Person(), new Person());
+
+    MedicalRecord medicalRecord = new MedicalRecord();
+    medicalRecord.setBirthdate("01/01/2010");
+
+    when(readFireStationRepository.findByStationNumberToList("1")).thenReturn(
+      fireStations
+    );
+    when(readPersonRepository.findPersonsByAddresses(fireStations)).thenReturn(
+      persons
+    );
+    when(
+      readMedicalRecordRepository.findByFirstNameAndLastName(any(Person.class))
+    ).thenReturn(Optional.of(medicalRecord));
+    when(calculateAgeService.calculate(anyString())).thenReturn(11);
+    when(calculateAgeService.isChild(11)).thenReturn(true);
+
+    FireStationDTO result = fireStationService.getPersonsCoveredByStation("1");
+
+    assertEquals(2, result.getChildCount());
+
+    verify(readFireStationRepository, times(1)).findByStationNumberToList("1");
+    verify(readPersonRepository, times(1)).findPersonsByAddresses(fireStations);
+  }
+
+  @Test
+  void testGetPersonsCoveredByStation_NoMedicalRecord() {
+    List<FireStation> fireStations = Arrays.asList(new FireStation());
+
+    List<Person> persons = Arrays.asList(new Person(), new Person());
+
+    when(readFireStationRepository.findByStationNumberToList("1")).thenReturn(
+      fireStations
+    );
+    when(readPersonRepository.findPersonsByAddresses(fireStations)).thenReturn(
+      persons
+    );
+    when(
+      readMedicalRecordRepository.findByFirstNameAndLastName(any(Person.class))
+    ).thenReturn(Optional.empty());
+
+    FireStationDTO result = fireStationService.getPersonsCoveredByStation("1");
+
+    assertEquals(0, result.getAdultCount());
     assertEquals(0, result.getChildCount());
 
     verify(readFireStationRepository, times(1)).findByStationNumberToList("1");
@@ -107,6 +160,19 @@ class FireStationServiceTest {
   }
 
   @Test
+  void testGetFireInfoByAddress_NoFireStation() {
+    when(readFireStationRepository.findByStationAddress("address")).thenReturn(
+      Optional.empty()
+    );
+
+    FireDTO result = fireStationService.getFireInfoByAddress("address");
+
+    assertNull(result.getStationNumber());
+    assertEquals(0, result.getPersons().size());
+    verify(readFireStationRepository, times(1)).findByStationAddress("address");
+  }
+
+  @Test
   void testGetFireInfoByAddress() {
     FireStation fireStation = new FireStation();
     fireStation.setStation("1");
@@ -134,6 +200,30 @@ class FireStationServiceTest {
   }
 
   @Test
+  void testGetFireInfoByAddress_NoMedicalRecord() {
+    FireStation fireStation = new FireStation();
+    fireStation.setStation("1");
+    List<Person> persons = Arrays.asList(new Person(), new Person());
+
+    when(readFireStationRepository.findByStationAddress("address")).thenReturn(
+      Optional.of(fireStation)
+    );
+    when(readPersonRepository.findPersonsAtAddress("address")).thenReturn(
+      persons
+    );
+    when(
+      readMedicalRecordRepository.findByFirstNameAndLastName(any(Person.class))
+    ).thenReturn(Optional.empty());
+
+    FireDTO result = fireStationService.getFireInfoByAddress("address");
+
+    assertEquals("1", result.getStationNumber());
+    assertEquals(0, result.getPersons().size());
+    verify(readFireStationRepository, times(1)).findByStationAddress("address");
+    verify(readPersonRepository, times(1)).findPersonsAtAddress("address");
+  }
+
+  @Test
   void testGetHouseholdsByStations() {
     Set<String> addresses = new HashSet<>(
       Arrays.asList("address1", "address2")
@@ -151,6 +241,11 @@ class FireStationServiceTest {
       readPersonRepository.findAndGroupPersonsByAddress(addresses)
     ).thenReturn(groupedPersons);
 
+    when(
+      readMedicalRecordRepository.findByFirstNameAndLastName(any(Person.class))
+    ).thenReturn(Optional.of(new MedicalRecord()));
+    when(calculateAgeService.calculate(anyString())).thenReturn(21);
+
     List<HouseholdInfoDTO> result = fireStationService.getHouseholdsByStations(
       Arrays.asList("1", "2")
     );
@@ -165,6 +260,25 @@ class FireStationServiceTest {
   }
 
   @Test
+  void testGetHouseholdsByStations_NoAddresses() {
+    when(
+      readFireStationRepository.findAllStationsNumberToSet(
+        Arrays.asList("1", "2")
+      )
+    ).thenReturn(new HashSet<>());
+
+    List<HouseholdInfoDTO> result = fireStationService.getHouseholdsByStations(
+      Arrays.asList("1", "2")
+    );
+
+    assertEquals(0, result.size());
+    verify(readFireStationRepository, times(1)).findAllStationsNumberToSet(
+      Arrays.asList("1", "2")
+    );
+    verify(readPersonRepository, times(1)).findAndGroupPersonsByAddress(any());
+  }
+
+  @Test
   void testAddFireStation() {
     FireStation fireStation = new FireStation();
     fireStation.setStation("1");
@@ -173,6 +287,40 @@ class FireStationServiceTest {
     fireStationService.addFireStation(fireStation);
 
     verify(writeFireStationRepository, times(1)).save(fireStation);
+  }
+
+  @Test
+  void testAddFireStation_NoAddress() {
+    FireStation fireStation = new FireStation();
+    fireStation.setAddress(null);
+    fireStation.setStation("1");
+
+    IllegalArgumentException exception = assertThrows(
+      IllegalArgumentException.class,
+      () -> {
+        fireStationService.addFireStation(fireStation);
+      }
+    );
+
+    assertEquals("Address and station are required", exception.getMessage());
+    verify(writeFireStationRepository, times(0)).save(fireStation);
+  }
+
+  @Test
+  void testAddFireStation_NoStation() {
+    FireStation fireStation = new FireStation();
+    fireStation.setAddress("address");
+    fireStation.setStation(null);
+
+    IllegalArgumentException exception = assertThrows(
+      IllegalArgumentException.class,
+      () -> {
+        fireStationService.addFireStation(fireStation);
+      }
+    );
+
+    assertEquals("Address and station are required", exception.getMessage());
+    verify(writeFireStationRepository, times(0)).save(fireStation);
   }
 
   @Test
@@ -187,10 +335,72 @@ class FireStationServiceTest {
   }
 
   @Test
+  void testUpdateFireStation_NoAddress() {
+    FireStation fireStation = new FireStation();
+    fireStation.setAddress(null);
+    fireStation.setStation("1");
+
+    IllegalArgumentException exception = assertThrows(
+      IllegalArgumentException.class,
+      () -> {
+        fireStationService.updateFireStation(fireStation);
+      }
+    );
+
+    assertEquals("Address and station are required", exception.getMessage());
+    verify(writeFireStationRepository, times(0)).update(fireStation);
+  }
+
+  @Test
+  void testUpdateFireStation_NoStation() {
+    FireStation fireStation = new FireStation();
+    fireStation.setAddress("address");
+    fireStation.setStation(null);
+
+    IllegalArgumentException exception = assertThrows(
+      IllegalArgumentException.class,
+      () -> {
+        fireStationService.updateFireStation(fireStation);
+      }
+    );
+
+    assertEquals("Address and station are required", exception.getMessage());
+    verify(writeFireStationRepository, times(0)).update(fireStation);
+  }
+
+  @Test
   void testDeleteFireStation() {
     FireStation fireStation = new FireStation();
     fireStation.setStation("1");
     fireStation.setAddress("address");
+
+    fireStationService.deleteFireStation(fireStation);
+
+    verify(writeFireStationRepository, times(1)).delete(fireStation);
+  }
+
+  @Test
+  void testDeleteFireStation_NoAddress() {
+    FireStation fireStation = new FireStation();
+    fireStation.setAddress(null);
+    fireStation.setStation("1");
+
+    IllegalArgumentException exception = assertThrows(
+      IllegalArgumentException.class,
+      () -> {
+        fireStationService.deleteFireStation(fireStation);
+      }
+    );
+
+    assertEquals("Address is required", exception.getMessage());
+    verify(writeFireStationRepository, times(0)).delete(fireStation);
+  }
+
+  @Test
+  void testDeleteFireStation_NoStation() {
+    FireStation fireStation = new FireStation();
+    fireStation.setAddress("address");
+    fireStation.setStation(null);
 
     fireStationService.deleteFireStation(fireStation);
 

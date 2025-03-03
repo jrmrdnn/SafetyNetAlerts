@@ -21,6 +21,7 @@ import org.mockito.MockitoAnnotations;
 class PersonRepositoryTest {
 
   private Person person;
+  private FireStation fireStation;
 
   @Mock
   private JsonWrapper jsonWrapper;
@@ -43,13 +44,13 @@ class PersonRepositoryTest {
     person.setZip("12345");
     person.setPhone("123-456-7890");
     person.setEmail("john@mail.com");
+
+    fireStation = new FireStation();
+    fireStation.setAddress("123 Main St");
   }
 
   @Test
   void testFindPersonsByAddresses() {
-    FireStation fireStation = new FireStation();
-    fireStation.setAddress("123 Main St");
-
     when(jsonWrapper.getPersons()).thenReturn(
       Collections.singletonList(person)
     );
@@ -63,7 +64,33 @@ class PersonRepositoryTest {
   }
 
   @Test
+  void testFindPersonsAtAddress_NoMatchingAddress() {
+    when(jsonWrapper.getPersons()).thenReturn(
+      Collections.singletonList(person)
+    );
+
+    List<Person> result = personRepository.findPersonsAtAddress(
+      "999 Unknown St"
+    );
+
+    assertTrue(result.isEmpty());
+  }
+
+  @Test
   void testFindPersonsAtAddress() {
+    when(jsonWrapper.getPersons()).thenReturn(
+      Collections.singletonList(person)
+    );
+
+    List<Person> result = personRepository.findPersonsAtAddress(
+      "999 Unknown St"
+    );
+
+    assertTrue(result.isEmpty());
+  }
+
+  @Test
+  void testFindPersonsAtAddress_MatchingAddress() {
     when(jsonWrapper.getPersons()).thenReturn(
       Collections.singletonList(person)
     );
@@ -76,9 +103,6 @@ class PersonRepositoryTest {
 
   @Test
   void testFindPhoneNumbersByAddress() {
-    FireStation fireStation = new FireStation();
-    fireStation.setAddress("123 Main St");
-
     when(jsonWrapper.getPersons()).thenReturn(
       Collections.singletonList(person)
     );
@@ -89,6 +113,19 @@ class PersonRepositoryTest {
 
     assertEquals(1, result.size());
     assertTrue(result.contains("123-456-7890"));
+  }
+
+  @Test
+  void testFindPhoneNumbersByAddress_NoMatchingAddress() {
+    when(jsonWrapper.getPersons()).thenReturn(
+      Collections.singletonList(person)
+    );
+
+    Set<String> result = personRepository.findPhoneNumbersByAddress(
+      Collections.singletonList(new FireStation())
+    );
+
+    assertTrue(result.isEmpty());
   }
 
   @Test
@@ -145,6 +182,57 @@ class PersonRepositoryTest {
   }
 
   @Test
+  void testFindPersonsWithLastName_NoMatchingLastName() {
+    when(jsonWrapper.getPersons()).thenReturn(
+      Collections.singletonList(person)
+    );
+
+    List<Person> result = personRepository.findPersonsWithLastName("Smith");
+
+    assertTrue(result.isEmpty());
+  }
+
+  @Test
+  void testFindPersonByFirstNameAndLastName() {
+    when(jsonWrapper.getPersons()).thenReturn(
+      Collections.singletonList(person)
+    );
+
+    Person result = personRepository
+      .findPersonByFirstNameAndLastName(person)
+      .orElse(null);
+
+    assertEquals(person, result);
+  }
+
+  @Test
+  void testFindPersonByFirstNameAndLastName_NoMatchingPerson() {
+    Person personNoMatchingFirstName = new Person();
+    personNoMatchingFirstName.setFirstName("Jane");
+    personNoMatchingFirstName.setLastName("Doe");
+
+    Person personNoMatchingLastName = new Person();
+    personNoMatchingLastName.setFirstName("John");
+    personNoMatchingLastName.setLastName("Smith");
+
+    when(jsonWrapper.getPersons()).thenReturn(
+      Collections.singletonList(person)
+    );
+
+    Person resultNoMatchingFirstName = personRepository
+      .findPersonByFirstNameAndLastName(personNoMatchingFirstName)
+      .orElse(null);
+
+    assertNull(resultNoMatchingFirstName);
+
+    Person resultNoMatchingLastName = personRepository
+      .findPersonByFirstNameAndLastName(personNoMatchingLastName)
+      .orElse(null);
+
+    assertNull(resultNoMatchingLastName);
+  }
+
+  @Test
   void testFindEmailsByCity() {
     when(jsonWrapper.getPersons()).thenReturn(
       Collections.singletonList(person)
@@ -157,6 +245,17 @@ class PersonRepositoryTest {
   }
 
   @Test
+  void testFindEmailsByCity_NoMatchingCity() {
+    when(jsonWrapper.getPersons()).thenReturn(
+      Collections.singletonList(person)
+    );
+
+    Set<String> result = personRepository.findEmailsByCity("Unknown City");
+
+    assertTrue(result.isEmpty());
+  }
+
+  @Test
   void testSave() {
     List<Person> persons = new ArrayList<>();
     when(jsonWrapper.getPersons()).thenReturn(persons);
@@ -166,6 +265,19 @@ class PersonRepositoryTest {
     verify(jsonWrapper, times(2)).getPersons();
     verify(dataPersistenceService).saveData();
     assertTrue(persons.contains(person));
+  }
+
+  @Test
+  void testSave_PersonAlreadyExists() {
+    List<Person> persons = new ArrayList<>(Collections.singletonList(person));
+    when(jsonWrapper.getPersons()).thenReturn(persons);
+
+    assertThrows(IllegalArgumentException.class, () ->
+      personRepository.save(person)
+    );
+
+    verify(jsonWrapper, times(1)).getPersons();
+    verify(dataPersistenceService, never()).saveData();
   }
 
   @Test
@@ -193,6 +305,23 @@ class PersonRepositoryTest {
   }
 
   @Test
+  void testUpdate_PersonNotFound() {
+    Person updatedPerson = new Person();
+    updatedPerson.setFirstName("Jane");
+    updatedPerson.setLastName("Doe");
+
+    List<Person> persons = new ArrayList<>(Collections.singletonList(person));
+    when(jsonWrapper.getPersons()).thenReturn(persons);
+
+    assertThrows(IllegalArgumentException.class, () ->
+      personRepository.update(updatedPerson)
+    );
+
+    verify(jsonWrapper, times(1)).getPersons();
+    verify(dataPersistenceService, never()).saveData();
+  }
+
+  @Test
   void testDelete() {
     List<Person> persons = new ArrayList<>(Collections.singletonList(person));
     when(jsonWrapper.getPersons()).thenReturn(persons);
@@ -204,5 +333,18 @@ class PersonRepositoryTest {
     verify(jsonWrapper, times(2)).getPersons();
     verify(dataPersistenceService).saveData();
     assertFalse(persons.contains(person));
+  }
+
+  @Test
+  void testDelete_PersonNotFound() {
+    List<Person> persons = new ArrayList<>();
+    when(jsonWrapper.getPersons()).thenReturn(persons);
+
+    assertThrows(IllegalArgumentException.class, () ->
+      personRepository.delete(person)
+    );
+
+    verify(jsonWrapper, times(1)).getPersons();
+    verify(dataPersistenceService, never()).saveData();
   }
 }

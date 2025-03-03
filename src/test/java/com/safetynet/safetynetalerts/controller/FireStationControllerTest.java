@@ -1,6 +1,6 @@
 package com.safetynet.safetynetalerts.controller;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -61,6 +61,10 @@ public class FireStationControllerTest {
       .perform(get("/firestation").param("stationNumber", stationNumber))
       .andExpect(status().isOk())
       .andExpect(content().json("{/* expected JSON response */}"));
+
+    verify(readFireStationService, times(1)).getPersonsCoveredByStation(
+      stationNumber
+    );
   }
 
   @Test
@@ -78,6 +82,10 @@ public class FireStationControllerTest {
       .perform(get("/phoneAlert").param("firestation", fireStation))
       .andExpect(status().isOk())
       .andExpect(content().json("[\"123-456-7890\",\"098-765-4321\"]"));
+
+    verify(readFireStationService, times(1)).getPhoneNumbersByFireStation(
+      fireStation
+    );
   }
 
   @Test
@@ -94,6 +102,8 @@ public class FireStationControllerTest {
       .perform(get("/fire").param("address", address))
       .andExpect(status().isOk())
       .andExpect(content().json("{/* expected JSON response */}"));
+
+    verify(readFireStationService, times(1)).getFireInfoByAddress(address);
   }
 
   @Test
@@ -112,6 +122,8 @@ public class FireStationControllerTest {
       .perform(get("/flood/stations").param("stations", "1,2"))
       .andExpect(status().isOk())
       .andExpect(content().json("[{}, {}]"));
+
+    verify(readFireStationService, times(1)).getHouseholdsByStations(stations);
   }
 
   @Test
@@ -128,6 +140,8 @@ public class FireStationControllerTest {
       )
       .andExpect(status().isOk())
       .andExpect(content().json("{/* expected JSON response */}"));
+
+    verify(writeFireStationService, times(1)).addFireStation(fireStation);
   }
 
   @Test
@@ -144,6 +158,8 @@ public class FireStationControllerTest {
       )
       .andExpect(status().isOk())
       .andExpect(content().json("{/* expected JSON response */}"));
+
+    verify(writeFireStationService, times(1)).updateFireStation(fireStation);
   }
 
   @Test
@@ -162,5 +178,7 @@ public class FireStationControllerTest {
       .andExpect(
         content().string("FireStation deleted: " + fireStation.getAddress())
       );
+
+    verify(writeFireStationService, times(1)).deleteFireStation(fireStation);
   }
 }

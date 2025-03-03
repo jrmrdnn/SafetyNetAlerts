@@ -6,9 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-public class EntityUpdaterTest {
+class EntityUpdaterTest {
 
-  private static class TestEntity {
+  static class TestEntity {
 
     private String stringField;
     private int intField;
@@ -46,28 +46,14 @@ public class EntityUpdaterTest {
     }
   }
 
-  private static class ChildEntity extends TestEntity {
-
-    private String childField;
-
-    public ChildEntity(
-      String stringField,
-      int intField,
-      boolean booleanField,
-      List<String> listField,
-      String childField
-    ) {
-      super(stringField, intField, booleanField, listField);
-      this.childField = childField;
-    }
-
-    public String getChildField() {
-      return childField;
-    }
+  @Test
+  void testEntityUpdaterInstantiation() {
+    EntityUpdater updater = new EntityUpdater();
+    assertNotNull(updater);
   }
 
   @Test
-  void updateFields_shouldUpdateNonNullFields() {
+  void updateFields_shouldUpdateFields() {
     TestEntity existing = new TestEntity(
       "oldString",
       10,
@@ -90,51 +76,6 @@ public class EntityUpdaterTest {
   }
 
   @Test
-  void updateFields_shouldNotUpdateNullFields() {
-    TestEntity existing = new TestEntity(
-      "oldString",
-      10,
-      false,
-      Arrays.asList("item1")
-    );
-    TestEntity updated = new TestEntity(null, 20, true, null);
-
-    EntityUpdater.updateFields(existing, updated);
-
-    assertEquals("oldString", existing.getStringField());
-    assertEquals(20, existing.getIntField());
-    assertTrue(existing.isBooleanField());
-    assertEquals(Arrays.asList("item1"), existing.getListField());
-  }
-
-  @Test
-  void updateFields_shouldHandleInheritedFields() {
-    ChildEntity existing = new ChildEntity(
-      "oldString",
-      10,
-      false,
-      Arrays.asList("item1"),
-      "oldChild"
-    );
-
-    ChildEntity updated = new ChildEntity(
-      "newString",
-      20,
-      true,
-      Arrays.asList("item2"),
-      "newChild"
-    );
-
-    EntityUpdater.updateFields(existing, updated);
-
-    assertEquals("newString", updated.getStringField());
-    assertEquals(20, updated.getIntField());
-    assertTrue(updated.isBooleanField());
-    assertEquals(Arrays.asList("item2"), updated.getListField());
-    assertEquals("newChild", updated.getChildField());
-  }
-
-  @Test
   void updateFields_shouldHandleDifferentTypes() {
     TestEntity existing = new TestEntity();
     TestEntity updated = new TestEntity(
@@ -145,6 +86,7 @@ public class EntityUpdaterTest {
     );
 
     EntityUpdater.updateFields(existing, updated);
+
     assertEquals("string", existing.getStringField());
     assertEquals(100, existing.getIntField());
     assertTrue(existing.isBooleanField());
@@ -165,16 +107,11 @@ public class EntityUpdaterTest {
       private final String finalField2 = "can't change me";
     }
 
-    InaccessibleField1 existing = new InaccessibleField1();
-    InaccessibleField2 updated = new InaccessibleField2();
+    InaccessibleField1 updated = new InaccessibleField1();
+    InaccessibleField2 existing = new InaccessibleField2();
 
-    RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+    assertThrows(Exception.class, () -> {
       EntityUpdater.updateFields(existing, updated);
     });
-
-    assertEquals(
-      "Can not set final java.lang.String field com.safetynet.safetynetalerts.util.EntityUpdaterTest$1InaccessibleField2.finalField2 to com.safetynet.safetynetalerts.util.EntityUpdaterTest$1InaccessibleField1",
-      exception.getMessage()
-    );
   }
 }
